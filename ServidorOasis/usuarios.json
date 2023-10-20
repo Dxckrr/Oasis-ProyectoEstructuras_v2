@@ -1,0 +1,37 @@
+[
+  {
+    "usuario": "operador1",
+    "password": "1234",
+    "id": 101
+  },
+  {
+    "usuario": "operador2",
+    "password": "1234",
+    "id": 102
+  },
+  {
+    "usuario": "operador3",
+    "password": "1234",
+    "id": 103
+  },
+  {
+    "usuario": "operador4",
+    "password": "1234",
+    "id": 104
+  },
+  {
+    "usuario": "admin",
+    "password": "1234",
+    "id": 201
+  },
+  {
+    "usuario": "cocina",
+    "password": "1234",
+    "id": 301
+  },
+  {
+    "usuario": "domicilio",
+    "password": "1234",
+    "id": 401
+  }
+]

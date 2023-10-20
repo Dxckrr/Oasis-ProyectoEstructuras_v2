@@ -1,0 +1,128 @@
+[
+  {
+    "nombre": "Pescado a la Sal",
+    "descripcion": "Un método de cocinar pescado, como la dorada o el lubina, cubierto de sal y cocido al horno, manteniendo la carne tierna y sabrosa.",
+    "precio": 1500,
+    "tiempoDePreparacion": 12,
+    "id": 1
+  },
+  {
+    "nombre": "Paella",
+    "descripcion": "Un plato de arroz originario de España, cocinado con azafrán y una variedad de ingredientes, como mariscos, pollo, conejo y verduras.",
+    "precio": 1800,
+    "tiempoDePreparacion": 5,
+    "id": 2
+  },
+  {
+    "nombre": "Kebabs",
+    "descripcion": "Brochetas de carne, como cordero, pollo o ternera, aderezadas con especias y asadas a la parrilla.",
+    "precio": 1200,
+    "tiempoDePreparacion": 6,
+    "id": 3
+  },
+  {
+    "nombre": "Ratatouille",
+    "descripcion": "Un guiso provenzal que incluye berenjenas, calabacines, tomates, pimientos y hierbas aromáticas.",
+    "precio": 1900,
+    "tiempoDePreparacion": 5,
+    "id": 4
+  },
+  {
+    "nombre": "Couscous",
+    "descripcion": "Originario del Magreb, el couscous es una sémola de trigo durum cocida al vapor, a menudo servida con verduras y carne.",
+    "precio": 1400,
+    "tiempoDePreparacion": 10,
+    "id": 5
+  },
+  {
+    "nombre": "Moussaka",
+    "descripcion": "Un plato griego en capas que combina berenjenas, carne picada (generalmente cordero o res), tomate y una bechamel.",
+    "precio": 2000,
+    "tiempoDePreparacion": 5,
+    "id": 6
+  },
+  {
+    "nombre": "Sangría",
+    "descripcion": "Una bebida española refrescante hecha de vino tinto, frutas y un toque de brandy",
+    "precio": 1500,
+    "tiempoDePreparacion": 5,
+    "id": 7
+  },
+  {
+    "nombre": "Café Griego",
+    "descripcion": "Un café fuerte y aromático servido en Grecia, a menudo endulzado y sin leche.",
+    "precio": 1700,
+    "tiempoDePreparacion": 8,
+    "id": 8
+  },
+  {
+    "nombre": "Ayran",
+    "descripcion": "Una bebida turca a base de yogur, agua y sal, muy refrescante en climas cálidos.",
+    "precio": 1600,
+    "tiempoDePreparacion": 6,
+    "id": 9
+  },
+  {
+    "nombre": "Agua de Valencia",
+    "descripcion": "Un cóctel valenciano hecho con zumo de naranja, cava, vodka y ginebra.",
+    "precio": 1100,
+    "tiempoDePreparacion": 4,
+    "id": 10
+  },
+  {
+    "nombre": "Café Espresso",
+    "descripcion": "Una taza pequeña pero fuerte de café, típica de Italia, servida en todo el Mediterráneo.",
+    "precio": 1900,
+    "tiempoDePreparacion": 7,
+    "id": 11
+  },
+  {
+    "nombre": "Limoncello",
+    "descripcion": "Un licor italiano de limón, dulce y refrescante, perfecto como digestivo.",
+    "precio": 1200,
+    "tiempoDePreparacion": 9,
+    "id": 12
+  },
+  {
+    "nombre": "Baklava",
+    "descripcion": "Un postre griego y turco hecho de capas de nueces y masa filo empapadas en miel.",
+    "precio": 1500,
+    "tiempoDePreparacion": 7,
+    "id": 13
+  },
+  {
+    "nombre": "Tiramisú",
+    "descripcion": "Un postre italiano con capas de bizcocho empapado en café, crema de mascarpone y cacao en polvo.",
+    "precio": 1400,
+    "tiempoDePreparacion": 8,
+    "id": 14
+  },
+  {
+    "nombre": "Cannoli",
+    "descripcion": "Tubos de masa crujiente rellenos de ricotta endulzada, típicos de Sicilia.",
+    "precio": 1600,
+    "tiempoDePreparacion": 10,
+    "id": 15
+  },
+  {
+    "nombre": "Pastel de Santiago",
+    "descripcion": "Un pastel de almendra español con una cruz de Santiago en la parte superior.",
+    "precio": 1700,
+    "tiempoDePreparacion": 14,
+    "id": 16
+  },
+  {
+    "nombre": "Budin de Pan",
+    "descripcion": "Un postre común en toda la región, hecho de pan viejo empapado en leche y huevo.",
+    "precio": 1800,
+    "tiempoDePreparacion": 7,
+    "id": 17
+  },
+  {
+    "nombre": "Loukoumades",
+    "descripcion": "Bolitas fritas de masa esponjosa cubiertas de miel y nueces, comunes en Grecia y otras partes del Mediterráneo.",
+    "precio": 1900,
+    "tiempoDePreparacion": 9,
+    "id": 18
+  }
+]

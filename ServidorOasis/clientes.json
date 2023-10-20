@@ -1,0 +1,44 @@
+[
+  {
+    "nombre": "Alex",
+    "direccion": "Cra 27-50",
+    "barrio": "Floridablanca",
+    "telefono": 41764714,
+    "numeroDePedidos": 1
+  },
+  {
+    "nombre": "Chris",
+    "direccion": "Cra 27-59",
+    "barrio": "Piedecuesta",
+    "telefono": 317161414,
+    "numeroDePedidos": 1
+  },
+  {
+    "nombre": "Lopez",
+    "direccion": "Cra 27-54",
+    "barrio": "Florida",
+    "telefono": 315648145,
+    "numeroDePedidos": 2
+  },
+  {
+    "nombre": "Carvajal",
+    "direccion": "Cra 24-56",
+    "barrio": "Piedecuesta",
+    "telefono": 3172642,
+    "numeroDePedidos": 1
+  },
+  {
+    "nombre": "Chavez",
+    "direccion": "Cra 47-54",
+    "barrio": "Piedecuesta",
+    "telefono": 317725424,
+    "numeroDePedidos": 1
+  },
+  {
+    "nombre": "Mano",
+    "direccion": "sanber",
+    "barrio": "Campo",
+    "telefono": 313567892,
+    "numeroDePedidos": 0
+  }
+]

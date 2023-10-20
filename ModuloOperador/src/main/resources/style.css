@@ -1,0 +1,11 @@
+#add {
+    -fx-background-color: #83CDAC;
+    -fx-border-radius : 1px;
+    -fx-border-color : #0000;
+}
+#buttonBack {
+
+    -fx-background-color: #FFECBB;
+    -fx-border-radius : 1px;
+    -fx-border-color : #0000;
+}

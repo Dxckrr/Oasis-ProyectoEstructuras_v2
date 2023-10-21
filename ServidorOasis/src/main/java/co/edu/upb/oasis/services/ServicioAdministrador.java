@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import com.google.gson.Gson;
@@ -49,32 +50,31 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
         return false;
     }
 
-    public boolean addUsuarioConfirmation(String usuario, String contraseña, int id)throws RemoteException {
-
+    public boolean addUsuarioConfirmation(String usuario, String contraseña, int id) throws RemoteException {
         Usuario usuarioToAdd = new Usuario(usuario, contraseña, id);
 
-        jsonClassUser.cargarJson(); //EL ERROR ESTA AQUI, AL CARGAR EL JSON
-        DoubleLinkedList lista = jsonClassUser.obtenerLista();
+        jsonClassUser.cargarJson();
+        DoubleLinkedList<Usuario> lista = jsonClassUser.obtenerLista();
         System.out.println("------------------");
         lista.imprimir();
         System.out.println("------------------");
-        Iterator iterator = lista.iterator();
-        DoubleListNode temporal;
+        Iterator<NodeInterface<Usuario>> iterator = lista.iterator();
+        NodeInterface<Usuario> temporal;
         Usuario tempCliente;
         while (iterator.hasNext()) {
-
-            temporal = (DoubleListNode) iterator.next();
-            tempCliente = (Usuario) temporal.getObject();
+            temporal = iterator.next();
+            tempCliente = temporal.getObject();
             System.out.println("UsuarioTemp usuario: " + tempCliente.getUsuario());
             System.out.println("Usuario to add usuario:  " + usuarioToAdd.getUsuario());
             System.out.println("iUGLAS?");
-            System.out.println(usuarioToAdd.getUsuario() == tempCliente.getUsuario());
-            if (usuarioToAdd.getUsuario() == tempCliente.getUsuario()) {
+            System.out.println(usuarioToAdd.getUsuario().equals(tempCliente.getUsuario()));
+            if (usuarioToAdd.getUsuario().equals(tempCliente.getUsuario())) {
                 return false;
             }
         }
         return true;
     }
+
 
     @Override
     public boolean addUsuario(String usuario, String contraseña, int id) throws RemoteException {
@@ -94,27 +94,25 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
 
     }
 
-    public boolean addProductoConfirmation(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id, boolean isLento)throws RemoteException {
+    public boolean addProductoConfirmation(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id) throws RemoteException {
+        Producto productoToAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id);
 
-        Producto productoToAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id, isLento);
-
-        jsonClassUser.cargarJson(); //EL ERROR ESTA AQUI, AL CARGAR EL JSON
-        DoubleLinkedList lista = jsonClassUser.obtenerLista();
+        jsonClassUser.cargarJson();
+        DoubleLinkedList<Producto> lista = jsonClassUser.obtenerLista();
         System.out.println("------------------");
         lista.imprimir();
         System.out.println("------------------");
-        Iterator iterator = lista.iterator();
-        DoubleListNode temporal;
-        Producto tempCliente;
+        Iterator<NodeInterface<Producto>> iterator = lista.iterator();
+        NodeInterface<Producto> temporal;
+        Producto tempProducto;
         while (iterator.hasNext()) {
-
-            temporal = (DoubleListNode) iterator.next();
-            tempCliente = (Producto) temporal.getObject();
-            System.out.println("ProductoTemp producto: " + tempCliente.getNombre());
+            temporal = iterator.next();
+            tempProducto = temporal.getObject();
+            System.out.println("ProductoTemp producto: " + tempProducto.getNombre());
             System.out.println("Producto to add producto:  " + productoToAdd.getNombre());
             System.out.println("iUGLAS?");
-            System.out.println(productoToAdd.getNombre() == tempCliente.getNombre());
-            if (productoToAdd.getNombre() == tempCliente.getNombre()) {
+            System.out.println(productoToAdd.getNombre().equals(tempProducto.getNombre()));
+            if (productoToAdd.getNombre().equals(tempProducto.getNombre())) {
                 return false;
             }
         }
@@ -122,11 +120,11 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
     }
 
     @Override
-    public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id, boolean isLento) throws RemoteException {
+    public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id) throws RemoteException {
         try {
             //System.out.println(" ----" + addClienteConfirmation(nombreCliente, direccion, ciudad, telefono));
-            if (addProductoConfirmation(nombre, descripcion, precio, tiempoDePreparacion, id,isLento)){
-                Producto productoTAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id, isLento);
+            if (addProductoConfirmation(nombre, descripcion, precio, tiempoDePreparacion, id)){
+                Producto productoTAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id);
                 System.out.println("Entra");
                 jsonClassUser.agregarObjetico(productoTAdd);
                 return true;
@@ -143,54 +141,44 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
         LinkedList<Usuario> resultados = new LinkedList<>();
         try {
             jsonClassUser.cargarJson();
-            DoubleLinkedList<Usuario> lista = jsonClassUser.obtenerLista(); 
-            Iterator<NodeInterface<Usuario>> iterator = lista.iterator(); 
+            DoubleLinkedList<Usuario> lista = jsonClassUser.obtenerLista();
+            Iterator<NodeInterface<Usuario>> iterator = lista.iterator();
             while (iterator.hasNext()) {
                 NodeInterface<Usuario> node = iterator.next();
                 Usuario tempUser = node.getObject();
                 String[] palabras = tempUser.getUsuario().split(" ");
-                String[] stringUsuarioActual;
-                if (palabras.length > 1){
-                    stringUsuarioActual = new String[palabras.length + 1];
-                    System.arraycopy(palabras, 0, stringUsuarioActual, 0, palabras.length);
-                    stringUsuarioActual[palabras.length] = tempUser.getUsuario();
-                } else {
-                    stringUsuarioActual = palabras;
-                }
-                
-                usuario = usuario.toLowerCase().replace(" ", "");
-                for (String palabra : stringUsuarioActual){
+                String[] stringUsuarioActual = palabras.length > 1 ? Arrays.copyOf(palabras, palabras.length + 1) : palabras;
+
+                String usuarioToCompare = usuario.toLowerCase().replace(" ", "");
+                for (String palabra : stringUsuarioActual) {
                     int igualdades = 0;
                     int pos1 = 0;
                     int pos2 = 0;
                     palabra = palabra.toLowerCase();
-                    int limite = (usuario.length() > palabra.length()) ? palabra.length() : usuario.length();
+                    int limite = Math.min(usuarioToCompare.length(), palabra.length());
                     int iterador = 0;
-                    while (iterador < limite){
-                        if (usuario.charAt(pos1) == palabra.charAt(pos2)){
+                    while (iterador < limite) {
+                        if (usuarioToCompare.charAt(pos1) == palabra.charAt(pos2)) {
                             igualdades++;
                             pos1++;
                             pos2++;
                         } else {
-                            if ((pos2 + 1) < palabra.length()){
-                                if (usuario.charAt(pos1) == palabra.charAt(pos2 + 1)) {
-                                    igualdades++;
-                                    pos1++;
-                                    pos2 += 2;
-                                    if (usuario.length() >= palabra.length()){
-                                        iterador++;
-                                    }
-                                } else{
-                                    pos1++;
-                                    pos2++;
+                            if ((pos2 + 1) < palabra.length() && usuarioToCompare.charAt(pos1) == palabra.charAt(pos2 + 1)) {
+                                igualdades++;
+                                pos1++;
+                                pos2 += 2;
+                                if (usuarioToCompare.length() >= palabra.length()) {
+                                    iterador++;
                                 }
+                            } else {
+                                pos1++;
+                                pos2++;
                             }
                         }
                         iterador++;
                     }
-                    if ((igualdades > 0) && ((double)usuario.length() / igualdades) <= 1.5){
+                    if (igualdades > 0 && (double) usuarioToCompare.length() / igualdades <= 1.5) {
                         resultados.add(tempUser);
-                        break;
                     }
                 }
             }
@@ -199,6 +187,8 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
         }
         return resultados;
     }
+
+
 
     /*public static Producto fromJSON(String filePath) {
         try {
@@ -215,3 +205,4 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
     }*/
 
 }
+

@@ -33,5 +33,24 @@ public class Usuario implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-}
+    @Override
+    public String toString() {
+        return "Usuario [usuario=" + usuario + ", contraseña=" + password + ", id=" + id +"]";
+    }
 
+    /*@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario1 = (Usuario) o;
+        return id == usuario1.id &&
+                Objects.equals(usuario, usuario1.usuario) &&
+                Objects.equals(password, usuario1.password);
+    }
+
+    /*@Override
+    public int hashCode() {
+        return Objects.hash(usuario, password, id);
+    }*/
+
+}

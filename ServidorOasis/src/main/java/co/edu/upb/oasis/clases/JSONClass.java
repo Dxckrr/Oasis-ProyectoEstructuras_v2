@@ -36,15 +36,17 @@ public class JSONClass<T extends Serializable> implements Serializable{
                     jsonText.append(line);
                 }
                 bufferedReader.close();
-
+    
                 Gson gson = new Gson();
                 JsonArray jsonArray = JsonParser.parseString(jsonText.toString()).getAsJsonArray();
-
+    
                 for (JsonElement jsonElement : jsonArray) {
                     T objeto = gson.fromJson(jsonElement, inClass);
                     listaObjetos.add(objeto);
                 }
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JsonParseException e) {
                 e.printStackTrace();
             }
         }

@@ -4,14 +4,14 @@
     "direccion": "Cra 27-50",
     "barrio": "Floridablanca",
     "telefono": 41764714,
-    "numeroDePedidos": 1
+    "numeroDePedidos": 2
   },
   {
     "nombre": "Chris",
     "direccion": "Cra 27-59",
     "barrio": "Piedecuesta",
     "telefono": 317161414,
-    "numeroDePedidos": 1
+    "numeroDePedidos": 2
   },
   {
     "nombre": "Lopez",
@@ -40,5 +40,12 @@
     "barrio": "Campo",
     "telefono": 313567892,
     "numeroDePedidos": 0
+  },
+  {
+    "nombre": "Miguel",
+    "direccion": "Cra 37-53",
+    "barrio": "Los andes",
+    "telefono": 312736234,
+    "numeroDePedidos": 1
   }
 ]

@@ -10,6 +10,6 @@ public interface AdminInterface extends Remote {
     public boolean login(String user, String password) throws RemoteException;
     public boolean addUsuario(String usuario, String contraseña, int id) throws RemoteException;
     public LinkedList<Usuario> buscarOperadorPorUsuario(String usuario) throws RemoteException;
-    public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id) throws RemoteException;
+    public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id, boolean isLento) throws RemoteException;
 
 }

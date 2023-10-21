@@ -8,10 +8,87 @@ import co.edu.upb.oasis.estructuras.lists.DoubleLinkedList;
 
 public class Main {
         public static void main(String[] args) {
-                //JSONClass pediClass = new JSONClass<>("pedidos.json", Pedido.class);
-                //Cliente cliente = new Cliente("Alex", "Cra 27-50", "Floridablanca", 41764714);
-                //pediClass.guardarDaticosEnArchivo();
-                /*     
+                /*JSONClass menu = new JSONClass<>("menu.json", Producto.class);
+
+                Producto pescadoALaSal = new Producto("Pescado a la Sal",
+                                "Un método de cocinar pescado, como la dorada o el lubina, cubierto de sal y cocido al horno, manteniendo la carne tierna y sabrosa.",
+                                1500, 12, 1, false);
+                Producto paella = new Producto("Paella",
+                                "Un plato de arroz originario de España, cocinado con azafrán y una variedad de ingredientes, como mariscos, pollo, conejo y verduras.",
+                                1800, 5, 2, true);
+                Producto kebabs = new Producto("Kebabs",
+                                "Brochetas de carne, como cordero, pollo o ternera, aderezadas con especias y asadas a la parrilla.",
+                                1200, 6, 3, false);
+                Producto ratatouille = new Producto("Ratatouille",
+                                "Un guiso provenzal que incluye berenjenas, calabacines, tomates, pimientos y hierbas aromáticas.",
+                                1900, 5, 4, true);
+                Producto couscous = new Producto("Couscous",
+                                "Originario del Magreb, el couscous es una sémola de trigo durum cocida al vapor, a menudo servida con verduras y carne.",
+                                1400, 10, 5, false);
+                Producto moussaka = new Producto("Moussaka",
+                                "Un plato griego en capas que combina berenjenas, carne picada (generalmente cordero o res), tomate y una bechamel.",
+                                2000, 5, 6, false);
+                Producto sangria = new Producto("Sangría",
+                                "Una bebida española refrescante hecha de vino tinto, frutas y un toque de brandy",
+                                1500, 5, 7, false);
+                Producto cafeGriego = new Producto("Café Griego",
+                                "Un café fuerte y aromático servido en Grecia, a menudo endulzado y sin leche.", 1700,
+                                8, 8, false);
+                Producto ayran = new Producto("Ayran",
+                                "Una bebida turca a base de yogur, agua y sal, muy refrescante en climas cálidos.",
+                                1600, 6, 9, true);
+                Producto aguaDeValencia = new Producto("Agua de Valencia",
+                                "Un cóctel valenciano hecho con zumo de naranja, cava, vodka y ginebra.", 1100, 4, 10,
+                                false);
+                Producto cafeEspresso = new Producto("Café Espresso",
+                                "Una taza pequeña pero fuerte de café, típica de Italia, servida en todo el Mediterráneo.",
+                                1900, 7, 11, false);
+                Producto limoncello = new Producto("Limoncello",
+                                "Un licor italiano de limón, dulce y refrescante, perfecto como digestivo.", 1200, 9,
+                                12, false);
+                Producto baklava = new Producto("Baklava",
+                                "Un postre griego y turco hecho de capas de nueces y masa filo empapadas en miel.",
+                                1500, 7, 13, false);
+                Producto tiramisu = new Producto("Tiramisú",
+                                "Un postre italiano con capas de bizcocho empapado en café, crema de mascarpone y cacao en polvo.",
+                                1400, 8, 14, false);
+                Producto cannoli = new Producto("Cannoli",
+                                "Tubos de masa crujiente rellenos de ricotta endulzada, típicos de Sicilia.", 1600, 10,
+                                15, false);
+                Producto pastelDeSantiago = new Producto("Pastel de Santiago",
+                                "Un pastel de almendra español con una cruz de Santiago en la parte superior.", 1700,
+                                14, 16, true);
+                Producto budinDePan = new Producto("Budín de Pan",
+                                "Un postre común en toda la región, hecho de pan viejo empapado en leche y huevo.",
+                                1800, 7, 17, false);
+                Producto loukoumades = new Producto("Loukoumades",
+                                "Bolitas fritas de masa esponjosa cubiertas de miel y nueces, comunes en Grecia y otras partes del Mediterráneo.",
+                                1900, 9, 18, false);
+
+                menu.agregarObjetico(pescadoALaSal);
+                menu.agregarObjetico(paella);
+                menu.agregarObjetico(kebabs);
+                menu.agregarObjetico(ratatouille);
+                menu.agregarObjetico(couscous);
+                menu.agregarObjetico(moussaka);
+                menu.agregarObjetico(sangria);
+                menu.agregarObjetico(cafeGriego);
+                menu.agregarObjetico(ayran);
+                menu.agregarObjetico(aguaDeValencia);
+                menu.agregarObjetico(cafeEspresso);
+                menu.agregarObjetico(limoncello);
+                menu.agregarObjetico(baklava);
+                menu.agregarObjetico(tiramisu);
+                menu.agregarObjetico(cannoli);
+                menu.agregarObjetico(pastelDeSantiago);
+                menu.agregarObjetico(budinDePan);
+                menu.agregarObjetico(loukoumades);
+
+                // JSONClass pediClass = new JSONClass<>("pedidos.json", Pedido.class);
+                // Cliente cliente = new Cliente("Alex", "Cra 27-50", "Floridablanca",
+                // 41764714);
+                // pediClass.guardarDaticosEnArchivo();
+                /*
                  * JSONClass pedidJsonClass = new JSONClass<>("pedidos.json", Pedido.class);
                  * JSONClass menuJsonClass = new JSONClass<>("menu.json", Producto.class);
                  * 

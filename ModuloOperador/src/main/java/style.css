@@ -1,0 +1,59 @@
+#add {
+    -fx-background-color: #83CDAC;
+    -fx-border-radius : 1px;
+    -fx-border-color : #0000;
+}
+#buttonBack {
+
+    -fx-background-color: #FFECBB;
+    -fx-border-radius : 1px;
+    -fx-border-color : #0000;
+}
+.button {
+    -fx-text-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-color: #beece5;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px, 4px, 3px;
+    -fx-border-width: 0.1px; /* Corrección de la propiedad 'border-width' */
+}
+
+.button:hover {
+    -fx-background-color: #4eebde;
+    
+}
+
+.button:pressed {
+    -fx-background-color: #48d493;
+    
+}
+
+#deleteButton {
+    -fx-text-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-color: #d31818;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px, 4px, 3px;
+    -fx-border-width: 0.1px; /* Corrección de la propiedad 'border-width' */
+}
+
+#deleteButton:hover {
+    -fx-background-color: #6b0707;
+}
+
+#deleteButton:pressed {
+    -fx-background-color: #ff0000;
+}
+.text {
+    -fx-text-fill: #333; /* Color de texto */
+    -fx-font-weight: bold; /* Establecer un peso de fuente intermedio */
+}
+#labelsAddClient {
+    -fx-font-size: 20px; /* Tamaño de fuente */
+    -fx-text-fill: #333; /* Color de texto */
+    -fx-font-weight: bold;
+}
+/*Updated*/
+

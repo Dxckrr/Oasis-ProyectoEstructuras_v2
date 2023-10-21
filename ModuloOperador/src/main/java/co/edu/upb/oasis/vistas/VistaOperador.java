@@ -170,6 +170,7 @@ public class VistaOperador {
         panelPrincipal.setAlignment(selector, Pos.CENTER); // establecer un margen (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
 
         optionPanel = new Scene(panelPrincipal, 1080, 720);
+        optionPanel.getStylesheets().add("style.css");
         window.setScene(optionPanel);
         window.setTitle("Oasis"); // Estableciendo titulo
         window.show();
@@ -182,7 +183,6 @@ public class VistaOperador {
         // -------------------------
         buscarClienteButton = new Button("Buscar Cliente");
         agregarClienteButton = new Button("Agregar Cliente");
-        agregarClienteButton.setId("add");
         rectangleToDecorateClientes = new Rectangle(700, 400);
 
         // Propiedades
@@ -235,10 +235,14 @@ public class VistaOperador {
         Label direccionLabel = new Label("Direccion: ");
         Label ciudadLabel = new Label("Barrio: ");
         Label telefonoLabel = new Label("Telefono: ");
-        ciudadLabel.setFont(new Font(20));
-        clienteLabel.setFont(new Font(20));
-        direccionLabel.setFont(new Font(20));
-        telefonoLabel.setFont(new Font(20));
+        ciudadLabel.setFont(new Font(50));
+        clienteLabel.setFont(new Font(50));
+        direccionLabel.setFont(new Font(50));
+        telefonoLabel.setFont(new Font(50));
+        clienteLabel.setId("labelsAddClient");
+        ciudadLabel.setId("labelsAddClient");
+        direccionLabel.setId("labelsAddClient");
+        telefonoLabel.setId("labelsAddClient");
 
         // ----------------------------------
         cliente = new TextField();
@@ -404,6 +408,7 @@ public class VistaOperador {
         panelPrincipalMenu.getChildren().addAll(contenedorComidas, contenedorBebidas, contenedorPostres);
         // ----------------------
         goBackToOptions = new Button("Atras");
+        goBackToOptions.setId("buttonBack");
         goBackToOptions.setScaleX(1.7);
         goBackToOptions.setScaleY(1.7);
         panelPrincipalMenu.getChildren().addAll(goBackToOptions);
@@ -450,10 +455,38 @@ public class VistaOperador {
         // Crear un ListView y configurarlo con la lista observable
         listView = new ListView<>(items);
         deleteProducto = new Button("Eliminar");
-
+        deleteProducto.setId("deleteButton");
         // Crear un diseño de caja vertical para organizar los elementos
         VBox contenedorDeProductosToAdd = new VBox(listView, deleteProducto);
         panelPrincipalMenu.getChildren().add(contenedorDeProductosToAdd);
+        // ----
+        // Apartado de comidas
+
+        Label tipoComidaLabel = new Label("Comidas");
+        Label tipoBebidaLabel = new Label("Bebidas");
+        Label tipoPostresLabel = new Label("Postres");
+
+        tipoComidaLabel.setId("headers");
+        tipoBebidaLabel.setId("headers");
+        tipoPostresLabel.setId("headers");
+
+        Rectangle[] rectanglesToDecorate = new Rectangle[3];
+
+        for (int i = 0; i < rectanglesToDecorate.length; i++) {
+            rectanglesToDecorate[i] = new Rectangle(400, 30);
+            rectanglesToDecorate[i].setFill(colorOrange);
+        }
+        panelPrincipalMenu.getChildren().addAll(rectanglesToDecorate);
+        panelPrincipalMenu.getChildren().addAll(tipoBebidaLabel, tipoComidaLabel, tipoPostresLabel);
+        // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+
+        panelPrincipalMenu.setMargin(tipoComidaLabel, new Insets(0, 0, 800, 0));
+        panelPrincipalMenu.setMargin(tipoBebidaLabel, new Insets(0, 0, 230, 0));
+        panelPrincipalMenu.setMargin(tipoPostresLabel, new Insets(360, 0, 0, 0));
+
+        panelPrincipalMenu.setMargin(rectanglesToDecorate[0], new Insets(0, 0, 800, 0));
+        panelPrincipalMenu.setMargin(rectanglesToDecorate[1], new Insets(0, 0, 230, 0));
+        panelPrincipalMenu.setMargin(rectanglesToDecorate[2], new Insets(360, 0, 0, 0));
 
         panelPrincipalMenu.setMargin(contenedorDeProductosToAdd, new Insets(600, 0, 150, 850));
         // ------
@@ -472,6 +505,7 @@ public class VistaOperador {
         sendPedidoToCocinaButton = new Button("Confirmar!");
         // ---------------------
         backToMenu = new Button("Anterior");
+        backToMenu.setId("buttonBack");
         // -----------
         logo = new ImageView(picture);
         // -----------

@@ -94,9 +94,9 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
 
     }
 
-    public boolean addProductoConfirmation(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id)throws RemoteException {
+    public boolean addProductoConfirmation(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id, boolean isLento)throws RemoteException {
 
-        Producto productoToAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id);
+        Producto productoToAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id, isLento);
 
         jsonClassUser.cargarJson(); //EL ERROR ESTA AQUI, AL CARGAR EL JSON
         DoubleLinkedList lista = jsonClassUser.obtenerLista();
@@ -122,11 +122,11 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
     }
 
     @Override
-    public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id) throws RemoteException {
+    public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id, boolean isLento) throws RemoteException {
         try {
             //System.out.println(" ----" + addClienteConfirmation(nombreCliente, direccion, ciudad, telefono));
-            if (addProductoConfirmation(nombre, descripcion, precio, tiempoDePreparacion, id)){
-                Producto productoTAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id);
+            if (addProductoConfirmation(nombre, descripcion, precio, tiempoDePreparacion, id,isLento)){
+                Producto productoTAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id, isLento);
                 System.out.println("Entra");
                 jsonClassUser.agregarObjetico(productoTAdd);
                 return true;

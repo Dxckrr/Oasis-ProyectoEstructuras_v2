@@ -1,5 +1,6 @@
 package co.edu.upb.oasis.vistas;
 
+import co.edu.upb.oasis.clases.Horno;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -7,15 +8,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import co.edu.upb.oasis.clases.Horno;
-import javafx.scene.control.ListView;
 
 public class VistaCocina {
     Stage window;
@@ -55,7 +57,7 @@ public class VistaCocina {
 
     //
     public ListView<String> listView;
-    //ESTO DEBE SER UN ARRAY DE BOTONES PARA DESPACHAR
+    // ESTO DEBE SER UN ARRAY DE BOTONES PARA DESPACHAR
     public Button deleteProducto;
     public ObservableList<String> items;
 
@@ -128,14 +130,14 @@ public class VistaCocina {
 
         // Crear un ListView y configurarlo con la lista observable
         listView = new ListView<>(items);
-        //KASKDFKASD
+        // KASKDFKASD
         deleteProducto = new Button("Eliminar");
-       // deleteProducto.setId("deleteButton");
+        // deleteProducto.setId("deleteButton");
         // Crear un diseño de caja vertical para organizar los elementos
-        VBox contenedorDeProductosToAdd = new VBox(listView, deleteProducto);
+        VBox contenedorDeProductosToAdd = new VBox(listView);
         panelPrincipal.getChildren().add(contenedorDeProductosToAdd);
         // Panel Principal distribucion
-        panelPrincipal.setMargin(contenedorDeProductosToAdd, new Insets(0, 600, 300, 0));
+        panelPrincipal.setMargin(contenedorDeProductosToAdd, new Insets(100, 780, 150, 10));
         panelPrincipal.setAlignment(panelListaPedidos, Pos.CENTER_LEFT);
         panelPrincipal.setAlignment(rectangleToDecorate, Pos.CENTER_LEFT);
         panelPrincipal.setMargin(contenedorHornos, new Insets(0, 0, 0, 600)); // establecer un margen

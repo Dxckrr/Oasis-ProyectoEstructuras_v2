@@ -17,9 +17,10 @@ public class CocinaViewController {
         VistaCocina vistaCocina = new VistaCocina();
         // CREAR OTRA COLA PARA ASI ORGANIZAR LOS PEDIDOS
         PriorityQueue<Producto> mPriorityQueue = new PriorityQueue<>(2);
+        PriorityQueue<Producto> mPriorityQueueCopia = new PriorityQueue<>(2);
 
         vistaCocina.getPedidos.setOnAction(actionEvent -> {
-            //---
+            // ---
             DoubleLinkedList<Producto> productosEnPedido = modelCocina.getPedido().getProductos();
             Iterator<NodeInterface<Producto>> iterator = productosEnPedido.iterator();
             DoubleListNode<Producto> temp;
@@ -27,14 +28,20 @@ public class CocinaViewController {
                 temp = (DoubleListNode<Producto>) iterator.next();
                 String productoTemp = temp.getObject().getNombre();
                 // implementar una listview
-                vistaCocina.items.add(productoTemp);
-                //----CAMBIAR ESTO DE ADD AQUI
+                // ----CAMBIAR ESTO DE ADD AQUI
                 if (temp.getObject().isLento()) {
                     mPriorityQueue.add(temp.getObject(), 0);
+                    mPriorityQueueCopia.add(temp.getObject(), 0);
                 } else {
                     mPriorityQueue.add(temp.getObject(), 1);
+                    mPriorityQueueCopia.add(temp.getObject(), 1);
                 }
             }
+
+            for (int i = 0; i <= mPriorityQueue.size(); i++) {
+                vistaCocina.items.add(mPriorityQueue.extract().getNombre());
+            }
+
             // System.out.println(modelCocina.getPedido());
         });
 

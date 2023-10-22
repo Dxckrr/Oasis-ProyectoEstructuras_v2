@@ -55,7 +55,7 @@ public class CocinaViewController {
                         System.out.println("it worksssssssss");
                         vistaCocina.hornos[i].getHorno().setCursor(Cursor.DEFAULT);
 
-                        //FALTA IMPLEMENTAR LA MANERA DE ENVIAR A DOMICILIO
+                        // FALTA IMPLEMENTAR LA MANERA DE ENVIAR A DOMICILIO
                         /*
                          * if (pedidos.get().getProductos()) {
                          * 
@@ -73,11 +73,13 @@ public class CocinaViewController {
                 Pedido inPedido = modelCocina.getPedido();
                 pedidos.add(inPedido);
                 DoubleLinkedList<Producto> productosEnPedido = inPedido.getProductos();
+                System.out.println(productosEnPedido);
                 if (!productosEnPedido.isEmpty()) {
                     Iterator<NodeInterface<Producto>> iterator = productosEnPedido.iterator();
                     DoubleListNode<Producto> temp;
                     while (iterator.hasNext()) {
                         temp = (DoubleListNode<Producto>) iterator.next();
+                        System.out.println(temp.getObject().getNombre());
                         // String productoTemp = temp.getObject().getNombre();
                         if (temp.getObject().isLento()) {
                             mPriorityQueue.add(temp.getObject(), 0);
@@ -88,12 +90,19 @@ public class CocinaViewController {
                         }
                     }
 
-                    for (int i = 0; i <= mPriorityQueue.size(); i++) {
-                        vistaCocina.items.add(mPriorityQueue.extract().getNombre());
-                    }
+                    System.out.println(mPriorityQueue.size());
+                    while (!mPriorityQueue.isEmpty()) {
+                        // System.out.println(z);
+                        // System.out.println(mPriorityQueue.extract().getNombre());
 
+                        vistaCocina.items.add(mPriorityQueue.extract().getNombre());
+                        System.out.println("------------");
+                        // System.out.println(vistaCocina.items.get(z));
+                    }
                 }
+
             } catch (Exception e) {
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("TRANQUILOS");
                 alert.setHeaderText("NO HAY MAS PEDIDOS");
@@ -101,7 +110,6 @@ public class CocinaViewController {
                 alert.showAndWait();
 
                 System.out.println("NO hay MAS PEDIDOS");
-
             }
 
             // ---
@@ -125,9 +133,13 @@ public class CocinaViewController {
 
                             }
                         } else {
-                            vistaCocina.hornos[j].turnOnRapido();
-                            vistaCocina.hornos[j].setProductoCook(temp);
-                            vistaCocina.items.remove(temp.getNombre());
+                            //SI no es lento entonces
+                            if (!vistaCocina.hornos[j].isLento()) {
+
+                                vistaCocina.hornos[j].turnOnRapido();
+                                vistaCocina.hornos[j].setProductoCook(temp);
+                                vistaCocina.items.remove(temp.getNombre());
+                            }
 
                             break;
 

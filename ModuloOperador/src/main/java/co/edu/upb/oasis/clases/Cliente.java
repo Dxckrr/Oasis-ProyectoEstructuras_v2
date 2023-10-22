@@ -7,11 +7,11 @@ public class Cliente implements Serializable {
     String nombre;
     String direccion;
     String barrio;
-    int telefono;
+    long telefono;
     int numeroDePedidos;
 
     // Tipo de cliente (ENUM )
-    public Cliente(String nombre, String direccion, String barrio, int telefono) {
+    public Cliente(String nombre, String direccion, String barrio, long telefono) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.barrio = barrio;
@@ -31,7 +31,7 @@ public class Cliente implements Serializable {
         return barrio;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 

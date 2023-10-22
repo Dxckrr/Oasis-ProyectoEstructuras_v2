@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 /**
+ * Main Class
+ * 
  *@author Juan David Patiño Parra
  */
 public class MainServer {

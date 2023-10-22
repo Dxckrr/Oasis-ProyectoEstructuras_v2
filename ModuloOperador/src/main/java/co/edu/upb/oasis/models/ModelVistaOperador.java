@@ -33,7 +33,7 @@ public class ModelVistaOperador {
 
     }
 
-    public boolean addCliente(String nombreCliente, String direccion, String ciudad, int telefono) {
+    public boolean addCliente(String nombreCliente, String direccion, String ciudad, long telefono) {
         // Cliente clienteToAdd = new Cliente(nombreCliente, direccion, ciudad,
         // telefono);
         try {

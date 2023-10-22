@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -84,7 +85,7 @@ public class VistaOperador {
     // -----
     public TextField cliente;
     public TextField direccion;
-    public TextField ciudad;
+    public ComboBox<String> barrio;
     public TextField telefono;
 
     // TextField
@@ -247,10 +248,15 @@ public class VistaOperador {
         // ----------------------------------
         cliente = new TextField();
         direccion = new TextField();
-        ciudad = new TextField();
+        barrio = new ComboBox<String>();
         telefono = new TextField();
 
         // ----------------------------------
+
+        barrio.getItems().addAll("Provenza", "Cabecera del Llano", "San Alonso", "La Ciudadela", "Lagos del Cacique",
+        "San Francisco", "La Joya", "Cañaveral", "Ciudad Valencia", "Lagos del Cacique",
+        "Girardot", "San Alonso", "El Bosque", "Los Cámbulos", "Los Cambulos", "Junin",
+        "Ciudadela Comfenalco", "La Salle", "Centro", "San Francisco", "La Feria");
 
         goBackToClientes = new Button("Atras");
         confirmAddButton = new Button("Guardar Informacion");
@@ -268,8 +274,8 @@ public class VistaOperador {
         direccion.setPrefWidth(10);
         direccion.setPrefHeight(5);
 
-        ciudad.setPrefWidth(10);
-        ciudad.setPrefHeight(5);
+        barrio.setPrefWidth(400);
+        barrio.setPrefHeight(5);
 
         telefono.setPrefWidth(10);
         telefono.setPrefHeight(5);
@@ -282,7 +288,7 @@ public class VistaOperador {
 
         VBox contenedorTextAddCliente = new VBox();
         contenedorTextAddCliente.setSpacing(20);
-        contenedorTextAddCliente.getChildren().addAll(cliente, direccion, ciudad, telefono);
+        contenedorTextAddCliente.getChildren().addAll(cliente, direccion, barrio, telefono);
 
         // ----------------------------------------------------------------------
 
@@ -513,36 +519,42 @@ public class VistaOperador {
         // LABELS
         Label informacionDelPedidoLabel = new Label("Informacion del Pedido: ");
         informacionDelPedidoLabel.setFont(new Font(40));
-
+        informacionDelPedidoLabel.setId("headerConfirmarPedido");
+        
         Label peidoLabel = new Label("Pedido: ");
         peidoLabel.setFont(new Font(20));
-
+        peidoLabel.setId("labelsOnConfirmView");
+        
         Label domicilioLabel = new Label("Domicilio: ");
         domicilioLabel.setFont(new Font(20));
+        domicilioLabel.setId("labelsOnConfirmView");
 
         Label precioLabel = new Label("Precio: ");
         precioLabel.setFont(new Font(20));
+        precioLabel.setId("labelsOnConfirmView");
 
         Label impuestosLabel = new Label("Impuestos: ");
         impuestosLabel.setFont(new Font(20));
+        impuestosLabel.setId("labelsOnConfirmView");
 
         Label precioTotalLabel = new Label("Precio Total");
         precioTotalLabel.setFont(new Font(20));
+        precioTotalLabel.setId("labelsOnConfirmView");
 
         VBox vboxParaLabels = new VBox();
         vboxParaLabels.setSpacing(45);
-        vboxParaLabels.getChildren().addAll(informacionDelPedidoLabel, peidoLabel, domicilioLabel, precioLabel,
+        vboxParaLabels.getChildren().addAll(peidoLabel, domicilioLabel, precioLabel,
                 impuestosLabel, precioTotalLabel);
         // -
         VBox vBoxParaText = new VBox();
-        vBoxParaText.setSpacing(55);
+        vBoxParaText.setSpacing(60);
 
         vBoxParaText.getChildren().addAll(pedidoText, domicilioText, precioText, impuestoText,
                 precioTotalText);
-
+        pedidoText.setId("PedidoStuff");
         // Agregando elementos
         contenedorELementosConfirmView.getChildren().addAll(sendPedidoToCocinaButton, backToMenu, logo,
-                rectangleToDecorateConfirm, vboxParaLabels, vBoxParaText);
+                rectangleToDecorateConfirm, vboxParaLabels, vBoxParaText, informacionDelPedidoLabel);
 
         // Propiedades
         sendPedidoToCocinaButton.setScaleY(2);
@@ -577,9 +589,10 @@ public class VistaOperador {
 
         contenedorELementosConfirmView.setMargin(logo, new Insets(0, 900, 620, 0)); // establecer un margen
         // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
-        contenedorELementosConfirmView.setMargin(vboxParaLabels, new Insets(50, 0, 0, 350)); // establecer un
+        contenedorELementosConfirmView.setMargin(vboxParaLabels, new Insets(170, 0, 0, 350)); // establecer un
 
-        contenedorELementosConfirmView.setMargin(vBoxParaText, new Insets(200, 0, 0, 550)); // establecer un
+        contenedorELementosConfirmView.setMargin(informacionDelPedidoLabel, new Insets(0, 50, 600, 0));
+        contenedorELementosConfirmView.setMargin(vBoxParaText, new Insets(170, 0, 0, 550)); // establecer un
         sendPedidoToCocinaButton.toFront();
         confirmarPedidoView = new Scene(contenedorELementosConfirmView, 1080, 720);
         confirmarPedidoView.getStylesheets().add("style.css");

@@ -9,7 +9,12 @@ import co.edu.upb.oasis.interfaces.DomicilioInterface;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
-
+/**
+ * 
+ * Class that implements the DomicilioInterface
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class ServicioDomicilio extends UnicastRemoteObject implements DomicilioInterface {
     JSONClass jsonClassUser = new JSONClass("usuarios.json", Usuario.class);
     public ServicioDomicilio() throws RemoteException {

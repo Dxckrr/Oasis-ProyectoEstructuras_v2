@@ -13,7 +13,11 @@ import co.edu.upb.oasis.interfaces.OperadorInterface;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
-
+/**
+ * Class that implements the OperadorInterface
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class ServicioOperador extends UnicastRemoteObject implements OperadorInterface {
     JSONClass<Usuario> jsonClassUser = new JSONClass("usuarios.json", Usuario.class);
     JSONClass<Cliente> jsonClassClientes = new JSONClass("clientes.json", Cliente.class);
@@ -38,14 +42,6 @@ public class ServicioOperador extends UnicastRemoteObject implements OperadorInt
         while (iterator.hasNext()) {
             temporal = (DoubleListNode) iterator.next();
             tempUser = (Usuario) temporal.getObject();
-            /*
-             * System.out.println(user);
-             * System.out.println(password);
-             * System.out.println("---------------");
-             * System.out.println(inUser.getUsuario());
-             * System.out.println(inUser.getPassword());
-             * System.out.println("---------------");
-             */
             if (tempUser.getUsuario().equals(inUser.getUsuario()) && tempUser.getPassword().equals(inUser.getPassword())
                     && (tempUser.getId() > 100 && tempUser.getId() < 200)) {
                 System.out.println("1");
@@ -56,7 +52,7 @@ public class ServicioOperador extends UnicastRemoteObject implements OperadorInt
         return false;
     }
 
-    public boolean addClienteConfirmation(String nombreCliente, String direccion, String ciudad, int telefono)
+    public boolean addClienteConfirmation(String nombreCliente, String direccion, String ciudad, long telefono)
             throws RemoteException {
 
         Cliente clienteToAdd = new Cliente(nombreCliente, direccion, ciudad, telefono);
@@ -84,7 +80,7 @@ public class ServicioOperador extends UnicastRemoteObject implements OperadorInt
     }
 
     @Override
-    public boolean addCliente(String nombreCliente, String direccion, String ciudad, int telefono) {
+    public boolean addCliente(String nombreCliente, String direccion, String ciudad, long telefono) {
         try {
             // System.out.println(" ----" + addClienteConfirmation(nombreCliente, direccion,
             // ciudad, telefono));

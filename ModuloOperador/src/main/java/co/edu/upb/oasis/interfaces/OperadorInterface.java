@@ -12,7 +12,7 @@ public interface OperadorInterface extends Remote {
 
     public boolean login(String user, String password) throws RemoteException;
 
-    public boolean addCliente(String nombreCliente, String direccion, String ciudad, int telefono)
+    public boolean addCliente(String nombreCliente, String direccion, String ciudad, long telefono)
             throws RemoteException;
 
     public DoubleLinkedList<Producto> getMenu() throws RemoteException;

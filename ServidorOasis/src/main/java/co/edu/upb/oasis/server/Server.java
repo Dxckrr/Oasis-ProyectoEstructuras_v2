@@ -20,7 +20,11 @@ import java.rmi.registry.LocateRegistry;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * Class that represents the 'Server' of the proyect on the RMI
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class Server {
 
     public String ip;
@@ -39,7 +43,10 @@ public class Server {
         this.ip = ip;
 
     }
-
+    /**
+     * 
+     * @return 'true' if all methods returned 'true' , otherwise 'false'
+     */
     public boolean deployServices() {
         Properties properties = new Properties();
 
@@ -71,7 +78,13 @@ public class Server {
             return false;
         }
     }
-
+    /**
+     * 
+     * @param serviceType
+     * @param port
+     * @param serviceName
+     * @return 'true' if the 'service' was created , otherwise 'false'
+     */
     public boolean deployServiceOperador(String serviceType, String port, String serviceName) {
         boolean ack = false;
         if (ip == null | port == null | serviceName == null)
@@ -90,7 +103,13 @@ public class Server {
             return ack;
         }
     }
-
+    /**
+     * 
+     * @param serviceType
+     * @param port
+     * @param serviceName
+     * @return 'true' if the 'service' was created , otherwise 'false'
+     */
     public boolean deployServiceAdministrador(String serviceType, String port, String serviceName) {
         boolean ack = false;
         if (ip == null | port == null | serviceName == null)
@@ -109,7 +128,13 @@ public class Server {
             return ack;
         }
     }
-
+    /**
+     * 
+     * @param serviceType
+     * @param port
+     * @param serviceName
+     * @return 'true' if the 'service' was created , otherwise 'false'
+     */
     public boolean deployServiceCocina(String serviceType, String port, String serviceName) {
         boolean ack = false;
         if (ip == null | port == null | serviceName == null)
@@ -128,7 +153,13 @@ public class Server {
             return ack;
         }
     }
-
+    /**
+     * 
+     * @param serviceType
+     * @param port
+     * @param serviceName
+     * @return 'true' if the 'service' was created , otherwise 'false'
+     */
     public boolean deployServiceDomicilio(String serviceType, String port, String serviceName) {
         boolean ack = false;
         if (ip == null | port == null | serviceName == null)

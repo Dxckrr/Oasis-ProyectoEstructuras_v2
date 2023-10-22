@@ -11,7 +11,14 @@ import com.google.gson.*;
 import co.edu.upb.oasis.estructuras.interfaces.NodeInterface;
 import co.edu.upb.oasis.estructuras.lists.DoubleLinkedList;
 import co.edu.upb.oasis.estructuras.node.DoubleListNode;
-
+/**
+ * Class for  management of "database" using JSON files
+ *  
+ * Clase para el manejo de la "base de datos" haciendo use de archivos JSON
+ * 
+ * @author Juliana Chavez King
+ * @author Juan David Patiño Parra
+ */
 public class JSONClass<T extends Serializable> implements Serializable{
     DoubleLinkedList<T> listaObjetos;
     DoubleLinkedList<T> listaObjetosEnElJson;
@@ -24,7 +31,9 @@ public class JSONClass<T extends Serializable> implements Serializable{
         listaObjetosEnElJson = new DoubleLinkedList<>();
         this.inClass = inClass;
     }
-
+    /**
+     * loads the information of a JSON file
+     */
     public void cargarJson() {
         File file = new File(nombreArchivoJson);
         if (file.exists()) {
@@ -49,7 +58,9 @@ public class JSONClass<T extends Serializable> implements Serializable{
             }
         }
     }
-
+    /**
+     * saves the new information on the JSON file
+     */
     public void guardarDaticosEnArchivo() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonArray jsonArray = new JsonArray();
@@ -66,11 +77,18 @@ public class JSONClass<T extends Serializable> implements Serializable{
             e.printStackTrace();
         }
     }
-
+    /**
+     * 
+     * @return a DoubleLinkedList  withe the elemnents on the JSON file
+     */
     public DoubleLinkedList<T> obtenerLista() {
         return listaObjetos;
     }
-
+    /**
+     * 
+     * @param id to represent the id of an element
+     * @return  an element with the 'id' on the arguments otherwise 'null'
+     */
     public T obtenerObjeticoPorId(int id) {
         Iterator iterator = listaObjetos.iterator();
         DoubleListNode node;
@@ -84,12 +102,23 @@ public class JSONClass<T extends Serializable> implements Serializable{
         }
         return null;
     }
-
+    /**
+     * 
+     * @param objeto
+     * adds an element to the DoubleLinkedList and saves it on the JSON file
+     */
     public void agregarObjetico(T objeto) {
         listaObjetos.add(objeto);
         guardarDaticosEnArchivo();
     }
-
+    /**
+     * 
+     * @param objetoNuevo  
+     * @param objetoAntiguo
+     * 
+     * updates an element on the JSON file
+     * 
+     */
     public void actualizarObjetico(T objetoNuevo, T objetoAntiguo) {
         Iterator iterator = listaObjetos.iterator();
         DoubleListNode node;
@@ -104,16 +133,29 @@ public class JSONClass<T extends Serializable> implements Serializable{
             }
         }
     }
-
+    /**
+     * 
+     * @param object
+     * removes an element from the JSON file
+     */
     public void eliminarObjeto(T object) {
         listaObjetos.remove(object);
         guardarDaticosEnArchivo();
     }
-
+    /**
+     * 
+     * @param object
+     * 
+     * @return 'true' if an element exists on the JSON file otherise 'false'
+     */
     public boolean validarExistenciaEnElArchivo(T object) {
         return listaObjetos.contains(object);
     }
-
+    /**
+     * 
+     * @param otroJsonFileName
+     * merge two JSON files
+     */
     public void fusionarArchivos(String otroJsonFileName) {
         try {
             String otroJsonText = leerArchivo(otroJsonFileName);
@@ -129,11 +171,15 @@ public class JSONClass<T extends Serializable> implements Serializable{
             e.printStackTrace();
         }
     }
-
     public interface IdentificarID {
         int getId();
     }
-
+    /**
+     * 
+     * @param fileName
+     * @return the information of a JSON file
+     * @throws IOException if the JSON file was not readed correctly
+     */
     private String leerArchivo(String fileName) throws IOException {
         StringBuilder content = new StringBuilder();
         File file = new File(fileName);

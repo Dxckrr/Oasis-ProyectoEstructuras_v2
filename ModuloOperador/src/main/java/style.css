@@ -56,5 +56,25 @@
     -fx-text-fill: #333; /* Color de texto */
     -fx-font-weight: bold;
 }
+
+
+#headerConfirmarPedido {
+    -fx-font-size: 40px;
+    -fx-text-fill: #333; /* Color de texto */
+    -fx-font-style: italic; 
+}
+
+#labelsOnConfirmView {
+    -fx-font-size: 20px;
+    -fx-text-fill: #333; /* Color de texto */
+    -fx-font-weight: bold; /* Establecer un peso de fuente intermedio */
+}
+
+#PedidoStuff {
+    -fx-font-size: 12px;
+    -fx-text-fill: #333; /* Color de texto */
+    -fx-font-weight: bold; /* Establecer un peso de fuente intermedio */
+
+}
 /*Updated*/
 

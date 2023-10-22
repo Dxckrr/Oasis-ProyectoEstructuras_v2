@@ -38,7 +38,7 @@ public class ClienteOperador implements OperadorInterface {
     }
 
     @Override
-    public boolean addCliente(String nombreCliente, String direccion, String ciudad, int telefono)
+    public boolean addCliente(String nombreCliente, String direccion, String ciudad, long telefono)
             throws RemoteException {
         try {
             service = (OperadorInterface) Naming.lookup(url);

@@ -144,16 +144,16 @@ public class OperadorController {
         // aGREGAR CLIENTE
 
         vistaOperador.confirmAddButton.setOnAction(actionEvent -> {
-            if (checkInteger(vistaOperador.telefono.getText())) {
-                if (vistaOperador.cliente == null || vistaOperador.direccion == null || vistaOperador.ciudad == null
+            if (checkNumber(vistaOperador.telefono.getText())) {
+                if (vistaOperador.cliente == null || vistaOperador.direccion == null || vistaOperador.barrio == null
                         || vistaOperador.telefono == null) {
                 } else {
                     if (modelVistaOperador.addCliente(vistaOperador.cliente.getText(),
-                            vistaOperador.direccion.getText(), vistaOperador.ciudad.getText(),
-                            (Integer.parseInt(vistaOperador.telefono.getText())))) {
+                            vistaOperador.direccion.getText(), vistaOperador.barrio.getValue(),
+                            (Long.parseLong(vistaOperador.telefono.getText())))) {
                         vistaOperador.cliente.setText("");
                         vistaOperador.direccion.setText("");
-                        vistaOperador.ciudad.setText("");
+                        vistaOperador.barrio.getSelectionModel().clearSelection();
                         vistaOperador.telefono.setText("");
                     }
 
@@ -348,9 +348,9 @@ public class OperadorController {
          */
     }
 
-    public boolean checkInteger(String textToConfirm) {
+    public boolean checkNumber(String textToConfirm) {
         try {
-            Integer.parseInt(textToConfirm);
+            Long.parseLong(textToConfirm);
         } catch (NumberFormatException e) {
             return false;
         }

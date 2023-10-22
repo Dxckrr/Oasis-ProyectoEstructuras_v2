@@ -47,5 +47,26 @@
     "barrio": "Los andes",
     "telefono": 312736234,
     "numeroDePedidos": 3
+  },
+  {
+    "nombre": "Pato",
+    "direccion": "Cra 35-43",
+    "barrio": "Cañaveral",
+    "telefono": 5234523,
+    "numeroDePedidos": 0
+  },
+  {
+    "nombre": "Lucas",
+    "direccion": "Cra 59-102",
+    "barrio": "Lagos del Cacique",
+    "telefono": 31652423,
+    "numeroDePedidos": 0
+  },
+  {
+    "nombre": "Lennin",
+    "direccion": "Cra 34-54",
+    "barrio": "La Ciudadela",
+    "telefono": 3156481459,
+    "numeroDePedidos": 0
   }
 ]

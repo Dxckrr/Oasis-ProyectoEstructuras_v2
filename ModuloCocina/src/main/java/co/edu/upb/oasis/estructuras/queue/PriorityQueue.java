@@ -2,7 +2,7 @@ package co.edu.upb.oasis.estructuras.queue;
 
 import java.io.Serializable;
 
-public class PriorityQueue<T extends Serializable> {
+public class PriorityQueue<T extends Serializable> implements Serializable{
     QueueList<T>[] myPriorityCola;
 
     public PriorityQueue(int size) {

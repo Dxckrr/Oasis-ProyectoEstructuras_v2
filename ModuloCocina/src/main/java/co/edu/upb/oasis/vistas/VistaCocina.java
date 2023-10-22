@@ -37,7 +37,7 @@ public class VistaCocina {
     public Label textListaPedidos;
 
     // Arrays Horno
-    Horno[] hornos = new Horno[4];
+    public Horno[] hornos = new Horno[16];
     // Figuras
     Rectangle rectangleToDecorate;
     Rectangle rectangleLogo;
@@ -53,8 +53,8 @@ public class VistaCocina {
     Color colorOrange = Color.web(orange);
     //
 
-    public Button getPedidos;
-
+    public Button getPedidosButton;
+    public Button cookButton;
     //
     public ListView<String> listView;
     // ESTO DEBE SER UN ARRAY DE BOTONES PARA DESPACHAR
@@ -87,8 +87,11 @@ public class VistaCocina {
         int ancho = 0;
         int largo = 0;
         for (int i = 0; i < hornos.length; i++) {
-            hornos[i] = new Horno(40);
-            if (i % 2 == 0) {
+            hornos[i] = new Horno(60, 70);
+            if (i == 5 || i == 7 || i == 13 || i == 15) {
+                hornos[i].setIsLento();
+            }
+            if (i % 4 == 0) {
                 ancho = 0;
                 largo++;
                 contenedorHornos.add(hornos[i].getHorno(), ancho, largo); // Añadir elementos al layout
@@ -99,12 +102,12 @@ public class VistaCocina {
         }
         // Propiedades de los paneles
         // Vbox
-        panelListaPedidos.setSpacing(5);
+        panelListaPedidos.setSpacing(2);
         panelListaPedidos.setPrefWidth(100);
 
         // GridPane Propiedades
-        contenedorHornos.setHgap(200);
-        contenedorHornos.setVgap(200);
+        contenedorHornos.setHgap(120);
+        contenedorHornos.setVgap(120);
 
         // Rectangle para decorar
 
@@ -117,9 +120,15 @@ public class VistaCocina {
         contenedorHornos.getChildren().addAll();
         // Propiedades elemtnos
         textListaPedidos.setFont(new Font(20));
-        getPedidos = new Button("Click");
+        // -----------
 
-        panelPrincipal.getChildren().addAll(panelListaPedidos, contenedorHornos, rectangleToDecorate, getPedidos);
+        getPedidosButton = new Button("Refresh");
+        getPedidosButton.setId("RefreshButton");
+
+        cookButton = new Button("Cocinar");
+        cookButton.setId("cook");
+        panelPrincipal.getChildren().addAll(panelListaPedidos, contenedorHornos, rectangleToDecorate, getPedidosButton,
+                cookButton);
         //
         panelPrincipal.setBackground(fondoCocina);
 
@@ -136,17 +145,22 @@ public class VistaCocina {
         // Crear un diseño de caja vertical para organizar los elementos
         VBox contenedorDeProductosToAdd = new VBox(listView);
         panelPrincipal.getChildren().add(contenedorDeProductosToAdd);
+
         // Panel Principal distribucion
-        panelPrincipal.setMargin(contenedorDeProductosToAdd, new Insets(100, 780, 150, 10));
+
+        panelPrincipal.setMargin(getPedidosButton, new Insets(650, 950, 0, 0)); // establecer un margen
+        panelPrincipal.setMargin(contenedorDeProductosToAdd, new Insets(100, 780, 100, 1));
         panelPrincipal.setAlignment(panelListaPedidos, Pos.CENTER_LEFT);
         panelPrincipal.setAlignment(rectangleToDecorate, Pos.CENTER_LEFT);
-        panelPrincipal.setMargin(contenedorHornos, new Insets(0, 0, 0, 600)); // establecer un margen
-                                                                              // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+        panelPrincipal.setMargin(contenedorHornos, new Insets(0, 0, 120, 420)); // establecer un margen
+                                                                                // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+        panelPrincipal.setMargin(cookButton, new Insets(650, 750, 0, 0)); // establecer un margen
+
         rectangleToDecorate.toBack();
-        getPedidos.toFront();
+        getPedidosButton.toFront();
         // -------
         principal = new Scene(panelPrincipal, 1080, 720);
-
+        principal.getStylesheets().add("style.css");
         window.setScene(principal);
         window.setTitle("Oasis"); // Estableciendo titulo
         window.show();

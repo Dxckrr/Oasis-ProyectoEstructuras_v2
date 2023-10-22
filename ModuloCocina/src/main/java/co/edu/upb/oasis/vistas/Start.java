@@ -38,7 +38,7 @@ public class Start {
     public TextField password;
     // Imagenes
     ImageView logo;
-    Image picture = new Image("file:src/main/java/co/edu/upb/oasis/images/gmail.png");
+    Image picture = new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\OasisLogo.png");
     // LABELS(TEXTO EN PANTALLA)
 
     Label adminText;
@@ -100,8 +100,8 @@ public class Start {
         welcome.setScaleX(2);
         adminText.setFont(new Font(20));
         // -----------
-        logo.setFitHeight(180); // Alto
-        logo.setFitWidth(180); // Ancho
+        logo.setFitHeight(320); // Alto
+        logo.setFitWidth(280); // Ancho
         // -----------
         panelPrincipal.setBackground(fondo);
         // -------------------------
@@ -159,8 +159,8 @@ public class Start {
 
         // Propiedades
 
-        logo.setFitHeight(180); // Alto
-        logo.setFitWidth(180); // Ancho
+        logo.setFitHeight(320); // Alto
+        logo.setFitWidth(280); // Ancho
         // -------------------------
         panelLogin.setBackground(fondo);
         // -------------------------

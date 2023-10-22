@@ -30,6 +30,7 @@
 }
 
 #deleteButton {
+    -fx-text-fill: white;
     -fx-text-alignment: center;
     -fx-cursor: hand;
     -fx-background-color: #d31818;

@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -77,21 +78,35 @@ public class OperadorController {
 
             confirmButton.setOnAction(e -> {
                 String selectedData = comboBox.getValue();
-                System.out.println("Cliente seleccionado: " + selectedData);
-                // Falta iterar
-                Iterator<NodeInterface<Cliente>> iteratorDeClientes1 = clientes.iterator();
-                DoubleListNode<Cliente> temporalClienteSelect;
-                while (iteratorDeClientes1.hasNext()) {
-                    temporalClienteSelect = (DoubleListNode<Cliente>) iteratorDeClientes1.next();
-                    if (temporalClienteSelect.getObject().getNombre().equals(selectedData)) {
-                        Cliente clienteToLinkPedido = temporalClienteSelect.getObject();
-                        System.out.println(clienteToLinkPedido.getNombre());
-                        setClienteToLinkPedido(clienteToLinkPedido);
+                if (selectedData == null) {
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("ERRORRR");
+                    alert.setHeaderText("CLIENTE NO SELECCIONADO");
+                    alert.setContentText(
+                            "Tienes que seleccionar uno!" + "\n"
+                                    + "Porfavor selecciona uno...");
+                    alert.showAndWait();
+                    vistaOperador.switchScene(vistaOperador.optionPanel);
+                } else {
+                    System.out.println("Cliente seleccionado: " + selectedData);
+                    // Falta iterar
+                    Iterator<NodeInterface<Cliente>> iteratorDeClientes1 = clientes.iterator();
+                    DoubleListNode<Cliente> temporalClienteSelect;
+                    while (iteratorDeClientes1.hasNext()) {
+                        temporalClienteSelect = (DoubleListNode<Cliente>) iteratorDeClientes1.next();
+                        if (temporalClienteSelect.getObject().getNombre().equals(selectedData)) {
+                            Cliente clienteToLinkPedido = temporalClienteSelect.getObject();
+                            System.out.println(clienteToLinkPedido.getNombre());
+                            setClienteToLinkPedido(clienteToLinkPedido);
+                        }
                     }
+                    // Cliente clienteSelected = selectedData.
+
+                    popupStage.close();
+                    vistaOperador.switchScene(vistaOperador.menuView);
                 }
-                // Cliente clienteSelected = selectedData.
-                popupStage.close();
-                vistaOperador.switchScene(vistaOperador.menuView);
+
             });
             // Crear el diseño de la ventana emergente y agregar elementos.
             VBox popupLayout = new VBox(10);
@@ -284,7 +299,7 @@ public class OperadorController {
                 vistaOperador.precioText.setText(String.valueOf(precioTemp));
                 vistaOperador.impuestoText.setText("dcdd");
 
-                vistaOperador.precioTotalText.setText((String.valueOf(precioTemp))+" "+ "impuestos" );
+                vistaOperador.precioTotalText.setText((String.valueOf(precioTemp)) + " " + "impuestos");
 
                 vistaOperador.switchScene(vistaOperador.confirmarPedidoView);
 
@@ -305,8 +320,17 @@ public class OperadorController {
         });
 
         vistaOperador.sendPedidoToCocinaButton.setOnAction(actionEvent -> {
-            System.out.println("HOLAA");
             modelVistaOperador.sendPedido(clienteToLinkPedido, pedido);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("SUCCESSSS");
+            alert.setHeaderText("PEDIDO ENVIADO A COCINA");
+            alert.setContentText(
+                    "El pedido fue enviado con exito!" + "\n" + "Porfavor agradezca a nuestros cocineros luego...");
+            alert.showAndWait();
+            vistaOperador.items.clear();
+            pedido.clear();
+            vistaOperador.switchScene(vistaOperador.optionPanel);
         });
         /*
          * / Producto[] pedidoArray = new Producto[pedido.size()];

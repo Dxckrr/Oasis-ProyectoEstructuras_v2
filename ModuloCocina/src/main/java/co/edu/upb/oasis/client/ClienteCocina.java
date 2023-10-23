@@ -7,7 +7,13 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
+/**
+ * Class that is the Client on the RMI
+ * 
+ *is the communication between the module and the server
+ * it implements the CocinaInterface
+ * @author Juan David Patiño Parra
+ */
 public class ClienteCocina implements CocinaInterface {
     private CocinaInterface service;
     private String ip;

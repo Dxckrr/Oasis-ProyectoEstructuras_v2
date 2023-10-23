@@ -3,17 +3,19 @@ package co.edu.upb.oasis.services;
 import co.edu.upb.oasis.clases.Cocina;
 import co.edu.upb.oasis.clases.JSONClass;
 import co.edu.upb.oasis.clases.Pedido;
-import co.edu.upb.oasis.clases.Producto;
 import co.edu.upb.oasis.clases.Usuario;
 import co.edu.upb.oasis.estructuras.lists.DoubleLinkedList;
 import co.edu.upb.oasis.estructuras.node.DoubleListNode;
-import co.edu.upb.oasis.estructuras.queue.PriorityQueue;
 import co.edu.upb.oasis.interfaces.CocinaInterface;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
-
+/**
+ * Class that implements the CocinaInterface
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class ServicioCocina extends UnicastRemoteObject implements CocinaInterface {
     JSONClass jsonClassUser = new JSONClass("usuarios.json", Usuario.class);
 

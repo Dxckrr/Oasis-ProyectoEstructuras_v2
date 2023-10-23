@@ -1,0 +1,38 @@
+#RefreshButton {
+    -fx-text-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-color: #beece5;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px, 4px, 3px;
+    -fx-border-width: 0.1px; /* Corrección de la propiedad 'border-width' */
+}
+
+#RefreshButton:hover {
+    -fx-background-color: #4eebde;
+    
+}
+
+#RefreshButton:pressed {
+    -fx-background-color: #48d493;
+    
+}
+#cook {
+    -fx-text-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-color: #ec2f2f;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px, 4px, 3px;
+    -fx-border-width: 0.1px; /* Corrección de la propiedad 'border-width' */
+}
+
+#cook:hover {
+    -fx-background-color: #f5e727;
+    
+}
+
+#cook:pressed {
+    -fx-background-color: #daa208;
+    
+}

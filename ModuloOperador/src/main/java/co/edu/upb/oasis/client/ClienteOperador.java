@@ -1,7 +1,6 @@
 package co.edu.upb.oasis.client;
 
 import co.edu.upb.oasis.clases.Cliente;
-import co.edu.upb.oasis.clases.Pedido;
 import co.edu.upb.oasis.clases.Producto;
 import co.edu.upb.oasis.estructuras.lists.DoubleLinkedList;
 import co.edu.upb.oasis.interfaces.OperadorInterface;
@@ -10,7 +9,13 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
+/**
+ * Class that is the Client on the RMI
+ * 
+ * is the communication between the module and the server
+ * it implements the OperadorInterface
+ * @author Juan David Patiño Parra
+ */
 public class ClienteOperador implements OperadorInterface {
     private OperadorInterface service;
     private String ip;
@@ -38,7 +43,7 @@ public class ClienteOperador implements OperadorInterface {
     }
 
     @Override
-    public boolean addCliente(String nombreCliente, String direccion, String ciudad, int telefono)
+    public boolean addCliente(String nombreCliente, String direccion, String ciudad, long telefono)
             throws RemoteException {
         try {
             service = (OperadorInterface) Naming.lookup(url);

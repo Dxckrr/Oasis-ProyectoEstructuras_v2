@@ -15,7 +15,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * Class which creates the start view
+ * @author Juan David Patiño
+ * 
+ */
 public class Start {
     public Stage window;
     //Escenas

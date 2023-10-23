@@ -15,15 +15,35 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * Class that represents the controller of the operador view
+ * 
+ * Clase que representa el controlador para la vista de operador
+ * 
+ * This class links buttons and images as well as proccess information from
+ * database
+ * 
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class OperadorController {
 
     Cliente clienteToLinkPedido;
     Iterator<NodeInterface<Producto>> iterator2;
+    DoubleLinkedList<Cliente> clientes;
 
+    /**
+     * Once initialized, the constructor sets all the actions that must be done once
+     * the user interacts with the elements
+     * (Buttons , ImageView , TextLabels , ComboBox, etc...)
+     */
     public OperadorController() {
         // CREAR VISTA Y MODELO
         VistaOperador vistaOperador = new VistaOperador();
@@ -55,7 +75,7 @@ public class OperadorController {
         vistaOperador.menuButton.setOnAction(actionEvent -> {
 
             // ---------------Consiguiendo los clientes del json y colocandolos en COMBOBOX
-            DoubleLinkedList<Cliente> clientes = modelVistaOperador.getClientes();
+            clientes = modelVistaOperador.getClientes();
             // clientes.imprimir();
             Iterator<NodeInterface<Cliente>> iteratorDeClientes = clientes.iterator();
             DoubleListNode<Cliente> temporalCliente;
@@ -77,21 +97,35 @@ public class OperadorController {
 
             confirmButton.setOnAction(e -> {
                 String selectedData = comboBox.getValue();
-                System.out.println("Cliente seleccionado: " + selectedData);
-                // Falta iterar
-                Iterator<NodeInterface<Cliente>> iteratorDeClientes1 = clientes.iterator();
-                DoubleListNode<Cliente> temporalClienteSelect;
-                while (iteratorDeClientes1.hasNext()) {
-                    temporalClienteSelect = (DoubleListNode<Cliente>) iteratorDeClientes1.next();
-                    if (temporalClienteSelect.getObject().getNombre().equals(selectedData)) {
-                        Cliente clienteToLinkPedido = temporalClienteSelect.getObject();
-                        System.out.println(clienteToLinkPedido.getNombre());
-                        setClienteToLinkPedido(clienteToLinkPedido);
+                if (selectedData == null) {
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("ERRORRR");
+                    alert.setHeaderText("CLIENTE NO SELECCIONADO");
+                    alert.setContentText(
+                            "Tienes que seleccionar uno!" + "\n"
+                                    + "Porfavor selecciona uno...");
+                    alert.showAndWait();
+                    vistaOperador.switchScene(vistaOperador.optionPanel);
+                } else {
+                    System.out.println("Cliente seleccionado: " + selectedData);
+                    // Falta iterar
+                    Iterator<NodeInterface<Cliente>> iteratorDeClientes1 = clientes.iterator();
+                    DoubleListNode<Cliente> temporalClienteSelect;
+                    while (iteratorDeClientes1.hasNext()) {
+                        temporalClienteSelect = (DoubleListNode<Cliente>) iteratorDeClientes1.next();
+                        if (temporalClienteSelect.getObject().getNombre().equals(selectedData)) {
+                            Cliente clienteToLinkPedido = temporalClienteSelect.getObject();
+                            System.out.println(clienteToLinkPedido.getNombre());
+                            setClienteToLinkPedido(clienteToLinkPedido);
+                        }
                     }
+                    // Cliente clienteSelected = selectedData.
+
+                    popupStage.close();
+                    vistaOperador.switchScene(vistaOperador.menuView);
                 }
-                // Cliente clienteSelected = selectedData.
-                popupStage.close();
-                vistaOperador.switchScene(vistaOperador.menuView);
+
             });
             // Crear el diseño de la ventana emergente y agregar elementos.
             VBox popupLayout = new VBox(10);
@@ -114,6 +148,13 @@ public class OperadorController {
             vistaOperador.switchScene(vistaOperador.optionPanel);
 
         });
+        vistaOperador.goBackToClientesOption.setOnAction(actionEvent -> {
+            vistaOperador.clientesFounded.clear();
+            vistaOperador.switchScene(vistaOperador.clientesView);
+        });
+        vistaOperador.buscarClienteButton.setOnAction(actionEvent -> {
+            vistaOperador.switchScene(vistaOperador.buscarClienteView);
+        });
 
         vistaOperador.agregarClienteButton.setOnAction(actionEvent -> {
             // vistaOperador.window.setScene(VistaOperador.optionPanel);
@@ -126,22 +167,39 @@ public class OperadorController {
 
         });
         // ---------------------------------------------------------------------------
+        // ---------------
+        // Buscar cliente
+        vistaOperador.busquedaDeClientes.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                clientes = modelVistaOperador.getClientes();
+                Long numeroIngresado = Long.parseLong(vistaOperador.busquedaDeClientes.getText());
+                Iterator<NodeInterface<Cliente>> iterator = clientes.iterator();
+                DoubleListNode<Cliente> temporallll;
+                while (iterator.hasNext()) {
+                    temporallll = (DoubleListNode<Cliente>) iterator.next();
+                    if (temporallll.getObject().getTelefono() == (numeroIngresado)) {
+                        vistaOperador.clientesFounded.add(temporallll.getObject().getNombre());
+                        break;
+                    }
+                }
+            }
+        });
+
         // aGREGAR CLIENTE
 
         vistaOperador.confirmAddButton.setOnAction(actionEvent -> {
-            if (checkInteger(vistaOperador.telefono.getText())) {
-                if (vistaOperador.cliente == null || vistaOperador.direccion == null || vistaOperador.ciudad == null
+            if (checkNumber(vistaOperador.telefono.getText())) {
+                if (vistaOperador.cliente == null || vistaOperador.direccion == null || vistaOperador.barrio == null
                         || vistaOperador.telefono == null) {
                 } else {
                     if (modelVistaOperador.addCliente(vistaOperador.cliente.getText(),
-                            vistaOperador.direccion.getText(), vistaOperador.ciudad.getText(),
-                            (Integer.parseInt(vistaOperador.telefono.getText())))) {
+                            vistaOperador.direccion.getText(), vistaOperador.barrio.getValue(),
+                            (Long.parseLong(vistaOperador.telefono.getText())))) {
                         vistaOperador.cliente.setText("");
                         vistaOperador.direccion.setText("");
-                        vistaOperador.ciudad.setText("");
+                        vistaOperador.barrio.getSelectionModel().clearSelection();
                         vistaOperador.telefono.setText("");
                     }
-
                 }
             } else {
                 modelVistaOperador.checkTelefono();
@@ -154,6 +212,39 @@ public class OperadorController {
             vistaOperador.items.clear();
             pedido.clear();
             vistaOperador.switchScene(vistaOperador.optionPanel);
+        });
+
+        // BUSQUEDA ---------------------------
+        vistaOperador.barraDeBusqueda.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String busqueda = vistaOperador.barraDeBusqueda.getText();
+
+                for (int a = 0; a < vistaOperador.comidas.length; a++) {
+                    if (vistaOperador.comidas[a].getText().toLowerCase().contains(busqueda)) {
+                        vistaOperador.comidas[a].setVisible(true);
+                    } else {
+                        vistaOperador.comidas[a].setVisible(false);
+                    }
+                }
+
+                for (int b = 0; b < vistaOperador.bebidas.length; b++) {
+
+                    if (vistaOperador.bebidas[b].getText().toLowerCase().contains(busqueda)) {
+                        vistaOperador.bebidas[b].setVisible(true);
+                    } else {
+                        vistaOperador.bebidas[b].setVisible(false);
+                    }
+                }
+
+                for (int c = 0; c < vistaOperador.postres.length; c++) {
+                    if (vistaOperador.postres[c].getText().toLowerCase().contains(busqueda)) {
+                        vistaOperador.postres[c].setVisible(true);
+                    } else {
+                        vistaOperador.postres[c].setVisible(false);
+                    }
+                }
+            }
+
         });
 
         // CREAR PEDIDO
@@ -272,19 +363,21 @@ public class OperadorController {
                 // -----Metodo para SACAR PRECIO Y IMPUESTOS
                 String result = "";
                 int precioTemp = 0;
+                int impuestos = 0;
                 DoubleListNode<Producto> increibleNode;
                 while (iterator2.hasNext()) {
                     increibleNode = (DoubleListNode<Producto>) iterator2.next();
                     result += increibleNode.getObject().getNombre() + "| ";
                     precioTemp += increibleNode.getObject().getPrecio();
+                    impuestos += getImpuesto(precioTemp);
                 }
-
+                int total = precioTemp + getPrecioDomicilio(clienteToLinkPedido.getBarrio());
                 vistaOperador.pedidoText.setText(result);
-                vistaOperador.domicilioText.setText("Depende aun");
-                vistaOperador.precioText.setText(String.valueOf(precioTemp));
-                vistaOperador.impuestoText.setText("dcdd");
+                vistaOperador.domicilioText.setText(String.valueOf(getPrecioDomicilio(clienteToLinkPedido.getBarrio())));
+                vistaOperador.precioText.setText(String.valueOf(precioTemp + getPrecioDomicilio(clienteToLinkPedido.getBarrio())));
+                vistaOperador.impuestoText.setText(String.valueOf(impuestos));
 
-                vistaOperador.precioTotalText.setText((String.valueOf(precioTemp))+" "+ "impuestos" );
+                vistaOperador.precioTotalText.setText((String.valueOf( total+ impuestos)));
 
                 vistaOperador.switchScene(vistaOperador.confirmarPedidoView);
 
@@ -305,8 +398,17 @@ public class OperadorController {
         });
 
         vistaOperador.sendPedidoToCocinaButton.setOnAction(actionEvent -> {
-            System.out.println("HOLAA");
             modelVistaOperador.sendPedido(clienteToLinkPedido, pedido);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("SUCCESSSS");
+            alert.setHeaderText("PEDIDO ENVIADO A COCINA");
+            alert.setContentText(
+                    "El pedido fue enviado con exito!" + "\n" + "Porfavor agradezca a nuestros cocineros luego...");
+            alert.showAndWait();
+            vistaOperador.items.clear();
+            pedido.clear();
+            vistaOperador.switchScene(vistaOperador.optionPanel);
         });
         /*
          * / Producto[] pedidoArray = new Producto[pedido.size()];
@@ -324,25 +426,124 @@ public class OperadorController {
          */
     }
 
-    public boolean checkInteger(String textToConfirm) {
+    /**
+     * Changes a String into a Long type
+     * 
+     * @param textToConfirm
+     * @return 'true' if an 'String' was parsed to 'Long' , otherwise 'false'
+     */
+    public boolean checkNumber(String textToConfirm) {
         try {
-            Integer.parseInt(textToConfirm);
+            Long.parseLong(textToConfirm);
         } catch (NumberFormatException e) {
             return false;
         }
         return true;
     }
 
+    /**
+     * Setter for 'Cliente'
+     * 
+     * @param cliente
+     * 
+     */
     public void setClienteToLinkPedido(Cliente cliente) {
         clienteToLinkPedido = cliente;
     }
 
+    /**
+     * Setter for an iterator
+     * 
+     * @param iteraastor2
+     */
     public void setIterator2(Iterator<NodeInterface<Producto>> iteraastor2) {
         this.iterator2 = iteraastor2;
     }
 
+    /**
+     * Gets the 'Cliente' from a ComboBox, this because the class atribute cant have
+     * a initialization on the constructor
+     * 
+     * @return 'Cliente' in order to have its reference
+     */
     public Cliente getClienteToLinkPedido() {
         return clienteToLinkPedido;
     }
 
+    /**
+     * Gets the extra cost of a product
+     * 
+     * int this case is about 5%
+     * 
+     * @param producto
+     * @return the price of the extra price of a product
+     */
+    public int getImpuesto(int producto) {
+        return ((producto * 5) / 100);
+    }
+
+    /**
+     * 
+     * @param direccion
+     * @return the price that cost the delivery
+     */
+    public int getPrecioDomicilio(String direccion) {
+        switch (direccion) {
+            case "Provenza":
+                return 1000;
+
+            case "Cabecera del Llano":
+                return 2000;
+
+            case "San Alonso":
+                return 3000;
+
+            case "La Ciudadela":
+                return 4000;
+
+            case "Lagos del Cacique":
+                return 5000;
+
+            case "San Francisco":
+                return 6000;
+
+            case "La Joya":
+                return 7000;
+
+            case "Cañaveral":
+                return 8000;
+
+            case "Ciudad Valencia":
+                return 9000;
+
+            case "Girardot":
+                return 10000;
+
+            case "El Bosque":
+                return 11000;
+
+            case "Los Cambulos":
+                return 12000;
+
+            case "Junin":
+                return 13000;
+
+            case "Ciudadela Comfenalco":
+                return 14000;
+
+            case "La Salle":
+                return 15000;
+
+            case "Centro":
+                return 16000;
+
+            case "La Feria":
+                return 17000;
+
+            case "Altos de Granda":
+                return 18000;
+            default:
+                return 0;
+        }
+    }
 }

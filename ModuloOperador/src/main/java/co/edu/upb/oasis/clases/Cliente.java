@@ -2,16 +2,23 @@ package co.edu.upb.oasis.clases;
 
 import java.io.Serializable;
 
+/**
+ * Class that represents a client.
+ * 
+ * Clase que representa a un cliente.
+ * 
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class Cliente implements Serializable {
 
     String nombre;
     String direccion;
     String barrio;
-    int telefono;
+    long telefono;
     int numeroDePedidos;
 
-    // Tipo de cliente (ENUM )
-    public Cliente(String nombre, String direccion, String barrio, int telefono) {
+    public Cliente(String nombre, String direccion, String barrio, long telefono) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.barrio = barrio;
@@ -19,31 +26,64 @@ public class Cliente implements Serializable {
         this.numeroDePedidos = 0;
     }
 
+    /**
+     * 
+     * 
+     * @return The name of the client.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * 
+     * @return The address of the client.
+     */
     public String getDireccion() {
         return direccion;
     }
 
+    /**
+     * 
+     * @return The neighborhood of the client.
+     */
     public String getBarrio() {
         return barrio;
     }
 
-    public int getTelefono() {
+    /**
+     * 
+     * @return The phone number of the client.
+     */
+    public long getTelefono() {
         return telefono;
     }
 
+    /**
+     * Updates the numbers of orders 
+     * 
+     * @return The updated number of orders.
+     */
     public int addPedido() {
         return numeroDePedidos++;
     }
 
+    /**
+     * 
+     * @return The number of orders done by the client.
+     */
     public int getNumeroDePedidos() {
         return numeroDePedidos;
     }
-    public boolean isVip(){
-        return numeroDePedidos>=10;
+
+    /**
+     * Check if the client is a VIP customer (has placed 10 or more orders).
+     * 
+     * 
+     * @return 'true' if the client is a VIP otherwise 'false'.
+     */
+    public boolean isVip() {
+        return numeroDePedidos >= 10;
     }
 
     @Override
@@ -51,5 +91,4 @@ public class Cliente implements Serializable {
         return "Cliente [nombre=" + nombre + ", direccion=" + direccion + ", barrio=" + barrio + ", telefono="
                 + telefono + "]";
     }
-
 }

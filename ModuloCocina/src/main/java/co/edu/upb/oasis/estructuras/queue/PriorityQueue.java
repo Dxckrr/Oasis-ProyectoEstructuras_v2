@@ -2,7 +2,7 @@ package co.edu.upb.oasis.estructuras.queue;
 
 import java.io.Serializable;
 
-public class PriorityQueue<T extends Serializable> {
+public class PriorityQueue<T extends Serializable> implements Serializable{
     QueueList<T>[] myPriorityCola;
 
     public PriorityQueue(int size) {
@@ -53,6 +53,7 @@ public class PriorityQueue<T extends Serializable> {
     public int size() {
         int count = 0;
         for (int i = 0; i < myPriorityCola.length; i++) {
+            for(int j=0;j < myPriorityCola[i].size();j++)
             count++;
         }
         return count;

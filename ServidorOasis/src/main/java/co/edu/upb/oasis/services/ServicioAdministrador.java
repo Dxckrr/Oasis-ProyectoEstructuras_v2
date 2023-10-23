@@ -9,16 +9,16 @@ import co.edu.upb.oasis.estructuras.node.DoubleListNode;
 import co.edu.upb.oasis.interfaces.AdminInterface;
 import co.edu.upb.oasis.estructuras.lists.LinkedList;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 import java.util.Iterator;
-
-import com.google.gson.Gson;
-
+/**
+ * Class that implements the AdminInterface
+ * 
+ * @author Juan David Patiño Parra
+ * @author Juliana Chavez King
+ */
 public class ServicioAdministrador extends UnicastRemoteObject implements AdminInterface {
     JSONClass jsonClassUser = new JSONClass("usuarios.json", Usuario.class);
     public ServicioAdministrador() throws RemoteException {

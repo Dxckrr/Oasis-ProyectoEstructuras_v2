@@ -37,6 +37,7 @@ public class OperadorController {
 
     Cliente clienteToLinkPedido;
     Iterator<NodeInterface<Producto>> iterator2;
+    DoubleLinkedList<Cliente> clientes;
 
     /**
      * Once initialized, the constructor sets all the actions that must be done once
@@ -74,7 +75,7 @@ public class OperadorController {
         vistaOperador.menuButton.setOnAction(actionEvent -> {
 
             // ---------------Consiguiendo los clientes del json y colocandolos en COMBOBOX
-            DoubleLinkedList<Cliente> clientes = modelVistaOperador.getClientes();
+            clientes = modelVistaOperador.getClientes();
             // clientes.imprimir();
             Iterator<NodeInterface<Cliente>> iteratorDeClientes = clientes.iterator();
             DoubleListNode<Cliente> temporalCliente;
@@ -148,6 +149,7 @@ public class OperadorController {
 
         });
         vistaOperador.goBackToClientesOption.setOnAction(actionEvent -> {
+            vistaOperador.clientesFounded.clear();
             vistaOperador.switchScene(vistaOperador.clientesView);
         });
         vistaOperador.buscarClienteButton.setOnAction(actionEvent -> {
@@ -169,7 +171,17 @@ public class OperadorController {
         //Buscar cliente
         vistaOperador.busquedaDeClientes.setOnKeyPressed(event ->{
             if(event.getCode() == KeyCode.ENTER){
-                //iterar lista y metodo BUSCARRR
+                clientes = modelVistaOperador.getClientes();
+                Long numeroIngresado = Long.parseLong(vistaOperador.busquedaDeClientes.getText());
+                Iterator<NodeInterface<Cliente>> iterator = clientes.iterator();
+                DoubleListNode<Cliente> temporallll;
+                while(iterator.hasNext()){
+                    temporallll = (DoubleListNode<Cliente>)iterator.next();
+                    if(temporallll.getObject().getTelefono() == (numeroIngresado)){
+                        vistaOperador.clientesFounded.add(temporallll.getObject().getNombre());
+                        break;
+                    }
+                }
             }
         });
 

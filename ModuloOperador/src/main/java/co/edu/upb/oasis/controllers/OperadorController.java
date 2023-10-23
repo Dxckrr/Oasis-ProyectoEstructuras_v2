@@ -16,15 +16,33 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * Class that represents the controller of the operador view
+ * 
+ * Clase que representa el controlador para la vista de operador
+ * 
+ * This class links buttons and images as well as proccess information from
+ * database
+ * 
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class OperadorController {
 
     Cliente clienteToLinkPedido;
     Iterator<NodeInterface<Producto>> iterator2;
 
+    /**
+     * Once initialized, the constructor sets all the actions that must be done once
+     * the user interacts with the elements
+     * (Buttons , ImageView , TextLabels , ComboBox, etc...)
+     */
     public OperadorController() {
         // CREAR VISTA Y MODELO
         VistaOperador vistaOperador = new VistaOperador();
@@ -129,6 +147,12 @@ public class OperadorController {
             vistaOperador.switchScene(vistaOperador.optionPanel);
 
         });
+        vistaOperador.goBackToClientesOption.setOnAction(actionEvent -> {
+            vistaOperador.switchScene(vistaOperador.clientesView);
+        });
+        vistaOperador.buscarClienteButton.setOnAction(actionEvent -> {
+            vistaOperador.switchScene(vistaOperador.buscarClienteView);
+        });
 
         vistaOperador.agregarClienteButton.setOnAction(actionEvent -> {
             // vistaOperador.window.setScene(VistaOperador.optionPanel);
@@ -141,6 +165,17 @@ public class OperadorController {
 
         });
         // ---------------------------------------------------------------------------
+        //---------------
+        //Buscar cliente
+        vistaOperador.busquedaDeClientes.setOnKeyPressed(event ->{
+            if(event.getCode() == KeyCode.ENTER){
+                //iterar lista y metodo BUSCARRR
+            }
+        });
+
+
+
+
         // aGREGAR CLIENTE
 
         vistaOperador.confirmAddButton.setOnAction(actionEvent -> {
@@ -156,7 +191,6 @@ public class OperadorController {
                         vistaOperador.barrio.getSelectionModel().clearSelection();
                         vistaOperador.telefono.setText("");
                     }
-
                 }
             } else {
                 modelVistaOperador.checkTelefono();
@@ -169,6 +203,39 @@ public class OperadorController {
             vistaOperador.items.clear();
             pedido.clear();
             vistaOperador.switchScene(vistaOperador.optionPanel);
+        });
+
+        // BUSQUEDA ---------------------------
+        vistaOperador.barraDeBusqueda.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String busqueda = vistaOperador.barraDeBusqueda.getText();
+
+                for (int a = 0; a < vistaOperador.comidas.length; a++) {
+                    if (vistaOperador.comidas[a].getText().toLowerCase().contains(busqueda)) {
+                        vistaOperador.comidas[a].setVisible(true);
+                    } else {
+                        vistaOperador.comidas[a].setVisible(false);
+                    }
+                }
+
+                for (int b = 0; b < vistaOperador.bebidas.length; b++) {
+
+                    if (vistaOperador.bebidas[b].getText().toLowerCase().contains(busqueda)) {
+                        vistaOperador.bebidas[b].setVisible(true);
+                    } else {
+                        vistaOperador.bebidas[b].setVisible(false);
+                    }
+                }
+
+                for (int c = 0; c < vistaOperador.postres.length; c++) {
+                    if (vistaOperador.postres[c].getText().toLowerCase().contains(busqueda)) {
+                        vistaOperador.postres[c].setVisible(true);
+                    } else {
+                        vistaOperador.postres[c].setVisible(false);
+                    }
+                }
+            }
+
         });
 
         // CREAR PEDIDO
@@ -287,19 +354,22 @@ public class OperadorController {
                 // -----Metodo para SACAR PRECIO Y IMPUESTOS
                 String result = "";
                 int precioTemp = 0;
+                int impuestos = 0;
                 DoubleListNode<Producto> increibleNode;
                 while (iterator2.hasNext()) {
                     increibleNode = (DoubleListNode<Producto>) iterator2.next();
                     result += increibleNode.getObject().getNombre() + "| ";
                     precioTemp += increibleNode.getObject().getPrecio();
+                    impuestos += getImpuesto(precioTemp);
                 }
 
                 vistaOperador.pedidoText.setText(result);
-                vistaOperador.domicilioText.setText("Depende aun");
+                vistaOperador.domicilioText
+                        .setText(String.valueOf(getPrecioDomicilio(clienteToLinkPedido.getDireccion())));
                 vistaOperador.precioText.setText(String.valueOf(precioTemp));
-                vistaOperador.impuestoText.setText("dcdd");
+                vistaOperador.impuestoText.setText(String.valueOf(impuestos));
 
-                vistaOperador.precioTotalText.setText((String.valueOf(precioTemp)) + " " + "impuestos");
+                vistaOperador.precioTotalText.setText((String.valueOf(precioTemp + impuestos)));
 
                 vistaOperador.switchScene(vistaOperador.confirmarPedidoView);
 
@@ -347,7 +417,11 @@ public class OperadorController {
          * });
          */
     }
-
+    /**
+     * Changes a String into a Long type
+     * @param textToConfirm
+     * @return 'true' if an 'String' was parsed to 'Long' , otherwise 'false'
+     */
     public boolean checkNumber(String textToConfirm) {
         try {
             Long.parseLong(textToConfirm);
@@ -356,17 +430,44 @@ public class OperadorController {
         }
         return true;
     }
-
+    /**
+     * Setter for 'Cliente'
+     * @param cliente
+     * 
+     */
     public void setClienteToLinkPedido(Cliente cliente) {
         clienteToLinkPedido = cliente;
     }
-
+    /**
+     * Setter for an iterator
+     * @param iteraastor2
+     */
     public void setIterator2(Iterator<NodeInterface<Producto>> iteraastor2) {
         this.iterator2 = iteraastor2;
     }
-
+    /**
+     * Gets the 'Cliente' from a ComboBox, this because the class atribute cant have a initialization on the constructor
+     * @return 'Cliente' in order to have its reference
+     */
     public Cliente getClienteToLinkPedido() {
         return clienteToLinkPedido;
     }
-
+    /**
+     * Gets the extra cost of a product
+     * 
+     * int this case is about 5%
+     * @param producto
+     * @return the price of the extra price of a product
+     */
+    public int getImpuesto(int producto) {
+        return ((producto * 5) / 100);
+    }
+    /**
+     * 
+     * @param direccion
+     * @return the price that cost the delivery
+     */
+    public int getPrecioDomicilio(String direccion) {
+        return 0;
+    }
 }

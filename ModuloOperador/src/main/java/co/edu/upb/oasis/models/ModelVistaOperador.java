@@ -8,12 +8,19 @@ import java.rmi.RemoteException;
 import java.util.Properties;
 
 import co.edu.upb.oasis.clases.Cliente;
-import co.edu.upb.oasis.clases.Pedido;
 import co.edu.upb.oasis.clases.Producto;
 import co.edu.upb.oasis.client.ClienteOperador;
 import co.edu.upb.oasis.estructuras.lists.DoubleLinkedList;
 import javafx.scene.control.Alert;
 
+/**
+ * 
+ * Class that represents the operations for the 'VistaOperador'
+ * 
+ * 
+ * @author Juan David Patiño Parra
+ * 
+ */
 public class ModelVistaOperador {
     ClienteOperador cliente;
 
@@ -33,6 +40,15 @@ public class ModelVistaOperador {
 
     }
 
+    /**
+     * Asks the server if a 'Cliente' can be added to the database
+     * 
+     * @param nombreCliente
+     * @param direccion
+     * @param ciudad
+     * @param telefono
+     * @return 'true' if it can, otherwise no
+     */
     public boolean addCliente(String nombreCliente, String direccion, String ciudad, long telefono) {
         // Cliente clienteToAdd = new Cliente(nombreCliente, direccion, ciudad,
         // telefono);
@@ -59,6 +75,9 @@ public class ModelVistaOperador {
 
     }
 
+    /**
+     * Creates an 'Alert' to inform that there was a mistake on addingClient
+     */
     public void checkTelefono() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("TELEFONO ERROR");
@@ -67,6 +86,11 @@ public class ModelVistaOperador {
         alert.showAndWait();
     }
 
+    /**
+     * Asks the server for a List of products
+     * 
+     * @return 'DoubleLinkedList' of products
+     */
     public DoubleLinkedList<Producto> getMenu() {
         try {
             return cliente.getMenu();
@@ -76,6 +100,11 @@ public class ModelVistaOperador {
         }
     }
 
+    /**
+     * Asks the server for a List of products
+     * 
+     * @return 'DoubleLinkedList' of products
+     */
     public DoubleLinkedList<Cliente> getClientes() {
         try {
             return cliente.getClientes();
@@ -85,17 +114,12 @@ public class ModelVistaOperador {
         }
     }
 
-    /*
-     * public boolean sendPedido(String nombreCliente, Producto[] productos) {
-     * try {
-     * return cliente.sendPedido(nombreCliente, productos);
-     * 
-     * } catch (RemoteException e) {
-     * throw new RuntimeException(e);
-     * }
-     * }
+    /**
+     * Asks the server for request to 'sendPedido'
+     * @param clienteToLink
+     * @param pedidoList
+     * @return 'true' if it was successful , otherwise 'false'
      */
-
     public boolean sendPedido(Cliente clienteToLink, DoubleLinkedList<Producto> pedidoList) {
         try {
             return cliente.sendPedido(clienteToLink, pedidoList);

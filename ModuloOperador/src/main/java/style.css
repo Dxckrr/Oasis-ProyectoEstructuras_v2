@@ -4,10 +4,21 @@
     -fx-border-color : #0000;
 }
 #buttonBack {
-
-    -fx-background-color: #FFECBB;
+    -fx-text-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-color: #0fac92;
     -fx-border-radius : 1px;
-    -fx-border-color : #0000;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px, 4px, 3px;
+    -fx-border-width: 0.1px;
+}
+#buttonBack:hover {
+    -fx-background-color: #a0e9c446;
+}
+
+#buttonBack:pressed {
+    -fx-background-color: #0bf150;
 }
 .button {
     -fx-text-alignment: center;
@@ -65,16 +76,21 @@
 }
 
 #labelsOnConfirmView {
-    -fx-font-size: 20px;
+    -fx-font-size: 25px;
     -fx-text-fill: #333; /* Color de texto */
     -fx-font-weight: bold; /* Establecer un peso de fuente intermedio */
 }
 
 #PedidoStuff {
-    -fx-font-size: 12px;
-    -fx-text-fill: #333; /* Color de texto */
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000; /* Color de texto */
     -fx-font-weight: bold; /* Establecer un peso de fuente intermedio */
 
+}
+#listaPedido {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000; /* Color de texto */
+    -fx-font-weight: bold; /* Establecer un peso de fuente intermedio */
 }
 /*Updated*/
 

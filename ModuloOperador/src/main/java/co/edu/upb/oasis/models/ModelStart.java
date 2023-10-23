@@ -11,7 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Properties;
-
+/**
+ * Class that represents the operations on the 'startView'
+ * 
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class ModelStart {
 
     ClienteOperador cliente;
@@ -30,7 +35,12 @@ public class ModelStart {
         }
 
     }
-
+    /**
+     * Asks the server if the 'Usuario' exists on the database
+     * @param usuario
+     * @param password
+     * @return 'true' if exists, otherwise 'false'
+     */
     public boolean buttonSubmit(String usuario, String password) {
         // Usuario operadorIn = new
         // Usuario(start.usuario.getText(),start.password.getText());

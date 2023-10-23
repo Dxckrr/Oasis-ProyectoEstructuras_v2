@@ -27,6 +27,7 @@ public class VistaOperador {
     //
     public Scene clientesView;
     public Scene agregarClienteView;
+    public Scene buscarClienteView;
     //
     public Scene menuView;
     public Scene confirmarPedidoView;
@@ -44,7 +45,7 @@ public class VistaOperador {
     ScrollPane scrollerDeMenu;
     public Button goBackToOptions;
     public Button confirmarPedido;
-
+    public TextField barraDeBusqueda;
     // --
     public Label pedidoText = new Label();
     public Label domicilioText = new Label();
@@ -63,6 +64,9 @@ public class VistaOperador {
     public ListView<String> listView;
     public Button deleteProducto;
     public ObservableList<String> items;
+
+    public ListView<String> clientesFoundedList;
+    public ObservableList<String> clientesFounded;
     // ---
 
     // StackPane panelPrincipalRutas;
@@ -80,6 +84,9 @@ public class VistaOperador {
     // -----
 
     public Button goBackToClientes;
+    public Button goBackToClientesOption;
+
+    public TextField busquedaDeClientes;
     public Button confirmAddButton;
 
     // -----
@@ -125,6 +132,7 @@ public class VistaOperador {
         initOperador();
         initShowClientes();
         initAgregarCliente();
+        initBuscarCliente();
         initShowMenu();
         initShowConfirmarPedido();
     }
@@ -254,11 +262,12 @@ public class VistaOperador {
         // ----------------------------------
 
         barrio.getItems().addAll("Provenza", "Cabecera del Llano", "San Alonso", "La Ciudadela", "Lagos del Cacique",
-        "San Francisco", "La Joya", "Cañaveral", "Ciudad Valencia", "Lagos del Cacique",
-        "Girardot", "San Alonso", "El Bosque", "Los Cámbulos", "Los Cambulos", "Junin",
-        "Ciudadela Comfenalco", "La Salle", "Centro", "San Francisco", "La Feria");
+                "San Francisco", "La Joya", "Cañaveral", "Ciudad Valencia", "Lagos del Cacique",
+                "Girardot", "San Alonso", "El Bosque", "Los Cámbulos", "Los Cambulos", "Junin",
+                "Ciudadela Comfenalco", "La Salle", "Centro", "San Francisco", "La Feria", "Altos de Granda");
 
         goBackToClientes = new Button("Atras");
+        goBackToClientes.setId("buttonBack");
         confirmAddButton = new Button("Guardar Informacion");
         // ----------------------------------
 
@@ -302,6 +311,48 @@ public class VistaOperador {
         confirmAddButton.toFront();
         agregarClienteView = new Scene(panelAgregarClientes, 1080, 720);
         agregarClienteView.getStylesheets().add("style.css");
+    }
+
+    public void initBuscarCliente() {
+        StackPane buscarClienteContendor = new StackPane();
+        buscarClienteContendor.setBackground(fondo);
+        // -------------------------
+        goBackToClientesOption = new Button("Atras");
+        goBackToClientesOption.setId("buttonBack");
+        busquedaDeClientes = new TextField("Buscar Cliente");
+        Rectangle rectangleToDecorateBuscadorDeClientes = new Rectangle(700, 400);
+        clientesFounded = FXCollections.observableArrayList();
+
+        // Crear un ListView y configurarlo con la lista observable
+        clientesFoundedList = new ListView<>(clientesFounded);
+        // Propiedades
+        goBackToClientesOption.setScaleX(2.5);
+        goBackToClientesOption.setScaleY(2.5);
+
+        busquedaDeClientes.setPrefHeight(10);
+        busquedaDeClientes.setPrefWidth(400);
+
+        clientesFoundedList.setPrefHeight(40);
+        clientesFoundedList.setPrefWidth(40);
+
+        // -------------------------
+        rectangleToDecorateBuscadorDeClientes.setFill(colorBeige);
+        rectangleToDecorateBuscadorDeClientes.setStroke(Color.BLACK); // Color del borde
+        rectangleToDecorateBuscadorDeClientes.setStrokeWidth(1); // Grosor del borde
+        rectangleToDecorateBuscadorDeClientes.toBack();
+        buscarClienteContendor.getChildren().addAll(clientesFoundedList);
+        buscarClienteContendor.getChildren().addAll(rectangleToDecorateBuscadorDeClientes, goBackToClientesOption,
+                busquedaDeClientes);
+        //
+        buscarClienteContendor.setMargin(busquedaDeClientes, new Insets(300, 500, 400, 300)); // establecer un margen
+        // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+        buscarClienteContendor.setMargin(clientesFoundedList, new Insets(350, 500, 200, 300)); // establecer un margen
+        // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+        buscarClienteContendor.setMargin(goBackToClientesOption, new Insets(500, 550, 0, 0)); // establecer un margen
+        // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+        clientesFoundedList.toFront();
+        buscarClienteView = new Scene(buscarClienteContendor, 1080, 720);
+        buscarClienteView.getStylesheets().add("style.css");
     }
 
     public void initShowMenu() {
@@ -427,7 +478,7 @@ public class VistaOperador {
         // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
 
         // -------
-        TextField barraDeBusqueda = new TextField();
+        barraDeBusqueda = new TextField();
         barraDeBusqueda.setText("Buscar...");
         barraDeBusqueda.setScaleX(1.5);
         barraDeBusqueda.setScaleY(1.5);
@@ -520,11 +571,11 @@ public class VistaOperador {
         Label informacionDelPedidoLabel = new Label("Informacion del Pedido: ");
         informacionDelPedidoLabel.setFont(new Font(40));
         informacionDelPedidoLabel.setId("headerConfirmarPedido");
-        
+
         Label peidoLabel = new Label("Pedido: ");
         peidoLabel.setFont(new Font(20));
         peidoLabel.setId("labelsOnConfirmView");
-        
+
         Label domicilioLabel = new Label("Domicilio: ");
         domicilioLabel.setFont(new Font(20));
         domicilioLabel.setId("labelsOnConfirmView");
@@ -542,16 +593,22 @@ public class VistaOperador {
         precioTotalLabel.setId("labelsOnConfirmView");
 
         VBox vboxParaLabels = new VBox();
-        vboxParaLabels.setSpacing(45);
+        vboxParaLabels.setSpacing(55);
         vboxParaLabels.getChildren().addAll(peidoLabel, domicilioLabel, precioLabel,
                 impuestosLabel, precioTotalLabel);
         // -
         VBox vBoxParaText = new VBox();
-        vBoxParaText.setSpacing(60);
+        vBoxParaText.setSpacing(65);
 
         vBoxParaText.getChildren().addAll(pedidoText, domicilioText, precioText, impuestoText,
                 precioTotalText);
-        pedidoText.setId("PedidoStuff");
+
+        pedidoText.setId("listaPedido");
+        domicilioText.setId("PedidoStuff");
+        precioText.setId("PedidoStuff");
+        impuestoText.setId("PedidoStuff");
+        precioTotalText.setId("PedidoStuff");
+
         // Agregando elementos
         contenedorELementosConfirmView.getChildren().addAll(sendPedidoToCocinaButton, backToMenu, logo,
                 rectangleToDecorateConfirm, vboxParaLabels, vBoxParaText, informacionDelPedidoLabel);

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+import co.edu.upb.oasis.vista.VistaXD;
+
 /**
  * Main Class
  * 
@@ -20,6 +22,7 @@ public class MainServer {
             Server serverOasis = new Server((String) properties.get("IP"));
 
             if (serverOasis.deployServices()) {
+                VistaXD visible = new VistaXD();
                 System.out.println("All services On");
             } else {
                 System.out.println("error");

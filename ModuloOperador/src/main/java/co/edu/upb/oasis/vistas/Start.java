@@ -15,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+
 /**
  * 
  * Class which creates the start view
@@ -38,7 +40,7 @@ public class Start {
     public TextField password;
     //Imagenes
     ImageView logo;
-    Image picture = new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\logo\\OasisFondo.png");
+    Image picture = new Image("file:src\\\\main\\\\java\\\\co\\\\edu\\\\upb\\\\oasis\\\\images\\\\logo\\\\OasisFondo.png");
     //LABELS(TEXTO EN PANTALLA)
     Label usuarioLabel;
     Label contrasenaLabel;

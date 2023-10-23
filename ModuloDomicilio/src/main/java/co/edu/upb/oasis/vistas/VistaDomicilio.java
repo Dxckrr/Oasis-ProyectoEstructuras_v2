@@ -1,6 +1,7 @@
 package co.edu.upb.oasis.vistas;
 
 import co.edu.upb.oasis.clases.Usuario;
+import co.edu.upb.oasis.clases1.DatosGraficos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,6 +27,9 @@ public class VistaDomicilio {
     GridPane opcionesPanel;
     StackPane panelLogin;
     VBox contenedorLoginPassWord;
+
+    public  int Numerotope = 0;
+    DatosGraficos arboles = new DatosGraficos();
 
     //Botones
     public Button clientes;
@@ -196,14 +200,14 @@ public class VistaDomicilio {
     }
 
     private GridPane createSmallerScreen() {
-        GridPane smallerScreen =otrofuncio("ADMINISTRADOR");
+        GridPane smallerScreen =otrofuncio("DOMICILIARIO");
         smallerScreen.add(anteriorButton, 0, 3);
 
-        Button databaseButton = new Button("BASE DE DATOS");
+        Button databaseButton = new Button("PEDIDOS");
         databaseButton.setPrefSize(277, 209);
         databaseButton.setId("databaseButton");
 
-        Button configButton = new Button("CONFIGURACION DEL SISTEMA");
+        Button configButton = new Button("RUTAS");
         configButton.setPrefSize(277, 209);
 
         GridPane buttonsGrid = new GridPane();
@@ -255,6 +259,29 @@ public class VistaDomicilio {
 
         return otrofunsionscreen;
     }
+
+    private Scene createSecondScreen() {
+        GridPane secondScreen = otrofuncio("¿QUÉ DESEA GESTIONAR EN LA BASE DE DATOS?");
+        secondScreen.add(anteriorButton, 0, 3);
+
+        Button usersButton = new Button("PEDIDOS");
+        usersButton.setPrefSize(277, 209);
+
+        GridPane buttonsGrid = new GridPane();
+        buttonsGrid.setHgap(10);
+
+        buttonsGrid.add(usersButton, 0, 0);
+
+        GridPane.setColumnSpan(buttonsGrid, 3);
+        secondScreen.add(buttonsGrid, 0, 1);
+
+        anteriorButton.setOnAction(event -> {
+            window.setScene(createFirstScreen());
+        });
+        return new Scene(secondScreen, 960, 603);
+    }
+
+
 
 
 }

@@ -1,12 +1,17 @@
 package co.edu.upb.oasis.vistas;
 
 import co.edu.upb.oasis.clases.Usuario;
+import co.edu.upb.oasis.models.ModelVistaAdministrador;
+import javafx.collections.FXCollections;
+import java.util.LinkedList;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -17,7 +22,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+/*
+ * @author Juliana Chavez King
+ */
 public class VistaAdmin {
     Stage window;
     //Escenas
@@ -30,6 +37,7 @@ public class VistaAdmin {
 
     //Botones
     public Button clientes;
+    public Button searchClienteButton;
     public Button anteriorButton = new Button();
     /*Button menu;
     Button pedido;
@@ -42,6 +50,10 @@ public class VistaAdmin {
     public Button anotherButton;
     public Button clientButton;
     public Button searchOperadorButton;
+    public Button botonEliminarCliente;
+    public TextArea textAreaInfoCliente;
+
+    public ListView<String> searchResults;
 
     //TextField
     public TextField usuarioField;
@@ -70,6 +82,8 @@ public class VistaAdmin {
     public TextField id22Field2;
     public TextField descripcion22Field;
     public TextField tiempo22dePreparacion;
+    public TextField telefono43Field;
+    public LinkedList<String> distanceHammingResults;
 
     //Imagenes
     ImageView logo;
@@ -120,6 +134,13 @@ public class VistaAdmin {
         mondaButton = new Button("Guardar Producto");
         Prod22Button = new Button("Guardar Producto");
         productt3Button = new Button("Guardar producto");
+        searchResults = new ListView<>();
+        search24Field = new TextField();
+        telefono43Field = new TextField();
+        searchClienteButton = new Button("Buscar Cliente");
+        botonEliminarCliente = new Button("Eliminar Cliente");
+        textAreaInfoCliente = new TextArea();
+        telefonoField = new TextField();
         /*menu = new Button("Menu");
         pedido = new Button("Pedidos");
         domicilio = new Button("Rutas");*/
@@ -195,8 +216,9 @@ public class VistaAdmin {
         });
         return scene;
     }
-
+    //SE CREA EL GRIDPANE EN GENERAL PARA TODO
     private GridPane otrofuncio(String title) {
+        //se le establece todas las configuraciones
         GridPane otrofunsionscreen = new GridPane();
         otrofunsionscreen.setBackground(new Background(new BackgroundFill(Color.web("#FFECBB"), null, null)));
         otrofunsionscreen.setPrefSize(893, 545);
@@ -217,7 +239,7 @@ public class VistaAdmin {
         adminText.setStyle("-fx-background-color: transparent;");
         adminText.setFont(new Font(14));
         otrofunsionscreen.add(adminText, 1, 0, 1, 1);
-
+        //se añade las imagenes del logo y la del susuario
         ImageView image = new ImageView(new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\OasisFondo.png"));
         image.setFitWidth(165);
         image.setFitHeight(119);
@@ -230,7 +252,7 @@ public class VistaAdmin {
 
         return otrofunsionscreen;
     }
-
+    //PRIMERA PANTALLA DEL ADMINISTRADOR
     private GridPane createSmallerScreen() {
         GridPane smallerScreen =otrofuncio("ADMINISTRADOR");
         smallerScreen.add(anteriorButton, 0, 3);
@@ -250,13 +272,13 @@ public class VistaAdmin {
 
         GridPane.setColumnSpan(buttonsGrid, 3);
         smallerScreen.add(buttonsGrid, 0, 1);
-
+        //boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(createFirstScreen());
         });
         return smallerScreen;
     }
-
+    //COMIDAS DE LAS PRODUCTOS
     private Scene anoTherProductsScreen(){
         GridPane productScreen = otrofuncio("¿QUÉ DESEA GESTIONAR DE LOS PRODUCTOS?");
         productScreen.add(anteriorButton, 0, 3);
@@ -291,14 +313,14 @@ public class VistaAdmin {
 
         GridPane.setColumnSpan(buttonsGrid, 3);
         productScreen.add(buttonsGrid, 0, 1);
-
+        //boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(createSecondScreen());
         });
         return new Scene(productScreen, 960, 603);
 
     }
-
+    //COMIDAS RAPIDAS
     private Scene productComidasRapidas() {
         GridPane comidasRapidasScreen = otrofuncio("COMIDAS MEDITERRANEAS");
     
@@ -340,14 +362,14 @@ public class VistaAdmin {
                 }
             }
         }
-    
+        //boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(anoTherProductsScreen());
         });
     
         return new Scene(comidasRapidasScreen, 960, 603);
     }
-    
+    //SE ALÑADE EL PRODUCTO
     private Scene addProduct11Screen() {
         GridPane addProduct11Screen = otrofuncio("CREAR PRODUCTO");
 
@@ -372,14 +394,14 @@ public class VistaAdmin {
         addProduct11Screen.add(id11Field2, 0, 6);
 
         addProduct11Screen.add(mondaButton, 0, 7);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productBebidas()));
         addProduct11Screen.add(backButton, 0, 8);
 
         return new Scene(addProduct11Screen, 960, 603);
     }
-
+    //SE BUSCA EL PRODUCTO
     private Scene createSearch11ProductScene() {
         GridPane searchProductt11Screen = otrofuncio("ENCONTRAR PRODUCTO");
 
@@ -389,14 +411,14 @@ public class VistaAdmin {
 
         Button searchButton = new Button("Buscar");
         searchProductt11Screen.add(searchButton, 1, 1);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productBebidas()));
         searchProductt11Screen.add(backButton, 0, 4);
 
         return new Scene(searchProductt11Screen, 960, 603);
     }
-
+    //SE AÑADE EL PRODUCTO
     private Scene addProduct22Screen() {
         GridPane addProduct22Screen = otrofuncio("CREAR PRODUCTO");
 
@@ -421,14 +443,14 @@ public class VistaAdmin {
         addProduct22Screen.add(id22Field2, 0, 6);
 
         addProduct22Screen.add(Prod22Button, 0, 7);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productPostrews()));
         addProduct22Screen.add(backButton, 0, 8);
 
         return new Scene(addProduct22Screen, 960, 603);
     }
-
+    // SE INTENTA BUSCAR EL PRODUCTO
     private Scene createSearch122ProductScene() {
         GridPane searchProductt22Screen = otrofuncio("ENCONTRAR PRODUCTO");
 
@@ -438,7 +460,7 @@ public class VistaAdmin {
 
         Button searchButton = new Button("Buscar");
         searchProductt22Screen.add(searchButton, 1, 1);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productPostrews()));
         searchProductt22Screen.add(backButton, 0, 4);
@@ -446,7 +468,7 @@ public class VistaAdmin {
         return new Scene(searchProductt22Screen, 960, 603);
     }
 
-
+    //SE ALÑADE EL PRODUCTO
     private Scene addProductScreen() {
         GridPane addProductScreen = otrofuncio("CREAR PRODUCTO");
 
@@ -471,14 +493,14 @@ public class VistaAdmin {
         addProductScreen.add(idField2, 0, 6);
 
         addProductScreen.add(productt3Button, 0, 7);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productComidasRapidas()));
         addProductScreen.add(backButton, 0, 8);
 
         return new Scene(addProductScreen, 960, 603);
     }
-
+    //SE ENCUENTRA EL PRODUCTO
     private Scene createSearchProductScene() {
         GridPane searchOperatorScreen = otrofuncio("ENCONTRAR PRODUCTO");
 
@@ -488,7 +510,7 @@ public class VistaAdmin {
 
         Button searchButton = new Button("Buscar");
         searchOperatorScreen.add(searchButton, 1, 1);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productComidasRapidas()));
         searchOperatorScreen.add(backButton, 0, 4);
@@ -577,7 +599,7 @@ public class VistaAdmin {
                     });
                 }
             }
-        }
+        }//boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(anoTherProductsScreen());
         });
@@ -633,7 +655,7 @@ public class VistaAdmin {
                     });
                 }
             }
-        }
+        }//boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(anoTherProductsScreen());
         });
@@ -674,12 +696,13 @@ public class VistaAdmin {
 
         GridPane.setColumnSpan(buttonsGrid, 3);
         secondScreen.add(buttonsGrid, 0, 1);
-
+        //boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(createFirstScreen());
         });
         return new Scene(secondScreen, 960, 603);
     }
+    
     private Scene createThirdScreen() {
         GridPane thirdScreen = otrofuncio("SELECCIONE UN TIPO DE USUARIO");
         thirdScreen.add(anteriorButton, 0, 3);
@@ -728,7 +751,7 @@ public class VistaAdmin {
             window.setScene(createSearchDomiciliariioScene());
         });
         manageDomiciliarioScreen.add(searchmanageDomiciliarioScreenzButton, 1, 1);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createThirdScreen()));
         manageDomiciliarioScreen.add(backButton, 0, 4);
@@ -750,7 +773,7 @@ public class VistaAdmin {
             window.setScene(createSearchOperatorScene());
         });
         manageOperatorsScreen.add(searchOperatorButton, 1, 1);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createThirdScreen()));
         manageOperatorsScreen.add(backButton, 0, 4);
@@ -778,7 +801,7 @@ public class VistaAdmin {
             }*/
         });
         searchDomixilairioScreen.add(searchButton, 1, 1);
-
+        //boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createManageDomiciliariozScene()));
         searchDomixilairioScreen.add(backButton, 0, 4);
@@ -788,19 +811,24 @@ public class VistaAdmin {
 
     private Scene createSearchOperatorScene() {
         GridPane searchOperatorScreen = otrofuncio("ENCONTRAR OPERADOR");
-
-        search24Field = new TextField();
-        search24Field.setPromptText("Buscar Operador por Código");
-        searchOperatorScreen.add(search24Field, 0, 1);
-
-        searchOperatorScreen.add(searchOperadorButton, 1, 1);
-
+        search24Field.setPromptText("Buscar Operador por Nombre");
+    
+        searchOperatorScreen.add(search24Field, 0, 0);
+        searchOperatorScreen.add(searchOperadorButton, 1, 0);
+        searchOperatorScreen.add(searchResults, 0, 1, 2, 1);
+    
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createManageOperatorsScene()));
         searchOperatorScreen.add(backButton, 0, 4);
-
+    
         return new Scene(searchOperatorScreen, 960, 603);
     }
+    
+
+    private boolean isEmpty(String textToCheck) {
+        return textToCheck == null || textToCheck.trim().isEmpty();
+    }
+
 
     private void showDomiciliariosInfo(Usuario domiciliario) {
         Stage infoStage = new Stage();
@@ -995,7 +1023,6 @@ public class VistaAdmin {
         ciudadField.setPromptText("Ciudad");
         addClienteScreen.add(ciudadField, 0, 4);
 
-        telefonoField = new TextField();
         telefonoField.setPromptText("Teléfono");
         addClienteScreen.add(telefonoField, 0, 5);
 
@@ -1033,24 +1060,15 @@ public class VistaAdmin {
     private Scene createSearchClientScene() {
         GridPane searchClientScreen = otrofuncio("ENCONTRAR CLIENTE");
 
-        TextField searchField = new TextField();
-        searchField.setPromptText("Buscar Cliente por Código");
-        searchClientScreen.add(searchField, 0, 1);
+        telefonoField.setPromptText("Buscar Cliente por Código");
+        searchClientScreen.add(telefono43Field, 0, 1);
 
-        Button searchButton = new Button("Buscar");
-        searchButton.setOnAction(event -> {
-            /*String searchCode = searchField.getText();
-            if (!searchCode.isEmpty()) {
-                Usuario operadorEncontrado = operadorEncontrado.buscarOperadorPorusuario(searchCode);
-                if (operadorEncontrado != null) {
-                    showOperatorInfo(operadorEncontrado);
-                } else {
-                    displayNotFoundAlert();
-                }
-            }*/
-        });
+        searchClientScreen.add(searchClienteButton, 1, 1);
 
-        searchClientScreen.add(searchButton, 1, 1);
+        searchClientScreen.add(textAreaInfoCliente, 0, 3);
+
+        botonEliminarCliente.setVisible(false); 
+        searchClientScreen.add(botonEliminarCliente, 1, 3);
 
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createManageClientScene()));

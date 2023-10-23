@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.Properties;
 
+import co.edu.upb.oasis.clases.Cliente;
 import co.edu.upb.oasis.clases.Producto;
 import co.edu.upb.oasis.clases.Usuario;
 import co.edu.upb.oasis.client.ClienteAdmin;
@@ -90,62 +91,13 @@ public class ModelVistaAdministrador {
         alert.showAndWait();
     }
 
-    public LinkedList<String> distanciaHammingMod(String stringBusqueda) {
-        LinkedList<String> resultadoBusqueda = new LinkedList<>();
+    public Cliente buscarCliente(int telefono) {
         try {
-            operadores = adminn.buscarOperadorPorUsuario(stringBusqueda);
-            for (Usuario operador : operadores) {
-                String[] palabras = operador.getUsuario().split(" ");
-                String[] stringOperadorActual;
-                if (palabras.length > 1) {
-                    stringOperadorActual = new String[palabras.length + 1];
-                    System.arraycopy(palabras, 0, stringOperadorActual, 0, palabras.length);
-                    stringOperadorActual[palabras.length] = operador.getUsuario();
-                } else {
-                    stringOperadorActual = palabras;
-                }
-
-                stringBusqueda = stringBusqueda.toLowerCase().replace(" ", "");
-                for (String palabra : stringOperadorActual) {
-                    int igualdades = 0;
-                    int pos1 = 0;
-                    int pos2 = 0;
-                    palabra = palabra.toLowerCase();
-                    int limite = (stringBusqueda.length() > palabra.length()) ? palabra.length()
-                            : stringBusqueda.length();
-                    int iterador = 0;
-                    while (iterador < limite) {
-                        if (stringBusqueda.charAt(pos1) == palabra.charAt(pos2)) {
-                            igualdades++;
-                            pos1++;
-                            pos2++;
-                        } else {
-                            if (pos2 + 1 < palabra.length()) {
-                                if (stringBusqueda.charAt(pos1) == palabra.charAt(pos2 + 1)) {
-                                    igualdades++;
-                                    pos1++;
-                                    pos2 += 2;
-                                    if (stringBusqueda.length() >= palabra.length()) {
-                                        iterador++;
-                                    }
-                                } else {
-                                    pos1++;
-                                    pos2++;
-                                }
-                            }
-                        }
-                        iterador++;
-                    }
-                    if (igualdades > 0 && (double) stringBusqueda.length() / igualdades <= 1.5) {
-                        resultadoBusqueda.add(operador.getUsuario());
-                        break;
-                    }
-                }
-            }
+            return adminn.buscarCliente(telefono);
         } catch (RemoteException e) {
             e.printStackTrace();
+            return null;
         }
-        return resultadoBusqueda;
     }
 
     public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id) {
@@ -171,5 +123,4 @@ public class ModelVistaAdministrador {
             throw new RuntimeException(e);
         }
     }
-
 }

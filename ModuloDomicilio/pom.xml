@@ -38,6 +38,30 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+    
+      <dependency>
+        <groupId>com.jtransc</groupId>
+        <artifactId>jtransc-rt</artifactId>
+        <version>0.5.0-ALPHA4</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>fr.opensagres.xdocreport.appengine-awt</groupId>
+        <artifactId>appengine-awt</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.kohlschutter.jdk.compiler</groupId>
+        <artifactId>standalone-jdk11</artifactId>
+        <version>1.1.2</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.github.axet</groupId>
+        <artifactId>jlame</artifactId>
+        <version>3.100</version>
+      </dependency>
     </dependencies>
 
     <build>

@@ -1,18 +1,16 @@
 package co.edu.upb.oasis.client;
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
+
+
 //import com.google.gson.*;
 
-import co.edu.upb.oasis.clases.Producto;
+import co.edu.upb.oasis.clases.Cliente;
 import co.edu.upb.oasis.clases.Usuario;
 import co.edu.upb.oasis.interfaces.AdminInterface;
 
@@ -86,6 +84,29 @@ public class ClienteAdmin implements AdminInterface {
         }
     }
 
+    @Override
+    public Cliente buscarCliente(int number) throws RemoteException {
+        try {
+            service = (AdminInterface) Naming.lookup(this.url);
+            return service.buscarCliente(number);
+        } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean borrarrCliente(int number) throws RemoteException {
+        try {
+            service = (AdminInterface) Naming.lookup(this.url);
+            return service.borrarrCliente(number);
+        } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+}
+
      /*public static Producto fromJSON(String filePath) {
         try {
             Gson gson = new Gson();
@@ -104,5 +125,3 @@ public class ClienteAdmin implements AdminInterface {
         }
         return null;
     }*/
-
-}

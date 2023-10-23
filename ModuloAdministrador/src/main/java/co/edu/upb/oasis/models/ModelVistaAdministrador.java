@@ -90,10 +90,11 @@ public class ModelVistaAdministrador {
         alert.showAndWait();
     }
 
-    public LinkedList<String> distanciaHammingMod(String stringBusqueda) {
+    public LinkedList<String> distanceHammingMod(String stringBusqueda) {
         LinkedList<String> resultadoBusqueda = new LinkedList<>();
         try {
             operadores = adminn.buscarOperadorPorUsuario(stringBusqueda);
+    
             for (Usuario operador : operadores) {
                 String[] palabras = operador.getUsuario().split(" ");
                 String[] stringOperadorActual;
@@ -104,15 +105,14 @@ public class ModelVistaAdministrador {
                 } else {
                     stringOperadorActual = palabras;
                 }
-
+    
                 stringBusqueda = stringBusqueda.toLowerCase().replace(" ", "");
                 for (String palabra : stringOperadorActual) {
                     int igualdades = 0;
                     int pos1 = 0;
                     int pos2 = 0;
                     palabra = palabra.toLowerCase();
-                    int limite = (stringBusqueda.length() > palabra.length()) ? palabra.length()
-                            : stringBusqueda.length();
+                    int limite = (stringBusqueda.length() > palabra.length()) ? palabra.length() : stringBusqueda.length();
                     int iterador = 0;
                     while (iterador < limite) {
                         if (stringBusqueda.charAt(pos1) == palabra.charAt(pos2)) {
@@ -136,9 +136,8 @@ public class ModelVistaAdministrador {
                         }
                         iterador++;
                     }
-                    if (igualdades > 0 && (double) stringBusqueda.length() / igualdades <= 1.5) {
+                    if (igualdades > 0 && ((double) stringBusqueda.length() / igualdades) <= 1.5) {
                         resultadoBusqueda.add(operador.getUsuario());
-                        break;
                     }
                 }
             }
@@ -147,6 +146,7 @@ public class ModelVistaAdministrador {
         }
         return resultadoBusqueda;
     }
+    
 
     public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id) {
         // Cliente clienteToAdd = new Cliente(nombreCliente, direccion, ciudad,
@@ -171,5 +171,4 @@ public class ModelVistaAdministrador {
             throw new RuntimeException(e);
         }
     }
-
 }

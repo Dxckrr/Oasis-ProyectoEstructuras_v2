@@ -51,5 +51,4 @@ public interface AdminInterface extends Remote {
      * @throws RemoteException
      */
     public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id, boolean isLento) throws RemoteException;
-
 }

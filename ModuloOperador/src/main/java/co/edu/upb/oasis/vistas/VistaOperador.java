@@ -23,6 +23,7 @@ import javafx.stage.Stage;
  * Class that represents the whole 'moduleOperador' view
  * @author Juan David Patiño Parra
  */
+
 public class VistaOperador {
     public Stage window;
     // Escenas

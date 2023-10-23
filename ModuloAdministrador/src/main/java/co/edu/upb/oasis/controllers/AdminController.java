@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 import co.edu.upb.oasis.models.ModelVistaAdministrador;
 import co.edu.upb.oasis.vistas.VistaAdmin;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 public class AdminController {
@@ -49,19 +51,19 @@ public class AdminController {
             }else{ modelVistaAdministrador.checkUser();}
         });
 
-        vistaAdmin.searchOperadorButton.setOnAction(actionEvent -> {
+        vistaAdmin.searchOperadorButton.setOnAction(event -> {
             if (!isEmpty(vistaAdmin.search24Field.getText())) {
-                LinkedList<String> resultados = modelVistaAdministrador.distanciaHammingMod(vistaAdmin.search24Field.getText());
-                // Lógica adicional para manejar los resultados de la búsqueda
+                LinkedList<String> resultados = modelVistaAdministrador.distanceHammingMod(vistaAdmin.search24Field.getText());
                 if (resultados.isEmpty()) {
                     displayNoResultsAlert();
                 } else {
-                    displaySearchResults(resultados);
+                    ObservableList<String> observableResultados = FXCollections.observableArrayList(resultados);
+                    vistaAdmin.searchResults.setItems(observableResultados);
                 }
             } else {
-                modelVistaAdministrador.checkUser();
+                displayNoInputAlert();
             }
-        });
+            });
 
         vistaAdmin.mondaButton.setOnAction(actionEvent ->{
             if(!isEmpty(vistaAdmin.producto11Field.getText())){
@@ -125,5 +127,35 @@ public class AdminController {
         alert.setContentText("Please try again with a different search term.");
         alert.showAndWait();
     }
+
+    /*public void displaySearchResults(java.util.LinkedList<String> resultados) {
+        StringBuilder resultText = new StringBuilder();
+        resultText.append("Resultados de la búsqueda:\n");
+        for (String result : resultados) {
+            resultText.append(result).append("\n");
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Resultados de la búsqueda");
+        alert.setHeaderText("Resultados encontrados para la búsqueda:");
+        alert.setContentText(resultText.toString());
+        alert.showAndWait();
+    }*/
+
+    /*public void displayNoResultsAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("No Results");
+        alert.setHeaderText("No se encontraron resultados para la búsqueda.");
+        alert.setContentText("Por favor, intente de nuevo con un término de búsqueda diferente.");
+        alert.showAndWait();
+    }*/
+
+    public void displayNoInputAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("No Input");
+        alert.setHeaderText("Ningún término de búsqueda ingresado.");
+        alert.setContentText("Por favor, ingrese un término de búsqueda.");
+        alert.showAndWait();
+    }
 }
+
 

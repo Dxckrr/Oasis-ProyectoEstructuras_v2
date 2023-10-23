@@ -1,12 +1,17 @@
 package co.edu.upb.oasis.vistas;
 
 import co.edu.upb.oasis.clases.Usuario;
+import co.edu.upb.oasis.models.ModelVistaAdministrador;
+import javafx.collections.FXCollections;
+import java.util.LinkedList;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -43,6 +48,8 @@ public class VistaAdmin {
     public Button clientButton;
     public Button searchOperadorButton;
 
+    public ListView<String> searchResults;
+
     //TextField
     public TextField usuarioField;
     public TextField contraseñaField;
@@ -70,6 +77,7 @@ public class VistaAdmin {
     public TextField id22Field2;
     public TextField descripcion22Field;
     public TextField tiempo22dePreparacion;
+    public LinkedList<String> distanceHammingResults;
 
     //Imagenes
     ImageView logo;
@@ -120,6 +128,8 @@ public class VistaAdmin {
         mondaButton = new Button("Guardar Producto");
         Prod22Button = new Button("Guardar Producto");
         productt3Button = new Button("Guardar producto");
+        searchResults = new ListView<>();
+        search24Field = new TextField();
         /*menu = new Button("Menu");
         pedido = new Button("Pedidos");
         domicilio = new Button("Rutas");*/
@@ -680,6 +690,7 @@ public class VistaAdmin {
         });
         return new Scene(secondScreen, 960, 603);
     }
+    
     private Scene createThirdScreen() {
         GridPane thirdScreen = otrofuncio("SELECCIONE UN TIPO DE USUARIO");
         thirdScreen.add(anteriorButton, 0, 3);
@@ -788,19 +799,24 @@ public class VistaAdmin {
 
     private Scene createSearchOperatorScene() {
         GridPane searchOperatorScreen = otrofuncio("ENCONTRAR OPERADOR");
-
-        search24Field = new TextField();
-        search24Field.setPromptText("Buscar Operador por Código");
-        searchOperatorScreen.add(search24Field, 0, 1);
-
-        searchOperatorScreen.add(searchOperadorButton, 1, 1);
-
+        search24Field.setPromptText("Buscar Operador por Nombre");
+    
+        searchOperatorScreen.add(search24Field, 0, 0);
+        searchOperatorScreen.add(searchOperadorButton, 1, 0);
+        searchOperatorScreen.add(searchResults, 0, 1, 2, 1);
+    
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createManageOperatorsScene()));
         searchOperatorScreen.add(backButton, 0, 4);
-
+    
         return new Scene(searchOperatorScreen, 960, 603);
     }
+    
+
+    private boolean isEmpty(String textToCheck) {
+        return textToCheck == null || textToCheck.trim().isEmpty();
+    }
+
 
     private void showDomiciliariosInfo(Usuario domiciliario) {
         Stage infoStage = new Stage();

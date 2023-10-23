@@ -77,5 +77,9 @@ public class Usuario implements Serializable {
      */
     public void setId(int id) {
         this.id = id;
+
+    @Override
+    public String toString() {
+        return "Usuario [usuario=" + usuario + ", contraseña=" + password + ", id=" + id +"]";
     }
-}
+

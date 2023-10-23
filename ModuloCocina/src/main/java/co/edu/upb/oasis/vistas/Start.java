@@ -21,6 +21,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * Class which creates the start view
+ * 
+ * @author Juan David Patiño
+ * 
+ */
 public class Start {
     public Stage window;
     // Escenas
@@ -70,7 +77,7 @@ public class Start {
             BackgroundPosition.DEFAULT,
             new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
 
-            Background fondo = new Background(backgroundImage);
+    Background fondo = new Background(backgroundImage);
 
     public Start() {
         window = new Stage();
@@ -123,7 +130,7 @@ public class Start {
         panelPrincipal.setMargin(logo, new Insets(0, 0, 125, 0)); // establecer un margen
                                                                   // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
         panelPrincipal.setMargin(adminText, new Insets(200, 500, 500, 0)); // establecer un margen
-                                                                         // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+                                                                           // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
 
         mainMenu = new Scene(panelPrincipal, 1080, 720);
         // mainMenu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

@@ -167,26 +167,23 @@ public class OperadorController {
 
         });
         // ---------------------------------------------------------------------------
-        //---------------
-        //Buscar cliente
-        vistaOperador.busquedaDeClientes.setOnKeyPressed(event ->{
-            if(event.getCode() == KeyCode.ENTER){
+        // ---------------
+        // Buscar cliente
+        vistaOperador.busquedaDeClientes.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
                 clientes = modelVistaOperador.getClientes();
                 Long numeroIngresado = Long.parseLong(vistaOperador.busquedaDeClientes.getText());
                 Iterator<NodeInterface<Cliente>> iterator = clientes.iterator();
                 DoubleListNode<Cliente> temporallll;
-                while(iterator.hasNext()){
-                    temporallll = (DoubleListNode<Cliente>)iterator.next();
-                    if(temporallll.getObject().getTelefono() == (numeroIngresado)){
+                while (iterator.hasNext()) {
+                    temporallll = (DoubleListNode<Cliente>) iterator.next();
+                    if (temporallll.getObject().getTelefono() == (numeroIngresado)) {
                         vistaOperador.clientesFounded.add(temporallll.getObject().getNombre());
                         break;
                     }
                 }
             }
         });
-
-
-
 
         // aGREGAR CLIENTE
 
@@ -374,14 +371,13 @@ public class OperadorController {
                     precioTemp += increibleNode.getObject().getPrecio();
                     impuestos += getImpuesto(precioTemp);
                 }
-
+                int total = precioTemp + getPrecioDomicilio(clienteToLinkPedido.getBarrio());
                 vistaOperador.pedidoText.setText(result);
-                vistaOperador.domicilioText
-                        .setText(String.valueOf(getPrecioDomicilio(clienteToLinkPedido.getDireccion())));
-                vistaOperador.precioText.setText(String.valueOf(precioTemp));
+                vistaOperador.domicilioText.setText(String.valueOf(getPrecioDomicilio(clienteToLinkPedido.getBarrio())));
+                vistaOperador.precioText.setText(String.valueOf(precioTemp + getPrecioDomicilio(clienteToLinkPedido.getBarrio())));
                 vistaOperador.impuestoText.setText(String.valueOf(impuestos));
 
-                vistaOperador.precioTotalText.setText((String.valueOf(precioTemp + impuestos)));
+                vistaOperador.precioTotalText.setText((String.valueOf( total+ impuestos)));
 
                 vistaOperador.switchScene(vistaOperador.confirmarPedidoView);
 
@@ -429,8 +425,10 @@ public class OperadorController {
          * });
          */
     }
+
     /**
      * Changes a String into a Long type
+     * 
      * @param textToConfirm
      * @return 'true' if an 'String' was parsed to 'Long' , otherwise 'false'
      */
@@ -442,44 +440,110 @@ public class OperadorController {
         }
         return true;
     }
+
     /**
      * Setter for 'Cliente'
+     * 
      * @param cliente
      * 
      */
     public void setClienteToLinkPedido(Cliente cliente) {
         clienteToLinkPedido = cliente;
     }
+
     /**
      * Setter for an iterator
+     * 
      * @param iteraastor2
      */
     public void setIterator2(Iterator<NodeInterface<Producto>> iteraastor2) {
         this.iterator2 = iteraastor2;
     }
+
     /**
-     * Gets the 'Cliente' from a ComboBox, this because the class atribute cant have a initialization on the constructor
+     * Gets the 'Cliente' from a ComboBox, this because the class atribute cant have
+     * a initialization on the constructor
+     * 
      * @return 'Cliente' in order to have its reference
      */
     public Cliente getClienteToLinkPedido() {
         return clienteToLinkPedido;
     }
+
     /**
      * Gets the extra cost of a product
      * 
      * int this case is about 5%
+     * 
      * @param producto
      * @return the price of the extra price of a product
      */
     public int getImpuesto(int producto) {
         return ((producto * 5) / 100);
     }
+
     /**
      * 
      * @param direccion
      * @return the price that cost the delivery
      */
     public int getPrecioDomicilio(String direccion) {
-        return 0;
+        switch (direccion) {
+            case "Provenza":
+                return 1000;
+
+            case "Cabecera del Llano":
+                return 2000;
+
+            case "San Alonso":
+                return 3000;
+
+            case "La Ciudadela":
+                return 4000;
+
+            case "Lagos del Cacique":
+                return 5000;
+
+            case "San Francisco":
+                return 6000;
+
+            case "La Joya":
+                return 7000;
+
+            case "Cañaveral":
+                return 8000;
+
+            case "Ciudad Valencia":
+                return 9000;
+
+            case "Girardot":
+                return 10000;
+
+            case "El Bosque":
+                return 11000;
+
+            case "Los Cambulos":
+                return 12000;
+
+            case "Junin":
+                return 13000;
+
+            case "Ciudadela Comfenalco":
+                return 14000;
+
+            case "La Salle":
+                return 15000;
+
+            case "Centro":
+                return 16000;
+
+            case "La Feria":
+                return 17000;
+
+            case "Altos de Granda":
+                return 18000;
+            default:
+                return 0;
+        }
     }
 }

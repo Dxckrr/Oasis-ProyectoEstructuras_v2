@@ -9,7 +9,11 @@ import java.util.Properties;
 
 import co.edu.upb.oasis.clases.Pedido;
 import co.edu.upb.oasis.client.ClienteCocina;
-
+/**
+ * Class that represents the operations on the 'VistaCocina'
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class ModelCocina {
 
     ClienteCocina cliente;
@@ -27,7 +31,10 @@ public class ModelCocina {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Gets a 'Pedido' from the server
+     * @return 'Pedido' if exists from the data base , otherwise 'false'
+     */
     public Pedido getPedido() {
         // Usuario operadorIn = new
         // Usuario(start.usuario.getText(),start.password.getText());

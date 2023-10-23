@@ -2,7 +2,13 @@ package co.edu.upb.oasis.clases;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+/**
+ * Class that represents an oven 
+ * 
+ * 
+ * @author Juan David Patiño Parra
+ * 
+ */
 public class Horno {
     ImageView horno;
     Image pictureHorno = new Image(

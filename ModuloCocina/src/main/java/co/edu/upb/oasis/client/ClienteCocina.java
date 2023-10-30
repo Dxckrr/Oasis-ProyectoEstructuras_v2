@@ -54,7 +54,7 @@ public class ClienteCocina implements CocinaInterface {
     }
 
     @Override
-    public boolean sendPedidoToDomicilio(Pedido pedido) {
+    public boolean sendPedidoToDomicilio(Pedido pedido) throws RemoteException {
         try {
             service = (CocinaInterface) Naming.lookup(url);
             return service.sendPedidoToDomicilio(pedido);

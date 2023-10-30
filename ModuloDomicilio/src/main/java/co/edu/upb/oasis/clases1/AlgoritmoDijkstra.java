@@ -3,7 +3,7 @@ import java.util.Arrays;
 import javafx.scene.paint.Color;
 /**
  * Class that gives the best route
- * @author
+ * @author Juliana Chavez King
  */
 public class AlgoritmoDijkstra {
 

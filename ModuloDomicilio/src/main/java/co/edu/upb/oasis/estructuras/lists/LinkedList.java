@@ -10,7 +10,7 @@ import co.edu.upb.oasis.estructuras.node.SingleListNode;
 
 
 public class LinkedList<T extends Serializable> implements LinkedListInterface<T> {
-    private SingleListNode<T> head;
+    public SingleListNode<T> head;
     private SingleListNode<T> tail;
     private int size;
     private SingleListNode<T> inode;

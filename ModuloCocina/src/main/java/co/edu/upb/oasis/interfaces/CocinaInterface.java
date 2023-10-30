@@ -30,5 +30,11 @@ public interface CocinaInterface extends Remote {
      * @throws RemoteException
      */
     public Pedido getPedido() throws RemoteException;
+    /**
+     * Sends a 'Pedido' to Server
+     * @param pedido
+     * @return 'true' if succesful , otherwise 'false'
+     */
+    public boolean sendPedidoToDomicilio(Pedido pedido) throws RemoteException;
 
 }

@@ -3,7 +3,10 @@ package co.edu.upb.oasis;
 import co.edu.upb.oasis.controllers.startController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
+/**
+ * @author Juliana Chavez King
+ * @param args
+ */
 public class Main extends Application {
 
     @Override

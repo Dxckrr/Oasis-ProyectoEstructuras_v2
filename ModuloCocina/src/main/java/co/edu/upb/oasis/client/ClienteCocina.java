@@ -7,11 +7,13 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+
 /**
  * Class that is the Client on the RMI
  * 
- *is the communication between the module and the server
+ * is the communication between the module and the server
  * it implements the CocinaInterface
+ * 
  * @author Juan David Patiño Parra
  */
 public class ClienteCocina implements CocinaInterface {
@@ -48,6 +50,17 @@ public class ClienteCocina implements CocinaInterface {
         } catch (MalformedURLException | RemoteException | NotBoundException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public boolean sendPedidoToDomicilio(Pedido pedido) {
+        try {
+            service = (CocinaInterface) Naming.lookup(url);
+            return service.sendPedidoToDomicilio(pedido);
+        } catch (MalformedURLException | RemoteException | NotBoundException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

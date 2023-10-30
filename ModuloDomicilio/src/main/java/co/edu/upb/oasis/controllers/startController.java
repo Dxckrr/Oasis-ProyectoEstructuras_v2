@@ -2,7 +2,9 @@ package co.edu.upb.oasis.controllers;
 
 import co.edu.upb.oasis.models.modelStart;
 import co.edu.upb.oasis.vistas.Start;
-
+/**
+ * @author Julana Chavez King
+ */
 public class startController {
     public startController(){
         Start start = new Start();  //VISTA

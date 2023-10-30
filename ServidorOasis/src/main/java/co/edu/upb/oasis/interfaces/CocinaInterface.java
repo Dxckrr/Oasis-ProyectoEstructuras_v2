@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 import co.edu.upb.oasis.clases.Pedido;
 
 /**
- * Interface for ServicioCocina
+ * Interface for ClienteCocina
  * 
  * @author Juan David Patiño Parra
  */
@@ -30,5 +30,11 @@ public interface CocinaInterface extends Remote {
      * @throws RemoteException
      */
     public Pedido getPedido() throws RemoteException;
+    /**
+     * Sends a 'Pedido' to Server
+     * @param pedido
+     * @return 'true' if succesful , otherwise 'false'
+     */
+    public boolean sendPedidoToDomicilio(Pedido pedido) throws RemoteException;
 
 }

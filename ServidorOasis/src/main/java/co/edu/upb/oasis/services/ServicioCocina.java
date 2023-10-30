@@ -1,6 +1,7 @@
 package co.edu.upb.oasis.services;
 
 import co.edu.upb.oasis.clases.Cocina;
+import co.edu.upb.oasis.clases.Domicilio;
 import co.edu.upb.oasis.clases.JSONClass;
 import co.edu.upb.oasis.clases.Pedido;
 import co.edu.upb.oasis.clases.Usuario;
@@ -11,6 +12,7 @@ import co.edu.upb.oasis.interfaces.CocinaInterface;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
+
 /**
  * Class that implements the CocinaInterface
  * 
@@ -51,10 +53,23 @@ public class ServicioCocina extends UnicastRemoteObject implements CocinaInterfa
 
     @Override
     public Pedido getPedido() {
-        if (!Cocina.isEmpty()) {
-            return Cocina.pop();
+        try {
+            if (!Cocina.isEmpty()) {
+                return Cocina.pop();
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
         }
-        // System.out.println(cocina.pop());
-        return null;
+
+    }
+
+    @Override
+    public boolean sendPedidoToDomicilio(Pedido pedido) {
+        try {
+            return Domicilio.add(pedido);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

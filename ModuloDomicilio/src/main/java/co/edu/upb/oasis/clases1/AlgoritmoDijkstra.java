@@ -1,7 +1,10 @@
 package co.edu.upb.oasis.clases1;
-
+import java.util.Arrays;
 import javafx.scene.paint.Color;
-
+/**
+ * Class that gives the best route
+ * @author
+ */
 public class AlgoritmoDijkstra {
 
     private final DatosGraficos arboles;
@@ -30,7 +33,9 @@ public class AlgoritmoDijkstra {
     public int getNombre() {
         return nodo[nodoFinal].getNombre();
     }
-
+    /**
+     * 
+     */
     public void dijkstra() {
         for (int i = 0; i < tope; i++) // creacion del vector nodo del tamaño del numero de nodos pintados 
         {
@@ -102,4 +107,74 @@ public class AlgoritmoDijkstra {
         
     }
 
+class DijkstraAlgorithm {
+
+    private static final int V = 18;
+    private static final String[] places = {"Cabecera del Llano", "San Alonso", "La Ciudadela", "Lagos del Cacique",
+            "San Francisco", "La Joya", "Cañaveral", "Ciudad Valencia", "Girardot", "El Bosque",
+            "Los Cambulos", "Junin", "Ciudadela Comfenalco", "La Salle", "Centro", "La Feria"};
+
+    int minDistance(int dist[], Boolean sptSet[]) {
+        int min = Integer.MAX_VALUE, min_index = -1;
+
+        for (int v = 0; v < V; v++)
+            if (!sptSet[v] && dist[v] <= min) {
+                min = dist[v];
+                min_index = v;
+            }
+
+        return min_index;
+    }
+
+    void printSolution(int dist[]) {
+        System.out.println("Vertex \t\t Distance from Cambulo");
+        for (int i = 0; i < V; i++)
+            System.out.println(places[i] + " \t\t " + dist[i] + " meters");
+    }
+
+    void dijkstra(int graph[][], int src) {
+        int dist[] = new int[V];
+        Boolean sptSet[] = new Boolean[V];
+
+        for (int i = 0; i < V; i++) {
+            dist[i] = Integer.MAX_VALUE;
+            sptSet[i] = false;
+        }
+
+        dist[src] = 0;
+
+        for (int count = 0; count < V - 1; count++) {
+            int u = minDistance(dist, sptSet);
+
+            sptSet[u] = true;
+
+            for (int v = 0; v < V; v++)
+
+                if (!sptSet[v] && graph[u][v] != 0 && dist[u] != Integer.MAX_VALUE && dist[u] + graph[u][v] < dist[v])
+                    dist[v] = dist[u] + graph[u][v];
+        }
+
+        printSolution(dist);
+    }
+        int graph[][] = new int[][] {
+            {0, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {500, 0, 300, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 300, 0, 250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 250, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 200, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 150, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 100, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 120, 0, 80, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 80, 0, 60, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 60, 0, 40, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 30, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 20, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 15, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 10, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 5, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 3, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 2},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0}
+        };
+}
 }

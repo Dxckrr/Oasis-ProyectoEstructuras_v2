@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import co.edu.upb.oasis.clases.Pedido;
 import co.edu.upb.oasis.client.ClienteCocina;
+
 /**
  * Class that represents the operations on the 'VistaCocina'
  * 
@@ -31,8 +32,10 @@ public class ModelCocina {
             e.printStackTrace();
         }
     }
+
     /**
      * Gets a 'Pedido' from the server
+     * 
      * @return 'Pedido' if exists from the data base , otherwise 'false'
      */
     public Pedido getPedido() {
@@ -44,6 +47,15 @@ public class ModelCocina {
             throw new RuntimeException(e);
         }
     }
-    // METODOS
+
+    public boolean sendPedidoToDomicilio(Pedido pedido) {
+        // Usuario operadorIn = new
+        // Usuario(start.usuario.getText(),start.password.getText());
+        try {
+            return cliente.sendPedidoToDomicilio(pedido);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

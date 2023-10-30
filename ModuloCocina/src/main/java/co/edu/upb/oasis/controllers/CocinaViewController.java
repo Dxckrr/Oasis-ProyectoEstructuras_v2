@@ -31,36 +31,33 @@ public class CocinaViewController {
         // ----------------------------------------------------------------------------
         PriorityQueue<Pedido> pedidosToSend = new PriorityQueue<>(2);
         // --
-        DoubleLinkedList<Pedido> pedidos = new DoubleLinkedList<>();
-        DoubleLinkedList<Pedido> productosToCompareWithPedido = new DoubleLinkedList<>();
-
         // ----------------------------------------------------------------------------
         // creando ANIMACIONES
 
         EventHandler<MouseEvent> click = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                int count = 0;
                 for (int i = 0; i < vistaCocina.hornos.length; i++) {
                     if (event.getSource() == vistaCocina.hornos[i].getHorno() && vistaCocina.hornos[i].isOn()) {
-                        /*
-                         * if (event.getSource() == vistaCocina.hornos[5].getHorno() ||
-                         * event.getSource() == vistaCocina.hornos[7].getHorno() ||
-                         * event.getSource() == vistaCocina.hornos[13].getHorno() ||
-                         * event.getSource() == vistaCocina.hornos[15].getHorno()) {
-                         * }
-                         */
-                        // Apagar el horno
 
+                        // Apagar Horno
                         vistaCocina.hornos[i].resetHorno();
                         System.out.println("it worksssssssss");
                         vistaCocina.hornos[i].getHorno().setCursor(Cursor.DEFAULT);
 
                         // FALTA IMPLEMENTAR LA MANERA DE ENVIAR A DOMICILIO
-                        /*
-                         * if (pedidos.get().getProductos()) {
-                         * 
-                         * }
-                         */
+                        if (!vistaCocina.hornos[i].isOn()) {
+                            count++;
+                        }
+                        if (count == 15) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("PEDIDOS ENVIADOS");
+                            alert.setHeaderText("SIGAN");
+                            alert.setContentText("Siganle con ganas mi gente!" + "\n" + "A COCINAR...");
+                            alert.showAndWait();
+                            modelCocina.sendPedidoToDomicilio(pedidosToSend.extract());
+                        }
 
                     }
 
@@ -71,7 +68,17 @@ public class CocinaViewController {
         vistaCocina.getPedidosButton.setOnAction(actionEvent -> {
             try {
                 Pedido inPedido = modelCocina.getPedido();
-                pedidos.add(inPedido);
+                Pedido pedidoCopia = inPedido;
+
+                if (inPedido.getCliente().isVip()) {
+                    pedidosToSend.add(pedidoCopia, 0);
+
+                } else {
+                    pedidosToSend.add(pedidoCopia, 1);
+
+                }
+                // -------------------------------------------------
+
                 DoubleLinkedList<Producto> productosEnPedido = inPedido.getProductos();
                 System.out.println(productosEnPedido);
                 if (!productosEnPedido.isEmpty()) {
@@ -133,7 +140,7 @@ public class CocinaViewController {
 
                             }
                         } else {
-                            //SI no es lento entonces
+                            // SI no es lento entonces
                             if (!vistaCocina.hornos[j].isLento()) {
 
                                 vistaCocina.hornos[j].turnOnRapido();

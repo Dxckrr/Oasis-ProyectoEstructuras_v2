@@ -4,48 +4,93 @@ import java.io.Serializable;
 
 import co.edu.upb.oasis.estructuras.lists.DoubleLinkedList;
 
+/**
+ * Class that represents a client.
+ * 
+ * Clase que representa a un cliente.
+ * 
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class Cliente implements Serializable {
 
     String nombre;
     String direccion;
-    String ciudad;
-    int telefono;
-    DoubleLinkedList<Pedido> pedidos; 
-    boolean premium;
+    String barrio;
+    long telefono;
+    int numeroDePedidos;
 
-    public Cliente(String nombre, String direccion , String ciudad , int telefono, boolean premium){
+    public Cliente(String nombre, String direccion, String barrio, long telefono) {
         this.nombre = nombre;
         this.direccion = direccion;
-        this.ciudad = ciudad;
+        this.barrio = barrio;
         this.telefono = telefono;
-        this.premium = premium;
-        pedidos = new DoubleLinkedList<>();
+        this.numeroDePedidos = 0;
     }
 
-    public Boolean getPremium() {
-        return premium;
-    }
-
+    /**
+     * 
+     * 
+     * @return The name of the client.
+     */
     public String getNombre() {
         return nombre;
     }
+
+    /**
+     * 
+     * @return The address of the client.
+     */
     public String getDireccion() {
         return direccion;
     }
-    public String getCiudad() {
-        return ciudad;
+
+    /**
+     * 
+     * @return The neighborhood of the client.
+     */
+    public String getBarrio() {
+        return barrio;
     }
-    public int getTelefono() {
+
+    /**
+     * 
+     * @return The phone number of the client.
+     */
+    public long getTelefono() {
         return telefono;
     }
-    public DoubleLinkedList<Pedido> getPedidos() {
-        return pedidos;
+
+    /**
+     * Updates the numbers of orders 
+     * 
+     * @return The updated number of orders.
+     */
+    public int addPedido() {
+        return numeroDePedidos++;
     }
-    
+
+    /**
+     * 
+     * @return The number of orders done by the client.
+     */
+    public int getNumeroDePedidos() {
+        return numeroDePedidos;
+    }
+
+    /**
+     * Check if the client is a VIP customer (has placed 10 or more orders).
+     * 
+     * 
+     * @return 'true' if the client is a VIP otherwise 'false'.
+     */
+    public boolean isVip() {
+        return numeroDePedidos >= 10;
+    }
+
     @Override
     public String toString() {
-        return "Cliente [nombre=" + nombre + ", direccion=" + direccion + ", ciudad=" + ciudad + ", telefono="
-                + telefono + ", pedidos=" + pedidos + ", Premium?: "+ premium+ "]";
+        return "Cliente [nombre=" + nombre + ", direccion=" + direccion + ", barrio=" + barrio + ", telefono="
+                + telefono + "]";
     }
 }
-

@@ -49,13 +49,13 @@ public class ModelCocina {
     }
 
     public boolean sendPedidoToDomicilio(Pedido pedido) {
-        // Usuario operadorIn = new
-        // Usuario(start.usuario.getText(),start.password.getText());
         try {
             return cliente.sendPedidoToDomicilio(pedido);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+        return false;
     }
 
 }

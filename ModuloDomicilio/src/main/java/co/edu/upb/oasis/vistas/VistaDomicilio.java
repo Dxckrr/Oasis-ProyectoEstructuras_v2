@@ -3,7 +3,6 @@ package co.edu.upb.oasis.vistas;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 
-import co.edu.upb.oasis.clases.Peddisos;
 import co.edu.upb.oasis.clases.Usuario;
 import co.edu.upb.oasis.clases1.DatosGraficos;
 import co.edu.upb.oasis.client.ClienteDomicilio;
@@ -41,7 +40,7 @@ public class VistaDomicilio {
     StackPane panelLogin;
     VBox contenedorLoginPassWord;
     ClienteDomicilio service;
-    Peddisos[] domicilioActual;
+    //Pedisos[] domicilioActual;
 
     public int Numerotope = 0;
     DatosGraficos arboles = new DatosGraficos();
@@ -49,6 +48,7 @@ public class VistaDomicilio {
     // Botones
     public Button clientes;
     public Button anteriorButton = new Button();
+    public Button mostrarPedidosButton;
     /*
      * Button menu;
      * Button pedido;
@@ -152,6 +152,7 @@ public class VistaDomicilio {
         root = new BorderPane();
         configButton = new Button("RUTAS");
         tenerLosPedidosBotoon = new Button("Mirar Pedidos");
+        mostrarPedidosButton = new Button("MOSTRAR");
         /*
          * menu = new Button("Menu");
          * pedido = new Button("Pedidos");
@@ -301,8 +302,7 @@ public class VistaDomicilio {
         GridPane secondScreen = otrofuncio("¿QUÉ DESEA GESTIONAR EN LA BASE DE DATOS?");
         secondScreen.add(anteriorButton, 0, 3);
 
-        Button mostrarButton = new Button("MOSTRAR");
-        mostrarButton.setPrefSize(277, 209);
+        mostrarPedidosButton.setPrefSize(277, 209);
 
         Button verFacturaButton = new Button("VER FACTURA");
         verFacturaButton.setPrefSize(277, 209);
@@ -310,7 +310,7 @@ public class VistaDomicilio {
         GridPane buttonsGrid = new GridPane();
         buttonsGrid.setHgap(10);
 
-        buttonsGrid.add(mostrarButton, 0, 0);
+        buttonsGrid.add(mostrarPedidosButton, 0, 0);
         buttonsGrid.add(verFacturaButton, 1, 0);
 
         GridPane.setColumnSpan(buttonsGrid, 3);
@@ -321,7 +321,7 @@ public class VistaDomicilio {
         });
 
         // Acción del botón Mostrar
-        mostrarButton.setOnAction(event -> {
+        /*mostrarButton.setOnAction(event -> {
             Stage pedidoStage = new Stage();
             GridPane pedidoPane = new GridPane(); // Crea tu diseño de visualización de pedidos aquí
 
@@ -345,7 +345,7 @@ public class VistaDomicilio {
             Scene pedidoScene = new Scene(pedidoPane, 600, 400);
             pedidoStage.setScene(pedidoScene);
             pedidoStage.show();
-        });
+        });*/
 
         verFacturaButton.setOnAction(event -> {
             Stage facturaStage = new Stage();

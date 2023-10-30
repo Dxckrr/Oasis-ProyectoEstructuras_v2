@@ -4,7 +4,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import co.edu.upb.oasis.clases.Cliente;
-import co.edu.upb.oasis.clases.Peddisos;
 import co.edu.upb.oasis.clases.Pedido;
 import co.edu.upb.oasis.clases.Producto;
 import co.edu.upb.oasis.estructuras.lists.LinkedList1;

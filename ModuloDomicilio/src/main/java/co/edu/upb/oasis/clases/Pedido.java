@@ -3,7 +3,15 @@ package co.edu.upb.oasis.clases;
 import java.io.Serializable;
 
 import co.edu.upb.oasis.estructuras.lists.DoubleLinkedList;
-
+/**
+ * 
+ * Class that represents an order
+ * 
+ * Clase que representa un pedido
+ * 
+ * 
+ * @author Juan David Patiño Parra
+ */
 public class Pedido implements Serializable {
     Cliente cliente;
     DoubleLinkedList<Producto> productos;

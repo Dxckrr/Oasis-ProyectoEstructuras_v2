@@ -2,6 +2,11 @@ package co.edu.upb.oasis.estructuras.queue;
 
 import java.io.Serializable;
 
+import co.edu.upb.oasis.clases.Cliente;
+import co.edu.upb.oasis.clases.Pedido;
+import co.edu.upb.oasis.clases.Producto;
+import co.edu.upb.oasis.estructuras.lists.DoubleLinkedList;
+
 public class PriorityQueue<T extends Serializable> {
     QueueList<T>[] myPriorityCola;
 

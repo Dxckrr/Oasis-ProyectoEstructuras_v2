@@ -5,7 +5,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import co.edu.upb.oasis.clases.Peddisos;
 import co.edu.upb.oasis.clases.Pedido;
 import co.edu.upb.oasis.estructuras.lists.LinkedList1;
 import co.edu.upb.oasis.interfaces.DomicilioInterface;

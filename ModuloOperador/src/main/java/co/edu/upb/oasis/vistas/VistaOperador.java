@@ -19,8 +19,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 /**
  * Class that represents the whole 'moduleOperador' view
+ * 
  * @author Juan David Patiño Parra
  */
 public class VistaOperador {
@@ -103,7 +105,7 @@ public class VistaOperador {
     // Imagenes
     ImageView logo;
     ImageView logoClientes;
-    Image picture = new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\logo\\OasisFondo.png");
+    Image picture = new Image("file:src/main/java/co/edu/upb/oasis/images/logo/OasisFondo.png");
 
     // Figuras
     Rectangle rectangleToDecorate;

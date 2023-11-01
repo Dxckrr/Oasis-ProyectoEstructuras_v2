@@ -45,7 +45,7 @@ public class Start {
     public TextField password;
     // Imagenes
     ImageView logo;
-    Image picture = new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\OasisLogo.png");
+    Image picture = new Image("file:src/main/java/co/edu/upb/oasis/images/OasisLogo.png");
     // LABELS(TEXTO EN PANTALLA)
 
     Label adminText;
@@ -71,7 +71,7 @@ public class Start {
     // Image image = new Image("file:/ruta/a/tu/imagen.png");
     // Background
     // BackgroundFill colorFondo = new BackgroundFill(colorRojoRaro,null,null);
-    Image cocinafondo = new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\fondo.jpg");
+    Image cocinafondo = new Image("file:src/main/java/co/edu/upb/oasis/images/fondo.jpg");
     BackgroundImage backgroundImage = new BackgroundImage(cocinafondo,
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
             BackgroundPosition.DEFAULT,

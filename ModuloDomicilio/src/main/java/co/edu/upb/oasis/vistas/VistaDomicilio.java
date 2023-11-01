@@ -98,7 +98,7 @@ public class VistaDomicilio {
     public Button configButton;
     // Imagenes
     ImageView logo;
-    Image picture = new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\OasisFondo.png");
+    Image picture = new Image("file:src/main/java/co/edu/upb/oasis/images/OasisFondo.png");
 
     // Figuras
     Rectangle rectangleToDecorate;
@@ -284,13 +284,13 @@ public class VistaDomicilio {
         adminText.setFont(new Font(14));
         otrofunsionscreen.add(adminText, 1, 0, 1, 1);
 
-        ImageView image = new ImageView(new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\OasisFondo.png"));
+        ImageView image = new ImageView(new Image("file:src/main/java/co/edu/upb/oasis/images/OasisFondo.png"));
         image.setFitWidth(165);
         image.setFitHeight(119);
         otrofunsionscreen.add(image, 0, 0, 1, 1);
 
         ImageView adminImage = new ImageView(
-                new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\adminUser.png"));
+                new Image("file:src/main/java/co/edu/upb/oasis/images/adminUser.png"));
         adminImage.setFitWidth(148);
         adminImage.setFitHeight(121);
         otrofunsionscreen.add(adminImage, 2, 0, 1, 1);

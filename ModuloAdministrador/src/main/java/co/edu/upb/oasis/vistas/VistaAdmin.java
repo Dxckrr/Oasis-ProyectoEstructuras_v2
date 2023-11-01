@@ -22,26 +22,29 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 /*
  * @author Juliana Chavez King
  */
 public class VistaAdmin {
     Stage window;
-    //Escenas
-    Scene optionPanel , login , selector;
-    //Paneles
+    // Escenas
+    Scene optionPanel, login, selector;
+    // Paneles
     StackPane panelPrincipal;
     GridPane opcionesPanel;
     StackPane panelLogin;
     VBox contenedorLoginPassWord;
 
-    //Botones
+    // Botones
     public Button clientes;
     public Button searchClienteButton;
     public Button anteriorButton = new Button();
-    /*Button menu;
-    Button pedido;
-    Button domicilio;*/
+    /*
+     * Button menu;
+     * Button pedido;
+     * Button domicilio;
+     */
     public Button confirmAddButton;
     public Button mondaButton;
     public Button Prod22Button;
@@ -55,7 +58,7 @@ public class VistaAdmin {
 
     public ListView<String> searchResults;
 
-    //TextField
+    // TextField
     public TextField usuarioField;
     public TextField contraseñaField;
     public TextField idField;
@@ -85,15 +88,15 @@ public class VistaAdmin {
     public TextField telefono43Field;
     public LinkedList<String> distanceHammingResults;
 
-    //Imagenes
+    // Imagenes
     ImageView logo;
-    Image picture = new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\UX.png");
+    Image picture = new Image("file:src/main/java/co/edu/upb/oasis/images/UX.png");
 
-    //Figuras
+    // Figuras
     Rectangle rectangleToDecorate;
     Rectangle rectangleLogo;
 
-    //Colores
+    // Colores
     String beige = "#FFECBB";
     Color colorBeige = Color.web(beige);
     //
@@ -103,8 +106,8 @@ public class VistaAdmin {
     String orange = "#FF9900";
     Color colorOrange = Color.web(orange);
 
-    //Background
-    BackgroundFill colorFondo = new BackgroundFill(colorSand,null,null);
+    // Background
+    BackgroundFill colorFondo = new BackgroundFill(colorSand, null, null);
     Background fondo = new Background(colorFondo);
 
     Pane pane = new Pane();
@@ -120,12 +123,12 @@ public class VistaAdmin {
     }
 
     private void initAdmin() {
-        //Crear Panel
+        // Crear Panel
         panelPrincipal = new StackPane();
         opcionesPanel = new GridPane();
         opcionesPanel.setHgap(100); // Ajusta la separación horizontal a 20 píxeles
         opcionesPanel.setVgap(100); // Ajusta la separación vertical a 20 píxeles
-        //Crear los objetos
+        // Crear los objetos
         clientes = new Button("HELLO ADMIN");
         confirmAddButton = new Button("Guardar Operador");
         mojarraButton = new Button("Guardar Domiciliario");
@@ -141,38 +144,44 @@ public class VistaAdmin {
         botonEliminarCliente = new Button("Eliminar Cliente");
         textAreaInfoCliente = new TextArea();
         telefonoField = new TextField();
-        /*menu = new Button("Menu");
-        pedido = new Button("Pedidos");
-        domicilio = new Button("Rutas");*/
-        //-----------
+        /*
+         * menu = new Button("Menu");
+         * pedido = new Button("Pedidos");
+         * domicilio = new Button("Rutas");
+         */
+        // -----------
         logo = new ImageView(picture);
-        //-----------
-        rectangleToDecorate = new Rectangle(700,400);
+        // -----------
+        rectangleToDecorate = new Rectangle(700, 400);
 
-        //Agregando elementos
+        // Agregando elementos
 
         opcionesPanel.add(clientes, 0, 0);
-       /*opcionesPanel.add(menu, 1, 0);
-        opcionesPanel.add(pedido, 0, 1);
-        opcionesPanel.add(domicilio, 1, 1);*/
+        /*
+         * opcionesPanel.add(menu, 1, 0);
+         * opcionesPanel.add(pedido, 0, 1);
+         * opcionesPanel.add(domicilio, 1, 1);
+         */
         opcionesPanel.setAlignment(Pos.CENTER);
-        panelPrincipal.getChildren().addAll(logo,rectangleToDecorate,opcionesPanel);
+        panelPrincipal.getChildren().addAll(logo, rectangleToDecorate, opcionesPanel);
 
-        //Propiedades
+        // Propiedades
         clientes.setScaleY(2.5);
         clientes.setScaleX(2.5);
-        /*menu.setScaleY(2);
-        menu.setScaleX(2);
-        pedido.setScaleY(2);
-        pedido.setScaleX(2);
-        domicilio.setScaleY(2);
-        domicilio.setScaleX(2);*/
-        //-----------
-        logo.setFitHeight(80);	//Alto
-        logo.setFitWidth(80);	//Ancho
-        //-----------
+        /*
+         * menu.setScaleY(2);
+         * menu.setScaleX(2);
+         * pedido.setScaleY(2);
+         * pedido.setScaleX(2);
+         * domicilio.setScaleY(2);
+         * domicilio.setScaleX(2);
+         */
+        // -----------
+        logo.setFitHeight(80); // Alto
+        logo.setFitWidth(80); // Ancho
+        // -----------
         panelPrincipal.setBackground(fondo);
-        //-------------------------
+        // -------------------------
 
         rectangleToDecorate.toBack();
         rectangleToDecorate.setFill(colorBeige);
@@ -182,19 +191,17 @@ public class VistaAdmin {
         //
         clientes.setOnAction(event -> {
 
-
         });
 
-        //Organizando items
-        panelPrincipal.setMargin(logo, new Insets(0,0,125,0)); // establecer un margen (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
-        panelPrincipal.setAlignment(opcionesPanel,Pos.CENTER); // establecer un margen (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+        // Organizando items
+        panelPrincipal.setMargin(logo, new Insets(0, 0, 125, 0)); // establecer un margen
+                                                                  // (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
+        panelPrincipal.setAlignment(opcionesPanel, Pos.CENTER); // establecer un margen (ABAJO,IZQUIERDA,ARRIBA,DERECHA)
 
-
-
-        optionPanel = new Scene(panelPrincipal,1080,720);
+        optionPanel = new Scene(panelPrincipal, 1080, 720);
 
         window.setScene(optionPanel);
-        window.setTitle("Oasis"); 	//Estableciendo titulo
+        window.setTitle("Oasis"); // Estableciendo titulo
         window.show();
     }
 
@@ -216,9 +223,10 @@ public class VistaAdmin {
         });
         return scene;
     }
-    //SE CREA EL GRIDPANE EN GENERAL PARA TODO
+
+    // SE CREA EL GRIDPANE EN GENERAL PARA TODO
     private GridPane otrofuncio(String title) {
-        //se le establece todas las configuraciones
+        // se le establece todas las configuraciones
         GridPane otrofunsionscreen = new GridPane();
         otrofunsionscreen.setBackground(new Background(new BackgroundFill(Color.web("#FFECBB"), null, null)));
         otrofunsionscreen.setPrefSize(893, 545);
@@ -239,22 +247,23 @@ public class VistaAdmin {
         adminText.setStyle("-fx-background-color: transparent;");
         adminText.setFont(new Font(14));
         otrofunsionscreen.add(adminText, 1, 0, 1, 1);
-        //se añade las imagenes del logo y la del susuario
-        ImageView image = new ImageView(new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\OasisFondo.png"));
+        // se añade las imagenes del logo y la del susuario
+        ImageView image = new ImageView(new Image("file:src/main/java/co/edu/upb/oasis/images/OasisFondo.png"));
         image.setFitWidth(165);
         image.setFitHeight(119);
         otrofunsionscreen.add(image, 0, 0, 1, 1);
 
-        ImageView adminImage = new ImageView(new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\adminUser.png"));
+        ImageView adminImage = new ImageView(new Image("file:src/main/java/co/edu/upb/oasis/images/adminUser.png"));
         adminImage.setFitWidth(148);
         adminImage.setFitHeight(121);
         otrofunsionscreen.add(adminImage, 2, 0, 1, 1);
 
         return otrofunsionscreen;
     }
-    //PRIMERA PANTALLA DEL ADMINISTRADOR
+
+    // PRIMERA PANTALLA DEL ADMINISTRADOR
     private GridPane createSmallerScreen() {
-        GridPane smallerScreen =otrofuncio("ADMINISTRADOR");
+        GridPane smallerScreen = otrofuncio("ADMINISTRADOR");
         smallerScreen.add(anteriorButton, 0, 3);
 
         Button databaseButton = new Button("BASE DE DATOS");
@@ -272,14 +281,15 @@ public class VistaAdmin {
 
         GridPane.setColumnSpan(buttonsGrid, 3);
         smallerScreen.add(buttonsGrid, 0, 1);
-        //boton anterior
+        // boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(createFirstScreen());
         });
         return smallerScreen;
     }
-    //COMIDAS DE LAS PRODUCTOS
-    private Scene anoTherProductsScreen(){
+
+    // COMIDAS DE LAS PRODUCTOS
+    private Scene anoTherProductsScreen() {
         GridPane productScreen = otrofuncio("¿QUÉ DESEA GESTIONAR DE LOS PRODUCTOS?");
         productScreen.add(anteriorButton, 0, 3);
 
@@ -291,15 +301,15 @@ public class VistaAdmin {
         });
         Button debidasButton = new Button("BEBIDAS");
         debidasButton.setPrefSize(277, 209);
-        debidasButton.setPrefSize(277,209);
-        debidasButton.setOnAction(event ->{
+        debidasButton.setPrefSize(277, 209);
+        debidasButton.setOnAction(event -> {
             Scene produccctBebidas = productBebidas();
             window.setScene(produccctBebidas);
         });
 
         Button postresButton = new Button("POSTRES");
         postresButton.setPrefSize(277, 209);
-        postresButton.setOnAction(event ->{
+        postresButton.setOnAction(event -> {
             Scene producttPostress = productPostrews();
             window.setScene(producttPostress);
         });
@@ -313,38 +323,39 @@ public class VistaAdmin {
 
         GridPane.setColumnSpan(buttonsGrid, 3);
         productScreen.add(buttonsGrid, 0, 1);
-        //boton anterior
+        // boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(createSecondScreen());
         });
         return new Scene(productScreen, 960, 603);
 
     }
-    //COMIDAS RAPIDAS
+
+    // COMIDAS RAPIDAS
     private Scene productComidasRapidas() {
         GridPane comidasRapidasScreen = otrofuncio("COMIDAS MEDITERRANEAS");
-    
+
         comidasRapidasScreen.add(anteriorButton, 0, 5);
-    
-        String[] productNames = {"Ratatouille", "Pescado", "Paella", "Moussaka", "Couscous", "Kebabs"};
-    
+
+        String[] productNames = { "Ratatouille", "Pescado", "Paella", "Moussaka", "Couscous", "Kebabs" };
+
         Button agregarProducto = new Button("Agregar Producto");
         agregarProducto.setOnAction(event -> {
             window.setScene(addProductScreen());
         });
         comidasRapidasScreen.add(agregarProducto, 5, 5);
-    
+
         Button buscarProducto = new Button("Buscar Producto");
         buscarProducto.setOnAction(event -> {
             window.setScene(createSearchProductScene());
         });
         comidasRapidasScreen.add(buscarProducto, 5, 4);
-    
+
         TextArea infoTextArea = new TextArea();
         infoTextArea.setPrefRowCount(5);
         infoTextArea.setPrefColumnCount(30);
         comidasRapidasScreen.add(infoTextArea, 0, 6, 3, 1);
-    
+
         for (int i = 2; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
                 int index = 3 * (i - 2) + j;
@@ -354,22 +365,23 @@ public class VistaAdmin {
                     button.setPrefSize(200, 150);
                     button.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-margin: 10px;");
                     comidasRapidasScreen.add(button, j, i);
-    
+
                     button.setOnAction(event -> {
-                        //displayProductInformation(productName);
+                        // displayProductInformation(productName);
                         infoTextArea.setText("Aquí va la información del producto " + productName);
                     });
                 }
             }
         }
-        //boton anterior
+        // boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(anoTherProductsScreen());
         });
-    
+
         return new Scene(comidasRapidasScreen, 960, 603);
     }
-    //SE ALÑADE EL PRODUCTO
+
+    // SE ALÑADE EL PRODUCTO
     private Scene addProduct11Screen() {
         GridPane addProduct11Screen = otrofuncio("CREAR PRODUCTO");
 
@@ -394,14 +406,15 @@ public class VistaAdmin {
         addProduct11Screen.add(id11Field2, 0, 6);
 
         addProduct11Screen.add(mondaButton, 0, 7);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productBebidas()));
         addProduct11Screen.add(backButton, 0, 8);
 
         return new Scene(addProduct11Screen, 960, 603);
     }
-    //SE BUSCA EL PRODUCTO
+
+    // SE BUSCA EL PRODUCTO
     private Scene createSearch11ProductScene() {
         GridPane searchProductt11Screen = otrofuncio("ENCONTRAR PRODUCTO");
 
@@ -411,14 +424,15 @@ public class VistaAdmin {
 
         Button searchButton = new Button("Buscar");
         searchProductt11Screen.add(searchButton, 1, 1);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productBebidas()));
         searchProductt11Screen.add(backButton, 0, 4);
 
         return new Scene(searchProductt11Screen, 960, 603);
     }
-    //SE AÑADE EL PRODUCTO
+
+    // SE AÑADE EL PRODUCTO
     private Scene addProduct22Screen() {
         GridPane addProduct22Screen = otrofuncio("CREAR PRODUCTO");
 
@@ -443,13 +457,14 @@ public class VistaAdmin {
         addProduct22Screen.add(id22Field2, 0, 6);
 
         addProduct22Screen.add(Prod22Button, 0, 7);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productPostrews()));
         addProduct22Screen.add(backButton, 0, 8);
 
         return new Scene(addProduct22Screen, 960, 603);
     }
+
     // SE INTENTA BUSCAR EL PRODUCTO
     private Scene createSearch122ProductScene() {
         GridPane searchProductt22Screen = otrofuncio("ENCONTRAR PRODUCTO");
@@ -460,7 +475,7 @@ public class VistaAdmin {
 
         Button searchButton = new Button("Buscar");
         searchProductt22Screen.add(searchButton, 1, 1);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productPostrews()));
         searchProductt22Screen.add(backButton, 0, 4);
@@ -468,7 +483,7 @@ public class VistaAdmin {
         return new Scene(searchProductt22Screen, 960, 603);
     }
 
-    //SE ALÑADE EL PRODUCTO
+    // SE ALÑADE EL PRODUCTO
     private Scene addProductScreen() {
         GridPane addProductScreen = otrofuncio("CREAR PRODUCTO");
 
@@ -493,14 +508,15 @@ public class VistaAdmin {
         addProductScreen.add(idField2, 0, 6);
 
         addProductScreen.add(productt3Button, 0, 7);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productComidasRapidas()));
         addProductScreen.add(backButton, 0, 8);
 
         return new Scene(addProductScreen, 960, 603);
     }
-    //SE ENCUENTRA EL PRODUCTO
+
+    // SE ENCUENTRA EL PRODUCTO
     private Scene createSearchProductScene() {
         GridPane searchOperatorScreen = otrofuncio("ENCONTRAR PRODUCTO");
 
@@ -510,7 +526,7 @@ public class VistaAdmin {
 
         Button searchButton = new Button("Buscar");
         searchOperatorScreen.add(searchButton, 1, 1);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(productComidasRapidas()));
         searchOperatorScreen.add(backButton, 0, 4);
@@ -518,49 +534,57 @@ public class VistaAdmin {
         return new Scene(searchOperatorScreen, 960, 603);
     }
 
-    /*private void displayProductInformation(String productName) {
-        Stage productInfoStage = new Stage();
-        productInfoStage.initModality(Modality.APPLICATION_MODAL);
-
-        VBox productInfoLayout = new VBox();
-        productInfoLayout.setAlignment(Pos.CENTER);
-        productInfoLayout.setSpacing(20);
-
-        TextArea productInfoTextArea = new TextArea();
-        productInfoTextArea.setPrefRowCount(5);
-        productInfoTextArea.setPrefColumnCount(30);
-        productInfoTextArea.setEditable(false); // Make it non-editable
-        productInfoLayout.getChildren().add(productInfoTextArea);
-
-        String filePath = "path_to_your_json_directory/" + productName + ".json"; // Reemplaza con la ruta real
-        Producto product = ServicioAdministrador.fromJSON(filePath);
-        if (product != null) {
-            String productInfo = "Name: " + product.getName() + "\n"
-                    + "Description: " + product.getDescription() + "\n"
-                    + "Price: " + product.getPrice() + "\n"
-                    + "Preparation Time: " + product.getPreparationTime() + "\n"
-                    + "ID: " + product.getId();
-            productInfoTextArea.setText(productInfo);
-        }
-
-        Scene productInfoScene = new Scene(productInfoLayout, 400, 400);
-        productInfoStage.setScene(productInfoScene);
-        productInfoStage.show();
-    }*/
+    /*
+     * private void displayProductInformation(String productName) {
+     * Stage productInfoStage = new Stage();
+     * productInfoStage.initModality(Modality.APPLICATION_MODAL);
+     * 
+     * VBox productInfoLayout = new VBox();
+     * productInfoLayout.setAlignment(Pos.CENTER);
+     * productInfoLayout.setSpacing(20);
+     * 
+     * TextArea productInfoTextArea = new TextArea();
+     * productInfoTextArea.setPrefRowCount(5);
+     * productInfoTextArea.setPrefColumnCount(30);
+     * productInfoTextArea.setEditable(false); // Make it non-editable
+     * productInfoLayout.getChildren().add(productInfoTextArea);
+     * 
+     * String filePath = "path_to_your_json_directory/" + productName + ".json"; //
+     * Reemplaza con la ruta real
+     * Producto product = ServicioAdministrador.fromJSON(filePath);
+     * if (product != null) {
+     * String productInfo = "Name: " + product.getName() + "\n"
+     * + "Description: " + product.getDescription() + "\n"
+     * + "Price: " + product.getPrice() + "\n"
+     * + "Preparation Time: " + product.getPreparationTime() + "\n"
+     * + "ID: " + product.getId();
+     * productInfoTextArea.setText(productInfo);
+     * }
+     * 
+     * Scene productInfoScene = new Scene(productInfoLayout, 400, 400);
+     * productInfoStage.setScene(productInfoScene);
+     * productInfoStage.show();
+     * }
+     */
 
     private Scene productBebidas() {
         GridPane bebdiasScreen = otrofuncio("Menú de bebidas");
 
         bebdiasScreen.add(anteriorButton, 0, 5);
 
-        String[] imagePaths = { "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\Sangría.jpg", "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\CaféEspresso.jpg", "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\CafeGriego.jpg", 
-        "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\Ayran.jpg", "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\AguadeValencia.jpg", "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\Limoncello.jpg" };
+        String[] imagePaths = {
+                "file:src/main/java/co/edu/upb/oasis/images/Sangría.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/CaféEspresso.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/CafeGriego.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/Ayran.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/AguadeValencia.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/Limoncello.jpg" };
 
         Button agregar1Producto = new Button("Agregar Producto");
         agregar1Producto.setOnAction(event -> {
             window.setScene(addProduct11Screen());
         });
-        bebdiasScreen.add(agregar1Producto,5,5);
+        bebdiasScreen.add(agregar1Producto, 5, 5);
 
         Button buscar1Producto = new Button("Buscar Producto");
         buscar1Producto.setOnAction(event -> {
@@ -594,32 +618,35 @@ public class VistaAdmin {
                     index++;
 
                     button.setOnAction(event -> {
-                        //displayProductInformation(imagePath);
+                        // displayProductInformation(imagePath);
                         infoTextArea.setText("Aquí va la información del producto " + imagePath);
                     });
                 }
             }
-        }//boton anterior
+        } // boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(anoTherProductsScreen());
         });
         return new Scene(bebdiasScreen, 960, 603);
     }
 
-
-    private Scene productPostrews(){
+    private Scene productPostrews() {
         GridPane postressScreen = otrofuncio("POSTRES");
 
         postressScreen.add(anteriorButton, 0, 5);
+        String[] imagePaths = { "file:src/main/java/co/edu/upb/oasis/images/Tiramisu.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/PasteldeSantiago.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/Loukoumades.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/Cannoli.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/BudíndePan.jpg",
+                "file:src/main/java/co/edu/upb/oasis/images/Baklava.jpg" };
 
-        String[] imagePaths = {"file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\Tiramisu.jpg", "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\PasteldeSantiago.jpg","file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\Loukoumades.jpg",
-        "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\Cannoli.jpg", "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\BudíndePan.jpg", "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\Baklava.jpg"};
 
         Button agregar2Producto = new Button("Agregar Producto");
         agregar2Producto.setOnAction(event -> {
             window.setScene(addProduct22Screen());
         });
-        postressScreen.add(agregar2Producto,5,5);
+        postressScreen.add(agregar2Producto, 5, 5);
 
         Button buscar2Producto = new Button("Buscar Producto");
         buscar2Producto.setOnAction(event -> {
@@ -650,12 +677,12 @@ public class VistaAdmin {
                     index++;
 
                     button.setOnAction(event -> {
-                        //displayProductInformation(imagePath);
+                        // displayProductInformation(imagePath);
                         infoTextArea.setText("Aquí va la información del producto " + imagePath);
                     });
                 }
             }
-        }//boton anterior
+        } // boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(anoTherProductsScreen());
         });
@@ -674,15 +701,15 @@ public class VistaAdmin {
         });
         Button productsButton = new Button("PRODUCTOS");
         productsButton.setPrefSize(277, 209);
-        productsButton.setPrefSize(277,209);
-        productsButton.setOnAction(event ->{
+        productsButton.setPrefSize(277, 209);
+        productsButton.setOnAction(event -> {
             Scene productsScreen = anoTherProductsScreen();
             window.setScene(productsScreen);
         });
 
         Button registeredClientsButton = new Button("CLIENTES REGISTRADOS");
         registeredClientsButton.setPrefSize(277, 209);
-        registeredClientsButton.setOnAction(event ->{
+        registeredClientsButton.setOnAction(event -> {
             Scene clientScreen = createManageClientScene();
             window.setScene(clientScreen);
         });
@@ -696,13 +723,13 @@ public class VistaAdmin {
 
         GridPane.setColumnSpan(buttonsGrid, 3);
         secondScreen.add(buttonsGrid, 0, 1);
-        //boton anterior
+        // boton anterior
         anteriorButton.setOnAction(event -> {
             window.setScene(createFirstScreen());
         });
         return new Scene(secondScreen, 960, 603);
     }
-    
+
     private Scene createThirdScreen() {
         GridPane thirdScreen = otrofuncio("SELECCIONE UN TIPO DE USUARIO");
         thirdScreen.add(anteriorButton, 0, 3);
@@ -729,7 +756,7 @@ public class VistaAdmin {
             Scene manageOperatorsScene = createManageOperatorsScene();
             window.setScene(manageOperatorsScene);
         });
-        deliveryButton.setOnAction(event ->{
+        deliveryButton.setOnAction(event -> {
             Scene manageDomiziliario = createManageDomiciliariozScene();
             window.setScene(manageDomiziliario);
         });
@@ -751,7 +778,7 @@ public class VistaAdmin {
             window.setScene(createSearchDomiciliariioScene());
         });
         manageDomiciliarioScreen.add(searchmanageDomiciliarioScreenzButton, 1, 1);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createThirdScreen()));
         manageDomiciliarioScreen.add(backButton, 0, 4);
@@ -773,7 +800,7 @@ public class VistaAdmin {
             window.setScene(createSearchOperatorScene());
         });
         manageOperatorsScreen.add(searchOperatorButton, 1, 1);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createThirdScreen()));
         manageOperatorsScreen.add(backButton, 0, 4);
@@ -781,7 +808,7 @@ public class VistaAdmin {
         return new Scene(manageOperatorsScreen, 960, 603);
     }
 
-    private Scene createSearchDomiciliariioScene(){
+    private Scene createSearchDomiciliariioScene() {
         GridPane searchDomixilairioScreen = otrofuncio("ENCONTRAR DOMICILIARIO");
 
         TextField searchField = new TextField();
@@ -790,18 +817,21 @@ public class VistaAdmin {
 
         Button searchButton = new Button("Buscar");
         searchButton.setOnAction(event -> {
-            /*String searchCode = searchField.getText();
-            if (!searchCode.isEmpty()) {
-                Usuario domiciliarioEncontrado = domiciliarioEncontrado.buscarDomiciliarioPorUsuario(searchCode);
-                if (domiciliarioEncontrado != null) {
-                    showDomiciliariosInfo(domiciliarioEncontrado);
-                } else {
-                    displayNotFoundAlert();
-                }
-            }*/
+            /*
+             * String searchCode = searchField.getText();
+             * if (!searchCode.isEmpty()) {
+             * Usuario domiciliarioEncontrado =
+             * domiciliarioEncontrado.buscarDomiciliarioPorUsuario(searchCode);
+             * if (domiciliarioEncontrado != null) {
+             * showDomiciliariosInfo(domiciliarioEncontrado);
+             * } else {
+             * displayNotFoundAlert();
+             * }
+             * }
+             */
         });
         searchDomixilairioScreen.add(searchButton, 1, 1);
-        //boton anterior
+        // boton anterior
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createManageDomiciliariozScene()));
         searchDomixilairioScreen.add(backButton, 0, 4);
@@ -812,23 +842,21 @@ public class VistaAdmin {
     private Scene createSearchOperatorScene() {
         GridPane searchOperatorScreen = otrofuncio("ENCONTRAR OPERADOR");
         search24Field.setPromptText("Buscar Operador por Nombre");
-    
+
         searchOperatorScreen.add(search24Field, 0, 0);
         searchOperatorScreen.add(searchOperadorButton, 1, 0);
         searchOperatorScreen.add(searchResults, 0, 1, 2, 1);
-    
+
         Button backButton = new Button("ANTERIOR");
         backButton.setOnAction(event -> window.setScene(createManageOperatorsScene()));
         searchOperatorScreen.add(backButton, 0, 4);
-    
+
         return new Scene(searchOperatorScreen, 960, 603);
     }
-    
 
     private boolean isEmpty(String textToCheck) {
         return textToCheck == null || textToCheck.trim().isEmpty();
     }
-
 
     private void showDomiciliariosInfo(Usuario domiciliario) {
         Stage infoStage = new Stage();
@@ -863,7 +891,6 @@ public class VistaAdmin {
         usuario1Field = new TextField(domiciliario.getUsuario());
         contraseña1Field = new TextField(domiciliario.getPassword());
         id1Field = new TextField(String.valueOf(domiciliario.getId()));
-
 
         Button saveButton = new Button("Guardar Cambios");
         saveButton.setOnAction(event -> {
@@ -952,6 +979,7 @@ public class VistaAdmin {
         editStage.initModality(Modality.APPLICATION_MODAL);
         editStage.show();
     }
+
     private void displayNotFoundAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Usuario no encontrado");
@@ -974,7 +1002,7 @@ public class VistaAdmin {
         id1Field = new TextField();
         id1Field.setPromptText("Id");
         addDomiziliariocreen.add(id1Field, 0, 4);
-        
+
         addDomiziliariocreen.add(mojarraButton, 0, 5);
 
         Button backButton = new Button("ANTERIOR");
@@ -1056,7 +1084,7 @@ public class VistaAdmin {
 
         return new Scene(manageClientScreen, 960, 603);
     }
-    
+
     private Scene createSearchClientScene() {
         GridPane searchClientScreen = otrofuncio("ENCONTRAR CLIENTE");
 
@@ -1067,7 +1095,7 @@ public class VistaAdmin {
 
         searchClientScreen.add(textAreaInfoCliente, 0, 3);
 
-        botonEliminarCliente.setVisible(false); 
+        botonEliminarCliente.setVisible(false);
         searchClientScreen.add(botonEliminarCliente, 1, 3);
 
         Button backButton = new Button("ANTERIOR");
@@ -1076,7 +1104,5 @@ public class VistaAdmin {
 
         return new Scene(searchClientScreen, 960, 603);
     }
-    
+
 }
-
-

@@ -34,7 +34,7 @@ public class Start {
     public TextField password;
     //Imagenes
     ImageView logo;
-    Image picture = new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\OasisFondo.png");
+    Image picture = new Image("file:src/main/java/co/edu/upb/oasis/images/OasisFondo.png");
     //LABELS(TEXTO EN PANTALLA)
 
     Label adminText;

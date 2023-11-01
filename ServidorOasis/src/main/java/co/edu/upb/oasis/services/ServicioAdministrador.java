@@ -21,19 +21,28 @@ import java.util.Iterator;
 import com.google.gson.Gson;
 
 public class ServicioAdministrador extends UnicastRemoteObject implements AdminInterface {
-    JSONClass jsonClassUser = new JSONClass("usuarios.json", Usuario.class);
+    JSONClass<Usuario> jsonClassUser = new JSONClass("usuarios.json", Usuario.class);
+    JSONClass<Cliente> jsonClassClientes = new JSONClass("clientes.json", Cliente.class);
+    JSONClass<Producto> jsonClassMenu = new JSONClass("menu.json", Producto.class);
+    // JSONClass jsonClassPedidos = new JSONClass("pedidos.json", Pedido.class);
+
     public ServicioAdministrador() throws RemoteException {
+        jsonClassUser.cargarJson();
+        jsonClassMenu.cargarJson();
+        jsonClassClientes.cargarJson();
+        // jsonClassPedidos.cargarJson();
+
     }
 
     @Override
     public boolean login(String user, String password) throws RemoteException {
-        jsonClassUser.cargarJson();
+
         DoubleLinkedList lista = jsonClassUser.obtenerLista();
         Iterator iterator = lista.iterator();
         DoubleListNode temporal;
         Usuario tempUser;
-        Usuario inUser = new Usuario (user,password);
-        while(iterator.hasNext()){
+        Usuario inUser = new Usuario(user, password);
+        while (iterator.hasNext()) {
             temporal = (DoubleListNode) iterator.next();
             tempUser = (Usuario) temporal.getObject();
             System.out.println(user);
@@ -42,7 +51,8 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
             System.out.println(inUser.getUsuario());
             System.out.println(inUser.getPassword());
             System.out.println("---------------");
-            if(tempUser.getUsuario().equals(inUser.getUsuario()) && tempUser.getPassword().equals(inUser.getPassword()) && (tempUser.getId()>200 && tempUser.getId()<300)){
+            if (tempUser.getUsuario().equals(inUser.getUsuario()) && tempUser.getPassword().equals(inUser.getPassword())
+                    && (tempUser.getId() > 200 && tempUser.getId() < 300)) {
                 System.out.println("1");
                 return true;
             }
@@ -54,7 +64,6 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
     public boolean addUsuarioConfirmation(String usuario, String contraseña, int id) throws RemoteException {
         Usuario usuarioToAdd = new Usuario(usuario, contraseña, id);
 
-        jsonClassUser.cargarJson();
         DoubleLinkedList<Usuario> lista = jsonClassUser.obtenerLista();
         System.out.println("------------------");
         lista.imprimir();
@@ -76,11 +85,11 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
         return true;
     }
 
-
     @Override
     public boolean addUsuario(String usuario, String contraseña, int id) throws RemoteException {
         try {
-            //System.out.println(" ----" + addClienteConfirmation(nombreCliente, direccion, ciudad, telefono));
+            // System.out.println(" ----" + addClienteConfirmation(nombreCliente, direccion,
+            // ciudad, telefono));
             if (addUsuarioConfirmation(usuario, contraseña, id)) {
                 Usuario usuarioToAdd = new Usuario(usuario, contraseña, id);
                 System.out.println("Entra");
@@ -95,11 +104,11 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
 
     }
 
-    public boolean addProductoConfirmation(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id) throws RemoteException {
-        Producto productoToAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id,false);
+    public boolean addProductoConfirmation(String nombre, String descripcion, int precio, int tiempoDePreparacion,
+            int id) throws RemoteException {
+        Producto productoToAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id, false);
 
-        jsonClassUser.cargarJson();
-        DoubleLinkedList<Producto> lista = jsonClassUser.obtenerLista();
+        DoubleLinkedList<Producto> lista = jsonClassMenu.obtenerLista();
         System.out.println("------------------");
         lista.imprimir();
         System.out.println("------------------");
@@ -121,13 +130,15 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
     }
 
     @Override
-    public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id,boolean isLento) throws RemoteException {
+    public boolean addProducto(String nombre, String descripcion, int precio, int tiempoDePreparacion, int id,
+            boolean isLento) throws RemoteException {
         try {
-            //System.out.println(" ----" + addClienteConfirmation(nombreCliente, direccion, ciudad, telefono));
-            if (addProductoConfirmation(nombre, descripcion, precio, tiempoDePreparacion, id)){
-                Producto productoTAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id,isLento);
+            // System.out.println(" ----" + addClienteConfirmation(nombreCliente, direccion,
+            // ciudad, telefono));
+            if (addProductoConfirmation(nombre, descripcion, precio, tiempoDePreparacion, id)) {
+                Producto productoTAdd = new Producto(nombre, descripcion, precio, tiempoDePreparacion, id, isLento);
                 System.out.println("Entra");
-                jsonClassUser.agregarObjetico(productoTAdd);
+                jsonClassMenu.agregarObjetico(productoTAdd);
                 return true;
             }
             return false;
@@ -139,13 +150,12 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
 
     @Override
     public Cliente buscarCliente(int number) throws RemoteException {
-        JSONClass<Cliente> clientesData = new JSONClass<>("clientes.json", Cliente.class);
-        clientesData.cargarJson();
-        DoubleLinkedList<Cliente> clientes = clientesData.obtenerLista();
+
+        DoubleLinkedList<Cliente> clientes = jsonClassClientes.obtenerLista();
         Iterator<NodeInterface<Cliente>> iterator = clientes.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Cliente temp = iterator.next().getObject();
-            if (temp.getTelefono() == number){
+            if (temp.getTelefono() == number) {
                 return temp;
             }
         }
@@ -154,15 +164,14 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
 
     @Override
     public boolean borrarrCliente(int number) throws RemoteException {
-        JSONClass<Cliente> clientesData = new JSONClass<>("clientes.json", Cliente.class);
-        clientesData.cargarJson();
-        DoubleLinkedList<Cliente> clientes = clientesData.obtenerLista();
+
+        DoubleLinkedList<Cliente> clientes = jsonClassClientes.obtenerLista();
         Iterator<NodeInterface<Cliente>> iterator = clientes.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Cliente temp = iterator.next().getObject();
-            if (temp.getTelefono() == number){
-                clientesData.eliminarObjeto(temp);
-                clientesData.guardarDaticosEnArchivo();
+            if (temp.getTelefono() == number) {
+                jsonClassClientes.eliminarObjeto(temp);
+                jsonClassClientes.guardarDaticosEnArchivo();
                 return true;
             }
         }
@@ -175,21 +184,22 @@ public class ServicioAdministrador extends UnicastRemoteObject implements AdminI
         throw new UnsupportedOperationException("Unimplemented method 'buscarOperadorPorUsuario'");
     }
 
-
-
-    /*public static Producto fromJSON(String filePath) {
-        try {
-            Gson gson = new Gson();
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("file:src\\main\\java\\co\\edu\\upb\\oasis\\services\\ServicioAdministrador.java"));
-            //Convertir el JSON a objeto
-            Producto product = gson.fromJson(bufferedReader, Producto.class);
-            bufferedReader.close();
-            return product;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
+    /*
+     * public static Producto fromJSON(String filePath) {
+     * try {
+     * Gson gson = new Gson();
+     * BufferedReader bufferedReader = new BufferedReader(new FileReader(
+     * "file:src\\main\\java\\co\\edu\\upb\\oasis\\services\\ServicioAdministrador.java"
+     * ));
+     * //Convertir el JSON a objeto
+     * Producto product = gson.fromJson(bufferedReader, Producto.class);
+     * bufferedReader.close();
+     * return product;
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * }
+     * return null;
+     * }
+     */
 
 }
-

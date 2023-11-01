@@ -2,8 +2,9 @@ package co.edu.upb.oasis.clases;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 /**
- * Class that represents an oven 
+ * Class that represents an oven
  * 
  * 
  * @author Juan David Patiño Parra
@@ -11,8 +12,7 @@ import javafx.scene.image.ImageView;
  */
 public class Horno {
     ImageView horno;
-    Image pictureHorno = new Image(
-            "file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\hornos\\HornoRapido_Apagado.png");
+    Image pictureHorno = new Image("file:src/main/java/co/edu/upb/oasis/images/hornos/HornoRapido_Apagado.png");
     boolean isLento;
     boolean isOn;
     Producto producto;
@@ -33,18 +33,20 @@ public class Horno {
     }
 
     public void turnOnRapido() {
-        horno.setImage(new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\hornos\\HornoRapido_Encendido.png"));
+        horno.setImage(
+                new Image("file:src/main/java/co/edu/upb/oasis/images/hornos/HornoRapido_Encendido.png"));
         this.isOn = true;
     }
 
     public void turnOnLento() {
-        horno.setImage(new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\hornos\\HornoLento_Encendido.png"));
+        horno.setImage(
+                new Image("file:src/main/java/co/edu/upb/oasis/images/hornos/HornoLento_Encendido.png"));
         this.isOn = true;
 
     }
 
     public boolean setIsLento() {
-        horno.setImage(new Image("file:src\\main\\java\\co\\edu\\upb\\oasis\\images\\hornos\\HornoLento_Apagado.png"));
+        horno.setImage(new Image("file:src/main/java/co/edu/upb/oasis/images/hornos/HornoLento_Apagado.png"));
         return this.isLento = true;
     }
 
@@ -66,11 +68,11 @@ public class Horno {
         return isOn;
     }
 
-    public Producto getProductoCooked(){
+    public Producto getProductoCooked() {
         return producto;
     }
 
-    public void setProductoCook(Producto producto){
+    public void setProductoCook(Producto producto) {
         this.producto = producto;
     }
 }

@@ -44,6 +44,9 @@ public class VistaDomicilio {
 
     public int Numerotope = 0;
     DatosGraficos arboles = new DatosGraficos();
+    public int routeIndex = 0;
+    public String ruta;
+    public int distanciaTotal = 0;
 
     // Botones
     public Button clientes;
@@ -54,6 +57,7 @@ public class VistaDomicilio {
      * Button pedido;
      * Button domicilio;
      */
+    public Button mostrarButton;
     public Button confirmAddButton;
     public Button mondaButton;
     public Button Prod22Button;
@@ -65,6 +69,7 @@ public class VistaDomicilio {
     public Button tomarPedidosButton;
     public VBox vbox;
     public Button tenerLosPedidosBotoon;
+    public Button showButton;
     // TextField
     public TextField usuarioField;
     public TextField contraseñaField;
@@ -153,6 +158,9 @@ public class VistaDomicilio {
         configButton = new Button("RUTAS");
         tenerLosPedidosBotoon = new Button("Mirar Pedidos");
         mostrarPedidosButton = new Button("MOSTRAR");
+        showButton = new Button("Mostrar");
+        mostrarButton = new Button("MOSTRAR");
+        ruta = "";
         /*
          * menu = new Button("Menu");
          * pedido = new Button("Pedidos");
@@ -302,7 +310,7 @@ public class VistaDomicilio {
         GridPane secondScreen = otrofuncio("¿QUÉ DESEA GESTIONAR EN LA BASE DE DATOS?");
         secondScreen.add(anteriorButton, 0, 3);
 
-        mostrarPedidosButton.setPrefSize(277, 209);
+        mostrarButton.setPrefSize(277, 209);
 
         Button verFacturaButton = new Button("VER FACTURA");
         verFacturaButton.setPrefSize(277, 209);
@@ -310,7 +318,7 @@ public class VistaDomicilio {
         GridPane buttonsGrid = new GridPane();
         buttonsGrid.setHgap(10);
 
-        buttonsGrid.add(mostrarPedidosButton, 0, 0);
+        buttonsGrid.add(mostrarButton, 0, 0);
         buttonsGrid.add(verFacturaButton, 1, 0);
 
         GridPane.setColumnSpan(buttonsGrid, 3);
@@ -321,32 +329,26 @@ public class VistaDomicilio {
         });
 
         // Acción del botón Mostrar
-        /*mostrarButton.setOnAction(event -> {
+        mostrarButton.setOnAction(event -> {
             Stage pedidoStage = new Stage();
             GridPane pedidoPane = new GridPane(); // Crea tu diseño de visualización de pedidos aquí
 
             // Simula la información del cliente y sus pedidos directamente en el código
-            String nombreCliente = "Nombre del cliente: Juan Perez";
-            String pedido1 = "Pedido 1: Producto A - Entregado";
-            String pedido2 = "Pedido 2: Producto B - Pendiente de entrega";
-            String pedido3 = "Pedido 3: Producto C - Entregado";
+            String nombreCliente = "Nombre del cliente: Chavez";
+            String pedido1 = "Pedido 1: Ratatouille - Entregadar";
 
             // Agrega la información del cliente y sus pedidos al pedidoPane
             Text infoCliente = new Text(nombreCliente);
             Text infoPedido1 = new Text(pedido1);
-            Text infoPedido2 = new Text(pedido2);
-            Text infoPedido3 = new Text(pedido3);
 
             pedidoPane.add(infoCliente, 0, 0);
             pedidoPane.add(infoPedido1, 0, 1);
-            pedidoPane.add(infoPedido2, 0, 2);
-            pedidoPane.add(infoPedido3, 0, 3);
 
             Scene pedidoScene = new Scene(pedidoPane, 600, 400);
             pedidoStage.setScene(pedidoScene);
             pedidoStage.show();
-        });*/
-
+        });
+        
         verFacturaButton.setOnAction(event -> {
             Stage facturaStage = new Stage();
 
@@ -354,7 +356,7 @@ public class VistaDomicilio {
             Rectangle factura1 = new Rectangle(250, 150);
             factura1.setFill(Color.LIGHTBLUE);
             factura1.setStroke(Color.BLACK);
-            Text infoFactura1 = new Text("Cliente: Juan Perez\nFecha de compra: 2023-10-24\nTotal: $200");
+            Text infoFactura1 = new Text("Cliente: Chavez\nFecha de compra: 2023-11-01\nTotal: $1900");
             infoFactura1.setFont(Font.font("Arial", FontWeight.BOLD, 12));
             StackPane stackPane1 = new StackPane();
             stackPane1.getChildren().addAll(factura1, infoFactura1);
@@ -415,28 +417,55 @@ public class VistaDomicilio {
         int V = graph.length;
         String[] places = { "Cabecera del Llano", "San Alonso", "La Ciudadela", "Lagos del Cacique",
                 "San Francisco", "La Joya", "Cañaveral", "Ciudad Valencia", "Restaurante OASIS UPB", "Girardot",
-                "El Bosque",
-                "Los Cambulos", "Junin", "Ciudadela Comfenalco", "La Salle", "Centro", "La Feria" };
+                "El Bosque", "Los Cambulos", "Junin", "Ciudadela Comfenalco", "La Salle", "Centro", "La Feria" };
 
-        String ruta = "Restaurante OASIS UPB (origen) -> Cabecera del Llano -> San Alonso -> La Ciudadela -> Lagos del Cacique";
-
-        int[] distancias = { 500, 300, 200 };
-
-        // Calcula la distancia total sumando todas las distancias
-        int distanciaTotal = 0;
-        for (int distancia : distancias) {
-            distanciaTotal += distancia;
-        }
-        Text rutaText = new Text("Ruta: " + ruta);
-        Text distanciaTotalText = new Text("Distancia total: " + distanciaTotal + " metros");
-        dijkstraPane.add(rutaText, 0, 1);
-        dijkstraPane.add(distanciaTotalText, 0, 2);
+                String[] routes = {
+                    "Restaurante OASIS UPB (origen) -> Cabecera del Llano -> San Alonso -> La Ciudadela -> Lagos del Cacique",
+                    "Restaurante OASIS UPB (origen) -> Cañaveral -> Ciudad Valencia -> Centro -> La Feria",
+                    "Restaurante OASIS UPB (origen) -> Junin -> Lagos del Cacique -> Girardot",
+                    "Restaurante OASIS UPB (origen) -> San Francisco -> El Bosque -> Cañaveral",
+                    "Restaurante OASIS UPB (origen) -> Los Cambulos -> Junin -> Ciudad Valencia"
+            };
+        
+            int[][] distances = {{500, 300, 200, 150}, {200, 90, 500, 200}, {240, 500, 100}, {200, 500, 340}, {500, 500, 500}};
+        
+            ruta = routes[routeIndex];
+        
+            // Calcula la distancia total sumando todas las distancias
+            distanciaTotal = calculateTotalDistance(distances[routeIndex]);
+            Text rutaText = new Text("Ruta: " + ruta);
+            Text distanciaTotalText = new Text("Distancia total: " + distanciaTotal + " metros");
+            dijkstraPane.add(rutaText, 0, 1);
+            dijkstraPane.add(distanciaTotalText, 0, 2);
+        
+            anteriorButton.setOnAction(event -> {
+                window.setScene(createSecondScreen());
+            });
+        
+            //Button showButton = new Button("Mostrar");
+            dijkstraPane.add(showButton, 0, 4);
+        
+            showButton.setOnAction(event -> {
+                routeIndex = (routeIndex + 1) % routes.length; // Actualiza el índice de la ruta circularmente
+                ruta = routes[routeIndex];
+                distanciaTotal = calculateTotalDistance(distances[routeIndex]);
+                rutaText.setText("Ruta: " + ruta);
+                distanciaTotalText.setText("Distancia total: " + distanciaTotal + " metros");
+            });
 
         anteriorButton.setOnAction(event -> {
             window.setScene(createSecondScreen());
         });
 
         return new Scene(dijkstraPane, 960, 603);
+    }
+
+    private int calculateTotalDistance(int[] distances) {
+        int distanciaTotal = 0;
+        for (int distancia : distances) {
+            distanciaTotal += distancia;
+        }
+        return distanciaTotal;
     }
 
 }
